@@ -14,6 +14,8 @@ const Footer = () => {
     { name: 'Future Age Predictor', href: '/future-age' },
     { name: 'Retirement Planner', href: '/retirement' },
     { name: 'Premium Offers', href: '/shop' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Contact Us', href: '/contact' },
   ];
 
   return (
