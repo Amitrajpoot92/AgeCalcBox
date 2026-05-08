@@ -61,7 +61,7 @@ const Navbar = () => {
               <span className="font-black text-[13px] md:text-lg tracking-tighter text-slate-800 leading-none mb-[2px] truncate">
                 Age Calculator <span className="text-[#00a63e]">Box</span>
               </span>
-              <span className="text-[6px] md:text-[8px] font-black uppercase tracking-widest text-slate-400 leading-none truncate">Powered by CodeWebX</span>
+              <span className="text-[6px] md:text-[8px] font-black uppercase tracking-widest text-slate-400 leading-none truncate"></span>
             </div>
           </Link>
 
