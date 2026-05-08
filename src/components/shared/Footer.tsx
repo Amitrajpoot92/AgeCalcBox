@@ -12,7 +12,6 @@ const Footer = () => {
     { name: 'Age Calculator', href: '/age-calculator' },
     { name: 'Age Difference', href: '/age-difference' },
     { name: 'Future Age Predictor', href: '/future-age' },
-    { name: 'Retirement Planner', href: '/retirement' },
     { name: 'Premium Offers', href: '/shop' },
     { name: 'About Us', href: '/about' },
     { name: 'Contact Us', href: '/contact' },
@@ -40,12 +39,12 @@ const Footer = () => {
                   Age Calculator <span className="text-[#00a63e]">Box</span>
                 </span>
               </div>
-              <div className="flex items-center gap-1.5 ml-1">
+              {/* <div className="flex items-center gap-1.5 ml-1">
                 <Code2 size={12} className="text-[#00a63e]" />
                 <p className="text-[10px] md:text-xs font-bold text-gray-500 tracking-[0.2em] uppercase">
                   Powered by <span className="text-[#00a63e]/80">CodeWebX</span> Engine
                 </p>
-              </div>
+              </div> */}
             </Link>
             
             <p className="text-sm md:text-base leading-relaxed max-w-sm text-gray-400 font-medium">
@@ -114,7 +113,7 @@ const Footer = () => {
             </p>
             
             {/* Highlighted CodeWebX Link */}
-            <a 
+            {/* <a 
               href="https://www.codewebx.in/" 
               target="_blank" 
               rel="noopener noreferrer" 
@@ -125,7 +124,7 @@ const Footer = () => {
                 Designed & Developed by <span className="text-white group-hover:text-[#00a63e] transition-colors">CodeWebX</span>
               </span>
               <ArrowUpRight size={12} className="text-gray-500 opacity-50 group-hover:opacity-100 group-hover:text-[#00a63e] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-            </a>
+            </a> */}
           </div>
           
           <div className="flex items-center gap-4">

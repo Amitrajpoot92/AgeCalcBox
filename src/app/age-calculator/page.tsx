@@ -1,32 +1,24 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { 
+  Sparkles, 
   RotateCcw, 
   BarChart2, 
-  TrendingUp, 
+  TrendingUp,
+  Cake,
   CalendarDays,
   Clock,
-  Zap,
-  Moon,
-  Sun,
-  Hourglass,
-  Star
+  Timer
 } from "lucide-react";
 import CalcShell from "@/components/calculators/CalcShell";
 
 export default function AgeCalc() {
-  // Smart Input States (DD/MM/YYYY)
-  const [day, setDay] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
-
-  const dayRef = useRef<HTMLInputElement>(null);
-  const monthRef = useRef<HTMLInputElement>(null);
-  const yearRef = useRef<HTMLInputElement>(null);
-
-  const [age, setAge] = useState<{ years: number; months: number; days: number } | null>(null);
+  const [dobStr, setDobStr] = useState("");
+  const [lockedDate, setLockedDate] = useState<Date | null>(null);
   const [error, setError] = useState("");
+  
+  const [age, setAge] = useState<{ years: number; months: number; days: number } | null>(null);
   
   const [liveData, setLiveData] = useState({
     totalWeeks: 0,
@@ -35,89 +27,83 @@ export default function AgeCalc() {
     seconds: 0,
   });
 
-  const handleDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value.replace(/\D/g, '').slice(0, 2);
-    setDay(val);
-    if (val.length === 2) monthRef.current?.focus();
-  };
+  // New State for Birthday Countdown
+  const [bdayData, setBdayData] = useState({
+    months: 0,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    nextDateStr: "",
+    isToday: false
+  });
 
-  const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value.replace(/\D/g, '').slice(0, 2);
-    setMonth(val);
-    if (val.length === 2) yearRef.current?.focus();
-  };
-
-  const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value.replace(/\D/g, '').slice(0, 4);
-    setYear(val);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, field: 'month' | 'year') => {
-    if (e.key === 'Backspace') {
-      if (field === 'month' && month === '') dayRef.current?.focus();
-      if (field === 'year' && year === '') monthRef.current?.focus();
+  // Auto-format input to DD/MM/YYYY
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/\D/g, ''); 
+    if (val.length > 8) val = val.slice(0, 8); 
+    
+    if (val.length >= 5) {
+      val = `${val.slice(0, 2)}/${val.slice(2, 4)}/${val.slice(4, 8)}`;
+    } else if (val.length >= 3) {
+      val = `${val.slice(0, 2)}/${val.slice(2)}`;
     }
+    setDobStr(val);
   };
 
-  // Auto Calculate Engine
-  useEffect(() => {
-    if (day.length === 2 && month.length === 2 && year.length === 4) {
-      const d = parseInt(day);
-      const m = parseInt(month);
-      const y = parseInt(year);
-
-      if (d < 1 || d > 31 || m < 1 || m > 12 || y < 1900 || y > 2100) {
-        setError("Invalid date parameters.");
-        setAge(null);
-        return;
-      }
-
-      const birthDate = new Date(y, m - 1, d);
-      const now = new Date();
-
-      if (birthDate.getDate() !== d || birthDate.getMonth() !== m - 1) {
-        setError("This date doesn't exist.");
-        setAge(null);
-        return;
-      }
-
-      if (birthDate > now) {
-        setError("Date cannot be in the future.");
-        setAge(null);
-        return;
-      }
-
-      setError("");
-
-      let calcY = now.getFullYear() - birthDate.getFullYear();
-      let calcM = now.getMonth() - birthDate.getMonth();
-      let calcD = now.getDate() - birthDate.getDate();
-
-      if (calcD < 0) {
-        calcM--;
-        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-        calcD += prevMonth.getDate();
-      }
-      if (calcM < 0) {
-        calcY--;
-        calcM += 12;
-      }
-      setAge({ years: calcY, months: calcM, days: calcD });
-    } else {
-      setAge(null);
-      setError("");
+  const handleCalculate = () => {
+    if (dobStr.length !== 10) {
+      setError("Please enter a complete date (DD/MM/YYYY)");
+      return;
     }
-  }, [day, month, year]);
 
-  // Live Engine Update
+    const [day, month, year] = dobStr.split('/').map(Number);
+
+    if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1900 || year > 2100) {
+      setError("Please enter a valid date.");
+      return;
+    }
+
+    const birthDate = new Date(year, month - 1, day);
+    const now = new Date();
+
+    if (birthDate.getDate() !== day || birthDate.getMonth() !== month - 1) {
+      setError("This calendar date doesn't exist.");
+      return;
+    }
+
+    if (birthDate > now) {
+      setError("Date of birth cannot be in the future.");
+      return;
+    }
+
+    setError("");
+    setLockedDate(birthDate);
+
+    // Initial Static Age Calculation
+    let calcY = now.getFullYear() - birthDate.getFullYear();
+    let calcM = now.getMonth() - birthDate.getMonth();
+    let calcD = now.getDate() - birthDate.getDate();
+
+    if (calcD < 0) {
+      calcM--;
+      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+      calcD += prevMonth.getDate();
+    }
+    if (calcM < 0) {
+      calcY--;
+      calcM += 12;
+    }
+    setAge({ years: calcY, months: calcM, days: calcD });
+  };
+
+  // Live Ticker Engine for Age AND Birthday Countdown
   useEffect(() => {
-    if (!age || day.length !== 2 || month.length !== 2 || year.length !== 4) return;
+    if (!lockedDate || !age) return;
 
     const updateLiveStats = () => {
-      const birthDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
       const now = new Date();
-      
-      const diffMs = now.getTime() - birthDate.getTime();
+      const diffMs = now.getTime() - lockedDate.getTime();
       const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
       
       setLiveData({
@@ -126,178 +112,280 @@ export default function AgeCalc() {
         minutes: now.getMinutes(),
         seconds: now.getSeconds(),
       });
+
+      // --- NEXT BIRTHDAY LOGIC ---
+      const birthMonth = lockedDate.getMonth();
+      const birthDay = lockedDate.getDate();
+      let nextBday = new Date(now.getFullYear(), birthMonth, birthDay);
+
+      const isBirthdayToday = (now.getMonth() === birthMonth && now.getDate() === birthDay);
+
+      if (now > nextBday && !isBirthdayToday) {
+        nextBday.setFullYear(now.getFullYear() + 1);
+      }
+
+      const nextDateStr = `${nextBday.getDate().toString().padStart(2, '0')}/${(nextBday.getMonth() + 1).toString().padStart(2, '0')}/${nextBday.getFullYear()}`;
+
+      let bMonths = 0, bDays = 0, bHours = 0, bMins = 0, bSecs = 0;
+
+      if (!isBirthdayToday) {
+        bMonths = nextBday.getMonth() - now.getMonth();
+        bDays = nextBday.getDate() - now.getDate();
+        if (bDays < 0) {
+          bMonths--;
+          const prevMonth = new Date(nextBday.getFullYear(), nextBday.getMonth(), 0);
+          bDays += prevMonth.getDate();
+        }
+        if (bMonths < 0) {
+          bMonths += 12;
+        }
+        bHours = 23 - now.getHours();
+        bMins = 59 - now.getMinutes();
+        bSecs = 59 - now.getSeconds();
+      }
+
+      setBdayData({
+        months: bMonths,
+        days: bDays,
+        hours: bHours,
+        minutes: bMins,
+        seconds: bSecs,
+        nextDateStr,
+        isToday: isBirthdayToday
+      });
     };
 
     updateLiveStats();
     const timer = setInterval(updateLiveStats, 1000);
     return () => clearInterval(timer);
-  }, [age, day, month, year]);
+  }, [lockedDate, age]);
 
   const handleReset = () => {
-    setDay("");
-    setMonth("");
-    setYear("");
+    setDobStr("");
+    setLockedDate(null);
     setAge(null);
     setError("");
-    dayRef.current?.focus();
   };
 
-  // FIX: Converted the string from .toFixed() back to a Number so Math.min doesn't crash
-  const lifePercentage = age ? Math.min(Number(((age.years / 80) * 100).toFixed(1)), 100) : 0;
+  const exactPercentage = age ? Number((((age.years * 365 + age.months * 30 + age.days) / (80 * 365)) * 100).toFixed(1)) : 0;
+  const lifePercentage = Math.min(exactPercentage, 100);
 
   return (
     <CalcShell 
-      title="Age Calculator" 
-      description="Experience your exact age in real-time with our premium live engine."
+      title="Exact Age Calculator" 
+      description="Calculate your precise chronological age, track life progress, and get a live countdown to your next birthday."
     >
-      <div className="max-w-md mx-auto bg-gradient-to-b from-[#131c2f] to-[#0b1120] p-6 md:p-8 rounded-[2.5rem] shadow-[0_40px_80px_rgba(0,0,0,0.9),0_0_40px_rgba(6,182,212,0.15)] border border-slate-700/60 border-t-cyan-500/40 relative overflow-hidden group">
+      
+      <div className="space-y-8 max-w-[600px] mx-auto font-sans">
         
-        {/* Animated Neon Background Orbs */}
-        <div className="absolute top-[-20%] right-[-10%] w-64 h-64 bg-fuchsia-600/20 blur-[100px] rounded-full pointer-events-none transition-all duration-1000 group-hover:scale-110"></div>
-        <div className="absolute bottom-[-10%] left-[-20%] w-64 h-64 bg-cyan-600/20 blur-[100px] rounded-full pointer-events-none transition-all duration-1000 group-hover:scale-110"></div>
-        <div className="absolute top-[40%] left-[30%] w-32 h-32 bg-emerald-500/10 blur-[80px] rounded-full pointer-events-none"></div>
-
-        {/* --- SMART CYBER INPUT --- */}
-        <div className="relative z-10 mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <label className="flex items-center gap-2 text-sm font-black tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
-              <CalendarDays size={18} className="text-cyan-400" />
-              Birth Date
-            </label>
-            <span className="text-[10px] font-black text-cyan-200/50 bg-cyan-900/30 border border-cyan-500/20 px-2.5 py-1 rounded-full uppercase tracking-widest shadow-[0_0_10px_rgba(6,182,212,0.2)]">
-              Auto-Calc
-            </span>
-          </div>
+        {/* =========================================
+            CARD 1: MAIN INPUT & AGE CALCULATOR
+        ========================================= */}
+        <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] max-w-[400px] mx-auto relative z-20">
           
-          <div className={`relative flex items-center justify-between p-1.5 bg-black/40 rounded-2xl transition-all shadow-[inset_0_4px_10px_rgba(0,0,0,0.6)] overflow-hidden ${error ? 'border border-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.2),inset_0_4px_10px_rgba(0,0,0,0.6)]' : 'border border-slate-700/50 focus-within:border-cyan-500/50 focus-within:shadow-[0_0_25px_rgba(6,182,212,0.2),inset_0_4px_10px_rgba(0,0,0,0.6)]'}`}>
+          <div className="mb-6">
+            <label className="block text-slate-700 font-bold mb-2 ml-1 text-[15px]">
+              Date of Birth <span className="font-normal text-slate-500">(DD/MM/YYYY)</span>
+            </label>
             <input 
-              ref={dayRef} type="text" placeholder="DD" value={day} onChange={handleDayChange}
-              className="w-full text-center text-3xl font-black text-white bg-transparent outline-none placeholder:text-slate-600 py-3"
+              type="text" 
+              placeholder="DD/MM/YYYY"
+              value={dobStr}
+              onChange={handleInputChange}
+              className={`w-full text-center text-xl tracking-[0.2em] font-medium text-slate-800 py-3.5 px-6 rounded-full border-2 transition-all outline-none ${error ? 'border-red-400 bg-red-50' : 'border-indigo-500 focus:ring-4 focus:ring-indigo-500/20'}`}
             />
-            <span className="text-4xl font-light text-slate-700">/</span>
-            <input 
-              ref={monthRef} type="text" placeholder="MM" value={month} onChange={handleMonthChange} onKeyDown={(e) => handleKeyDown(e, 'month')}
-              className="w-full text-center text-3xl font-black text-white bg-transparent outline-none placeholder:text-slate-600 py-3"
-            />
-            <span className="text-4xl font-light text-slate-700">/</span>
-            <input 
-              ref={yearRef} type="text" placeholder="YYYY" value={year} onChange={handleYearChange} onKeyDown={(e) => handleKeyDown(e, 'year')}
-              className="w-full text-center text-3xl font-black text-white bg-transparent outline-none placeholder:text-slate-600 py-3"
-            />
+            {error && <p className="text-red-500 text-xs font-bold mt-2 text-center">{error}</p>}
           </div>
-          {error && <p className="text-red-400 text-[11px] font-bold mt-3 ml-2 flex items-center gap-1.5 animate-pulse"><RotateCcw size={12}/> {error}</p>}
-        </div>
 
-        {/* --- RESET BUTTON --- */}
-        {(day || month || year) && !age && (
-          <button 
-            onClick={handleReset}
-            className="w-full mb-6 bg-slate-800/50 border border-slate-700/50 text-slate-300 py-3.5 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-slate-700/80 hover:text-white hover:shadow-lg transition-all active:scale-95 relative z-10"
-          >
-            <RotateCcw size={16} /> Clear Fields
-          </button>
-        )}
+          <div className="space-y-3 mb-2">
+            <button 
+              onClick={handleCalculate}
+              className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-lg py-3.5 rounded-full flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-indigo-500/30 transition-all active:scale-95"
+            >
+              <Sparkles size={20} className="text-yellow-300 fill-yellow-300" /> Calculate My Age
+            </button>
+            <button 
+              onClick={handleReset}
+              className="w-full bg-white border border-slate-200 text-slate-700 font-bold text-[15px] py-3.5 rounded-full flex items-center justify-center gap-2 hover:bg-slate-50 transition-all active:scale-95"
+            >
+              <RotateCcw size={16} /> Reset
+            </button>
+          </div>
 
-        {/* --- VIBRANT RESULTS SECTION --- */}
-        {age && (
-          <div className="space-y-5 animate-in fade-in zoom-in-95 duration-500 relative z-10">
-            
-            {/* Colorful 6-Block Grid with Icons & Gradients */}
-            <div className="grid grid-cols-3 gap-3">
-              {[
-                { value: age.years, label: "YEARS", icon: <Star size={14}/>, border: "border-fuchsia-500/30", bg: "bg-fuchsia-500/10", text: "from-fuchsia-300 to-pink-500", glow: "shadow-[0_10px_20px_rgba(217,70,239,0.15)]" },
-                { value: age.months, label: "MONTHS", icon: <Moon size={14}/>, border: "border-indigo-500/30", bg: "bg-indigo-500/10", text: "from-indigo-300 to-blue-500", glow: "shadow-[0_10px_20px_rgba(99,102,241,0.15)]" },
-                { value: age.days, label: "DAYS", icon: <Sun size={14}/>, border: "border-emerald-500/30", bg: "bg-emerald-500/10", text: "from-emerald-300 to-teal-500", glow: "shadow-[0_10px_20px_rgba(16,185,129,0.15)]" },
-                { value: liveData.hours.toString().padStart(2, '0'), label: "HOURS", icon: <Hourglass size={14}/>, border: "border-amber-500/30", bg: "bg-amber-500/10", text: "from-amber-300 to-orange-500", glow: "shadow-[0_10px_20px_rgba(245,158,11,0.15)]" },
-                { value: liveData.minutes.toString().padStart(2, '0'), label: "MINUTES", icon: <Clock size={14}/>, border: "border-violet-500/30", bg: "bg-violet-500/10", text: "from-violet-300 to-purple-500", glow: "shadow-[0_10px_20px_rgba(139,92,246,0.15)]" },
-                { value: liveData.seconds.toString().padStart(2, '0'), label: "SECONDS", icon: <Zap size={14}/>, border: "border-cyan-500/30", bg: "bg-cyan-500/10", text: "from-cyan-300 to-blue-500", glow: "shadow-[0_10px_20px_rgba(6,182,212,0.15)]" },
-              ].map((item, index) => (
-                <div key={index} className={`${item.bg} ${item.border} ${item.glow} rounded-[1.5rem] p-3 md:p-4 flex flex-col items-center justify-center border relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300`}>
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className={`text-white/40 mb-1.5 group-hover:text-white transition-colors`}>{item.icon}</div>
-                  <span className={`text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b ${item.text} mb-1 tabular-nums drop-shadow-md leading-none`}>
-                    {item.value}
-                  </span>
-                  <span className="text-[8px] md:text-[10px] font-black text-white/50 tracking-[0.2em] uppercase mt-1">
-                    {item.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Glowing Total Weeks Block */}
-            <div className="bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-rose-500/20 rounded-[1.5rem] p-4 flex items-center justify-center gap-3 border border-amber-500/40 shadow-[0_10px_30px_rgba(245,158,11,0.2)] relative overflow-hidden group hover:scale-[1.02] transition-transform">
-              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
-              <div className="bg-black/40 p-2.5 rounded-xl border border-amber-500/30 shadow-inner relative z-10"><BarChart2 size={20} className="text-amber-400" /></div>
-              <span className="relative z-10 text-lg font-bold text-amber-100/90">
-                Total Weeks: <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400 font-black text-2xl tracking-tight ml-1 drop-shadow-md">{liveData.totalWeeks.toLocaleString()}</span>
-              </span>
-            </div>
-
-            {/* Neon Life Progress Bar Section */}
-            <div className="pt-2 space-y-4 bg-black/30 backdrop-blur-xl p-5 rounded-[1.5rem] border border-white/10 relative overflow-hidden shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)]">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-3xl rounded-full"></div>
-              
-              <div className="flex items-center justify-between text-slate-300 font-bold relative z-10">
-                <div className="flex items-center gap-2">
-                  <TrendingUp size={18} className="text-cyan-400" />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400 font-black uppercase tracking-widest text-sm drop-shadow-sm">Life Progress</span>
-                </div>
-                <span className="text-cyan-200/60 font-black text-[10px] bg-cyan-950/80 px-2.5 py-1 rounded-md border border-cyan-500/30 uppercase tracking-widest shadow-[0_0_10px_rgba(6,182,212,0.2)]">80 Yrs Max</span>
+          {age && (
+            <div className="space-y-6 mt-8 animate-in fade-in slide-in-from-top-4 duration-500 pt-6 border-t border-slate-100">
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { value: age.years, label: "YEARS" },
+                  { value: age.months, label: "MONTHS" },
+                  { value: age.days, label: "DAYS" },
+                  { value: liveData.hours.toString().padStart(2, '0'), label: "HOURS" },
+                  { value: liveData.minutes.toString().padStart(2, '0'), label: "MINUTES" },
+                  { value: liveData.seconds.toString().padStart(2, '0'), label: "SECONDS" },
+                ].map((item, index) => (
+                  <div key={index} className="bg-[#f3f6ff] rounded-2xl p-4 flex flex-col items-center justify-center border border-indigo-50/50">
+                    <span className="text-2xl font-bold text-indigo-900 mb-0.5 tabular-nums">{item.value}</span>
+                    <span className="text-[10px] font-medium text-slate-500 tracking-wider">{item.label}</span>
+                  </div>
+                ))}
               </div>
-              
-              <div className="relative pt-6 pb-2 z-10">
-                {/* Background Segmented Bar */}
-                <div className="w-full h-3.5 rounded-full flex overflow-hidden bg-black border border-slate-700 shadow-[inset_0_4px_6px_rgba(0,0,0,0.8)]">
-                  <div className="w-[30%] bg-gradient-to-r from-emerald-600 to-emerald-400 border-r border-slate-900"></div>
-                  <div className="w-[40%] bg-gradient-to-r from-amber-600 to-amber-400 border-r border-slate-900"></div>
-                  <div className="w-[30%] bg-gradient-to-r from-red-600 to-rose-400"></div>
-                </div>
 
-                {/* Progress Indicator Marker */}
-                <div 
-                  className="absolute top-0 -ml-5 flex flex-col items-center transition-all duration-1000 ease-out z-20"
-                  style={{ left: `${lifePercentage}%` }}
-                >
-                  <div className="bg-[#0f172a] text-cyan-400 text-[11px] font-black px-3 py-1 rounded-lg shadow-[0_10px_25px_rgba(6,182,212,0.8)] mb-1 border border-cyan-400 relative flex items-center justify-center">
-                    {lifePercentage}%
-                    <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-transparent border-t-cyan-400"></div>
+              <div className="bg-[#fef9e6] rounded-2xl p-4 flex items-center justify-center gap-3">
+                <BarChart2 size={20} className="text-emerald-500" />
+                <span className="text-[17px] font-bold text-slate-800">
+                  Total Weeks: <span className="text-amber-700">{liveData.totalWeeks.toLocaleString()}</span>
+                </span>
+              </div>
+
+              <div className="pt-2">
+                <div className="flex items-center gap-2 text-slate-800 font-bold mb-6">
+                  <TrendingUp size={20} className="text-red-400" /> Life Progress <span className="text-slate-500 font-normal text-[13px]">(based on 80 years)</span>
+                </div>
+                <div className="relative mb-8">
+                  <div className="w-full h-3.5 rounded-full flex overflow-hidden">
+                    <div className="w-[30%] bg-[#00c853]"></div>
+                    <div className="w-[40%] bg-[#ff9100]"></div>
+                    <div className="w-[30%] bg-[#ff1744]"></div>
+                  </div>
+                  <div className="absolute top-1/2 -translate-y-1/2 -ml-5 flex items-center justify-center transition-all duration-1000 ease-out" style={{ left: `${lifePercentage}%` }}>
+                    <div className="bg-white border-[3px] border-[#ffb300] text-amber-500 text-[10px] font-black w-10 h-10 rounded-full flex items-center justify-center shadow-md">
+                      {Math.floor(lifePercentage)}%
+                    </div>
                   </div>
                 </div>
-
-                {/* Stylish Legend */}
-                <div className="flex justify-between items-center text-[9px] text-slate-400 font-black mt-4 px-1 uppercase tracking-widest">
-                  <span className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.5)]"></div>0</span>
-                  <span className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.5)]"></div>24</span>
-                  <span className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]"></div>56</span>
-                  <span className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-slate-500"></div>80</span>
+                <div className="flex justify-between items-center text-[11px] text-slate-500 mb-6 px-1">
+                  <span className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#7cb342]"></div>0 yrs</span>
+                  <span className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#ffb300]"></div>24 yrs</span>
+                  <span className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#e53935]"></div>56 yrs</span>
+                  <span className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-slate-700"></div>80 yrs</span>
+                </div>
+                <div className="text-center pb-2">
+                  <h3 className="text-xl font-bold text-slate-800 tracking-tight">Life Lived: {exactPercentage}% of 80 years</h3>
                 </div>
               </div>
             </div>
+          )}
+        </div>
 
-            {/* Minimalist Reset Option Below Results */}
-            <div className="pt-2 flex justify-center relative z-10">
-               <button 
-                onClick={handleReset}
-                className="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-cyan-400 flex items-center gap-1.5 transition-colors"
-               >
-                 <RotateCcw size={12} /> Calculate New Date
-               </button>
+        {/* =========================================
+            EMPTY STATE: SEO & FEATURE EXPLANATION
+            (This completely hides once a date is calculated)
+        ========================================= */}
+        {!age && (
+          <div className="animate-in fade-in slide-in-from-bottom-8 duration-700 text-center px-4 relative z-10 pt-4">
+            <h2 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight mb-4">
+              More Than Just a <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Date of Birth Calculator</span>
+            </h2>
+            <p className="text-slate-500 font-medium text-sm leading-relaxed mb-8 max-w-xl mx-auto">
+              Enter your date of birth above to unlock a personalized chronological dashboard. Our exact age calculator goes beyond simple years and months, giving you real-time insights into your life's journey instantly.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              
+              <div className="bg-white p-5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col items-center text-center gap-3">
+                <div className="w-12 h-12 bg-indigo-50 text-indigo-500 rounded-[14px] flex items-center justify-center">
+                  <Timer size={22} />
+                </div>
+                <h3 className="text-[15px] font-bold text-slate-800">Live Age Ticker</h3>
+                <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                  Track your exact chronological age in hours, minutes, and live ticking seconds.
+                </p>
+              </div>
+
+              <div className="bg-white p-5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col items-center text-center gap-3">
+                <div className="w-12 h-12 bg-pink-50 text-pink-500 rounded-[14px] flex items-center justify-center">
+                  <Cake size={22} />
+                </div>
+                <h3 className="text-[15px] font-bold text-slate-800">Birthday Countdown</h3>
+                <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                  Get a vibrant, real-time timer tracking exact months and days to your next birthday.
+                </p>
+              </div>
+
+              <div className="bg-white p-5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col items-center text-center gap-3">
+                <div className="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-[14px] flex items-center justify-center">
+                  <TrendingUp size={22} />
+                </div>
+                <h3 className="text-[15px] font-bold text-slate-800">Life Progress</h3>
+                <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                  Visualize your life journey with our intuitive 80-year graphical milestone tracker.
+                </p>
+              </div>
+
             </div>
-
           </div>
         )}
 
-        {/* Graphical Empty State */}
-        {!age && !error && (
-            <div className="h-40 flex flex-col items-center justify-center border-2 border-dashed border-slate-700 rounded-3xl bg-black/20 shadow-[inset_0_4px_20px_rgba(0,0,0,0.5)] mt-6 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cyber-pattern.png')] opacity-5 group-hover:opacity-10 transition-opacity"></div>
-                <div className="relative z-10 flex flex-col items-center text-center">
-                    <Clock size={32} className="text-slate-600 mb-3 animate-pulse" />
-                    <p className="text-sm font-bold text-slate-500">Waiting for your birth date</p>
-                    <p className="text-xs text-slate-600 mt-1">Live engine will start instantly.</p>
-                </div>
+        {/* =========================================
+            CARD 2: CLIENT'S NEXT BIRTHDAY WIDGET
+        ========================================= */}
+        {age && (
+          <div className="bg-[#fcfaff] rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.05)] overflow-hidden border border-fuchsia-50 max-w-[400px] mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
+            
+            {/* Header (Vibrant Gradient) */}
+            <div className="bg-gradient-to-r from-[#fc238c] to-[#5951f8] p-5 flex items-center relative">
+              <Cake size={32} className="absolute left-6 text-yellow-300 drop-shadow-md" />
+              <h2 className="text-white font-bold text-2xl text-center w-full leading-tight drop-shadow-sm">
+                Next Birthday <br/> Countdown
+              </h2>
             </div>
+
+            {/* Body */}
+            <div className="p-6 flex flex-col items-center">
+              
+              {bdayData.isToday ? (
+                 <div className="text-center space-y-3 py-6">
+                    <div className="text-5xl animate-bounce">🎉🎂✨</div>
+                    <h3 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">Happy Birthday!</h3>
+                    <p className="text-slate-600 font-bold text-lg">Have a wonderful celebration today!</p>
+                 </div>
+              ) : (
+                <>
+                  <div className="bg-white px-6 py-3 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-3 mb-6">
+                    <CalendarDays size={22} className="text-purple-600" />
+                    <span className="text-[#2d3748] font-black text-xl tracking-wide">
+                      {bdayData.nextDateStr}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-[#2d3748] font-bold text-[15px] mb-4">
+                    <Clock size={18} className="text-[#ff509e]" /> Live Countdown
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3 w-full mb-3">
+                    <div className="bg-gradient-to-b from-[#fc238c] to-[#f80860] rounded-2xl p-4 flex flex-col items-center text-white shadow-lg shadow-pink-500/20">
+                      <span className="text-4xl font-black tabular-nums tracking-tighter drop-shadow-sm">{bdayData.months}</span>
+                      <span className="text-[10px] font-bold uppercase mt-1 tracking-wider opacity-90">Months</span>
+                    </div>
+                    <div className="bg-gradient-to-b from-[#ab40ff] to-[#9226f3] rounded-2xl p-4 flex flex-col items-center text-white shadow-lg shadow-purple-500/20">
+                      <span className="text-4xl font-black tabular-nums tracking-tighter drop-shadow-sm">{bdayData.days}</span>
+                      <span className="text-[10px] font-bold uppercase mt-1 tracking-wider opacity-90">Days</span>
+                    </div>
+                    <div className="bg-gradient-to-b from-[#5966ff] to-[#424ff5] rounded-2xl p-4 flex flex-col items-center text-white shadow-lg shadow-indigo-500/20">
+                      <span className="text-4xl font-black tabular-nums tracking-tighter drop-shadow-sm">{bdayData.hours}</span>
+                      <span className="text-[10px] font-bold uppercase mt-1 tracking-wider opacity-90">Hours</span>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3 w-full mb-6">
+                    <div className="bg-white rounded-2xl p-4 flex flex-col items-center text-[#2d3748] shadow-sm border border-slate-100">
+                      <span className="text-4xl font-black tabular-nums tracking-tighter">{bdayData.minutes}</span>
+                      <span className="text-[11px] font-bold uppercase mt-1 tracking-wider text-slate-500">Minutes</span>
+                    </div>
+                    <div className="bg-white rounded-2xl p-4 flex flex-col items-center text-[#2d3748] shadow-sm border border-slate-100">
+                      <span className="text-4xl font-black tabular-nums tracking-tighter">{bdayData.seconds}</span>
+                      <span className="text-[11px] font-bold uppercase mt-1 tracking-wider text-slate-500">Seconds</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-white w-full py-4 px-2 rounded-2xl shadow-sm border border-slate-100 text-center text-[14px] font-medium text-[#2d3748]">
+                    That's exactly <span className="text-[#fc238c] font-bold">{bdayData.months} months</span>, <span className="text-[#fc238c] font-bold">{bdayData.days} days</span>, and <span className="text-[#fc238c] font-bold">{bdayData.hours} hours</span> away!
+                  </div>
+                </>
+              )}
+            </div>
+
+          </div>
         )}
       </div>
     </CalcShell>

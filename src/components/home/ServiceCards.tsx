@@ -7,8 +7,7 @@ import {
   Sparkles, 
   Calculator, 
   Users, 
-  FastForward, 
-  Palmtree 
+  FastForward 
 } from 'lucide-react';
 
 const tools = [
@@ -32,13 +31,6 @@ const tools = [
     image: "/service4.webp",
     href: "/future-age",
     icon: <FastForward className="text-white" size={18} />,
-  },
-  {
-    title: "Retirement Calc",
-    desc: "Plan your golden years by calculating exactly when you will retire.",
-    image: "/service1.webp",
-    href: "/retirement",
-    icon: <Palmtree className="text-white" size={18} />,
   }
 ];
 
@@ -62,8 +54,8 @@ const ServiceCards = () => {
           </h2>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-20">
+        {/* Grid: Changed lg:grid-cols-4 to lg:grid-cols-3 for perfect 3-card balance */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20 max-w-5xl mx-auto">
           {tools.map((tool, index) => (
             <Link 
               key={index} 
@@ -80,7 +72,6 @@ const ServiceCards = () => {
               <div className="relative h-full z-10 bg-[#121826] rounded-[2.4rem] p-7 pt-10 flex flex-col min-h-[280px] border border-white/5 overflow-visible">
                 
                 {/* --- 3. CHARACTER IMAGE (Right Side & Pop-out) --- */}
-                {/* Changed z-index to 20 so text (z-30) can stay above the image */}
                 <div className="absolute -top-16 -right-2 w-36 h-48 z-20 pointer-events-none transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-2">
                   {/* Neon Light Effect (Always On) */}
                   <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-24 h-12 bg-[#00a63e]/40 blur-[35px] rounded-full"></div>
@@ -94,8 +85,7 @@ const ServiceCards = () => {
                   />
                 </div>
 
-                {/* 4. CONTENT AREA (Now above the image) */}
-                {/* Changed z-index to 30, adjusted padding, and added dark drop-shadow for readability */}
+                {/* 4. CONTENT AREA */}
                 <div className="relative z-30 flex-grow space-y-4 pr-2"> 
                   <div className="inline-flex p-2.5 bg-[#00a63e] rounded-xl shadow-lg shadow-[#00a63e]/20">
                     {tool.icon}
@@ -112,7 +102,6 @@ const ServiceCards = () => {
                 </div>
 
                 {/* 5. FOOTER */}
-                {/* Added relative z-30 to ensure footer is also clickable and above the image */}
                 <div className="relative z-30 mt-8 pt-5 border-t border-white/5 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#00a63e] animate-pulse"></div>
