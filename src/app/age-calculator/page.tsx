@@ -6,7 +6,6 @@ import {
   RotateCcw, 
   BarChart2, 
   TrendingUp,
-  Cake,
   CalendarDays,
   Clock,
   Timer
@@ -293,8 +292,8 @@ export default function AgeCalc() {
               </div>
 
               <div className="bg-white p-5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col items-center text-center gap-3">
-                <div className="w-12 h-12 bg-pink-50 text-pink-500 rounded-[14px] flex items-center justify-center">
-                  <Cake size={22} />
+                <div className="w-12 h-12 bg-pink-50 text-pink-500 rounded-[14px] flex items-center justify-center text-2xl">
+                  🎂
                 </div>
                 <h3 className="text-[15px] font-bold text-slate-800">Birthday Countdown</h3>
                 <p className="text-xs text-slate-500 font-medium leading-relaxed">
@@ -324,7 +323,7 @@ export default function AgeCalc() {
             
             {/* Header (Vibrant Gradient) */}
             <div className="bg-gradient-to-r from-[#fc238c] to-[#5951f8] p-5 flex items-center relative">
-              <Cake size={32} className="absolute left-6 text-yellow-300 drop-shadow-md" />
+              <span className="absolute left-6 text-3xl drop-shadow-md">🎂</span>
               <h2 className="text-white font-bold text-2xl text-center w-full leading-tight drop-shadow-sm">
                 Next Birthday <br/> Countdown
               </h2>

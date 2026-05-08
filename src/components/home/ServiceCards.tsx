@@ -1,7 +1,6 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { 
   ArrowUpRight, 
   Sparkles, 
@@ -14,48 +13,82 @@ const tools = [
   {
     title: "Age Calculator",
     desc: "Calculate your exact age in years, months, and days with a live second counter.",
-    image: "/service2.webp",
     href: "/age-calculator",
-    icon: <Calculator className="text-white" size={18} />,
+    actionText: "Calculate Age",
+    icon: <Calculator size={22} className="text-white" />,
+    theme: {
+      cardBg: "bg-gradient-to-br from-emerald-50/80 to-teal-100/50",
+      iconBg: "bg-gradient-to-br from-emerald-400 to-teal-500",
+      solid: "bg-emerald-500",
+      glow: "bg-emerald-500/30",
+      aura: "from-emerald-400/40 to-teal-400/40",
+      hoverText: "group-hover:text-emerald-600",
+      border: "border-emerald-200/60"
+    }
   },
   {
     title: "Age Difference",
     desc: "Find the exact age gap between two people with custom relationship labels.",
-    image: "/service3.webp",
     href: "/age-difference",
-    icon: <Users className="text-white" size={18} />,
+    actionText: "Compare Ages",
+    icon: <Users size={22} className="text-white" />,
+    theme: {
+      cardBg: "bg-gradient-to-br from-indigo-50/80 to-purple-100/50",
+      iconBg: "bg-gradient-to-br from-indigo-400 to-purple-500",
+      solid: "bg-indigo-500",
+      glow: "bg-indigo-500/30",
+      aura: "from-indigo-400/40 to-purple-400/40",
+      hoverText: "group-hover:text-indigo-600",
+      border: "border-indigo-200/60"
+    }
   },
   {
     title: "Future Age",
     desc: "Predict how old you will be on any specific date in the future with milestones.",
-    image: "/service4.webp",
     href: "/future-age",
-    icon: <FastForward className="text-white" size={18} />,
+    actionText: "Predict Future",
+    icon: <FastForward size={22} className="text-white" />,
+    theme: {
+      cardBg: "bg-gradient-to-br from-orange-50/80 to-rose-100/50",
+      iconBg: "bg-gradient-to-br from-orange-400 to-rose-500",
+      solid: "bg-orange-500",
+      glow: "bg-orange-500/30",
+      aura: "from-orange-400/40 to-rose-400/40",
+      hoverText: "group-hover:text-orange-600",
+      border: "border-orange-200/60"
+    }
   }
 ];
 
 const ServiceCards = () => {
   return (
-    <section className="py-24 md:py-32 bg-white relative overflow-visible">
+    <section className="py-24 md:py-32 relative overflow-visible z-0">
       
-      {/* Background Ambience */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-gray-50 to-transparent pointer-events-none"></div>
+      {/* Super Colorful Background Ambience */}
+      <div className="absolute inset-0 bg-[#f8fafc] -z-20 pointer-events-none"></div>
+      
+      {/* Animated Glowing Orbs */}
+      <div className="absolute top-[10%] left-[-5%] w-[400px] h-[400px] bg-fuchsia-400/10 blur-[100px] rounded-full pointer-events-none -z-10 animate-pulse"></div>
+      <div className="absolute bottom-[20%] right-[-5%] w-[500px] h-[500px] bg-cyan-400/10 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+      <div className="absolute top-[40%] left-[40%] w-[300px] h-[300px] bg-emerald-400/10 blur-[100px] rounded-full pointer-events-none -z-10"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         
-        {/* Header */}
+        {/* Header Section */}
         <div className="mb-24 text-center space-y-4">
-          <div className="flex items-center justify-center gap-3">
-            <Sparkles size={18} className="text-[#00a63e]" />
-            <span className="text-[11px] font-black uppercase tracking-[0.5em] text-[#00a63e]">Smart Intelligence</span>
+          <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-slate-100">
+            <Sparkles size={16} className="text-violet-500" />
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600">
+              Smart Intelligence
+            </span>
           </div>
-          <h2 className="text-5xl md:text-7xl font-black text-gray-900 tracking-tighter">
-            Precision <span className="text-[#00a63e]">Simplified.</span>
+          <h2 className="text-5xl md:text-7xl font-black text-slate-800 tracking-tighter leading-tight drop-shadow-sm">
+            Precision <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00a63e] to-[#007a2d]">Simplified.</span>
           </h2>
         </div>
 
-        {/* Grid: Changed lg:grid-cols-4 to lg:grid-cols-3 for perfect 3-card balance */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20 max-w-5xl mx-auto">
+        {/* 3-Column Perfect Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 max-w-5xl mx-auto">
           {tools.map((tool, index) => (
             <Link 
               key={index} 
@@ -63,61 +96,45 @@ const ServiceCards = () => {
               className="group relative block transition-all duration-500 hover:-translate-y-2"
             >
               
-              {/* --- 1. CONTINUOUS ROTATING BORDER LIGHT --- */}
-              <div className="absolute inset-[-1.5px] rounded-[2.5rem] overflow-hidden p-[1.5px] z-0">
-                <div className="absolute inset-[-200%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_150deg,#00a63e_180deg,transparent_210deg,transparent_360deg)] animate-[spin_4s_linear_infinite]"></div>
-              </div>
+              {/* --- 1. HOVER GLOW AURA --- */}
+              <div className={`absolute inset-0 rounded-[2.5rem] bg-gradient-to-br ${tool.theme.aura} blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 transform group-hover:scale-105`}></div>
 
-              {/* --- 2. DARK CARD BODY --- */}
-              <div className="relative h-full z-10 bg-[#121826] rounded-[2.4rem] p-7 pt-10 flex flex-col min-h-[280px] border border-white/5 overflow-visible">
+              {/* --- 2. VIBRANT CARD BODY (Tinted Glassmorphism without Images) --- */}
+              <div className={`relative h-full z-10 ${tool.theme.cardBg} backdrop-blur-md rounded-[2.4rem] p-8 md:p-10 flex flex-col border ${tool.theme.border} shadow-[0_15px_40px_rgba(0,0,0,0.05)] group-hover:shadow-[0_25px_50px_rgba(0,0,0,0.1)] transition-all overflow-hidden`}>
                 
-                {/* --- 3. CHARACTER IMAGE (Right Side & Pop-out) --- */}
-                <div className="absolute -top-16 -right-2 w-36 h-48 z-20 pointer-events-none transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-2">
-                  {/* Neon Light Effect (Always On) */}
-                  <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-24 h-12 bg-[#00a63e]/40 blur-[35px] rounded-full"></div>
-                  
-                  <Image 
-                    src={tool.image} 
-                    alt={tool.title} 
-                    fill
-                    className="object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]"
-                    style={{ objectPosition: 'bottom' }}
-                  />
-                </div>
-
-                {/* 4. CONTENT AREA */}
-                <div className="relative z-30 flex-grow space-y-4 pr-2"> 
-                  <div className="inline-flex p-2.5 bg-[#00a63e] rounded-xl shadow-lg shadow-[#00a63e]/20">
+                {/* --- 3. CONTENT AREA --- */}
+                <div className="relative z-30 flex-grow space-y-6"> 
+                  {/* Vibrant Solid Icon Box */}
+                  <div className={`inline-flex p-4 rounded-[1.2rem] ${tool.theme.iconBg} shadow-lg shadow-${tool.theme.solid}/30 transition-transform group-hover:scale-110 duration-300`}>
                     {tool.icon}
                   </div>
                   
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-black text-white tracking-tight uppercase leading-tight drop-shadow-[0_4px_6px_rgba(0,0,0,0.9)]">
+                  <div className="space-y-3">
+                    <h3 className={`text-2xl md:text-3xl font-black text-slate-800 tracking-tight leading-tight ${tool.theme.hoverText} transition-colors duration-300`}>
                       {tool.title}
                     </h3>
-                    <p className="text-gray-300 text-[12px] font-bold leading-relaxed line-clamp-3 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">
+                    <p className="text-slate-600 text-sm font-semibold leading-relaxed">
                       {tool.desc}
                     </p>
                   </div>
                 </div>
 
-                {/* 5. FOOTER */}
-                <div className="relative z-30 mt-8 pt-5 border-t border-white/5 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#00a63e] animate-pulse"></div>
-                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">Live Engine</span>
+                {/* --- 4. DYNAMIC ACTION FOOTER --- */}
+                <div className={`relative z-30 mt-10 pt-6 border-t ${tool.theme.border} flex items-center justify-between`}>
+                  <div className="flex items-center gap-3">
+                    <div className={`w-3 h-3 rounded-full ${tool.theme.solid} animate-pulse shadow-sm`}></div>
+                    <span className={`text-[11px] font-black uppercase tracking-[0.2em] ${tool.theme.hoverText} text-slate-500 transition-colors`}>
+                      {tool.actionText}
+                    </span>
                   </div>
-                  <div className="bg-white/5 p-2 rounded-full text-white/40 border border-white/10 group-hover:bg-[#00a63e] group-hover:text-white transition-all transform group-hover:rotate-45">
-                    <ArrowUpRight size={16} />
+                  
+                  {/* Action Arrow Button */}
+                  <div className={`p-3 rounded-full bg-white text-slate-400 border ${tool.theme.border} group-hover:${tool.theme.solid} group-hover:bg-opacity-10 transition-all transform group-hover:rotate-45 shadow-sm`}>
+                    <ArrowUpRight size={20} className={tool.theme.hoverText} />
                   </div>
                 </div>
 
-                {/* Subtle Inner Glow (Always On) */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#00a63e]/5 to-transparent pointer-events-none rounded-[2.4rem]"></div>
               </div>
-
-              {/* Bottom Shadow for White Background */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-[#00a63e]/10 blur-2xl -z-10 transition-opacity opacity-50 group-hover:opacity-100"></div>
             </Link>
           ))}
         </div>

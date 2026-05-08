@@ -28,27 +28,30 @@ export default function TrustAndInfo() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         
         {/* =========================================
-            1. FLOATING TRUST BAR
+            1. FLOATING TRUST BAR (Optimized for Mobile)
         ========================================= */}
         <div className="mb-20">
-          <div className="bg-white/60 backdrop-blur-2xl border border-white rounded-[2.5rem] p-4 md:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.05)] flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-slate-200/50">
+          <div className="bg-white/60 backdrop-blur-2xl border border-white rounded-[2rem] md:rounded-[2.5rem] p-4 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.05)]">
             
-            {[
-              { title: "100% Free", desc: "No hidden charges", icon: <Unlock size={20} />, color: "text-blue-500", bg: "bg-blue-500/10" },
-              { title: "Zero Data", desc: "Absolute privacy", icon: <ShieldCheck size={20} />, color: "text-emerald-500", bg: "bg-emerald-500/10" },
-              { title: "High Precision", desc: "Exact accuracy", icon: <Target size={20} />, color: "text-orange-500", bg: "bg-orange-500/10" },
-              { title: "No Signup", desc: "Instant access", icon: <UserMinus size={20} />, color: "text-fuchsia-500", bg: "bg-fuchsia-500/10" },
-            ].map((item, idx) => (
-              <div key={idx} className="flex items-center gap-4 px-6 py-4 md:py-2 w-full md:w-auto hover:scale-105 transition-transform duration-300 cursor-default group">
-                <div className={`w-12 h-12 rounded-[1rem] flex items-center justify-center shrink-0 ${item.bg} ${item.color} shadow-inner group-hover:shadow-md transition-all`}>
-                  {item.icon}
+            {/* Grid specifically designed for mobile 2x2 and desktop 1x4 */}
+            <div className="grid grid-cols-2 md:flex md:flex-row items-center justify-between gap-4 md:gap-0 md:divide-x divide-slate-200/50">
+              {[
+                { title: "100% Free", desc: "No hidden charges", icon: <Unlock size={20} />, color: "text-blue-500", bg: "bg-blue-500/10" },
+                { title: "Zero Data", desc: "Absolute privacy", icon: <ShieldCheck size={20} />, color: "text-emerald-500", bg: "bg-emerald-500/10" },
+                { title: "High Precision", desc: "Exact accuracy", icon: <Target size={20} />, color: "text-orange-500", bg: "bg-orange-500/10" },
+                { title: "No Signup", desc: "Instant access", icon: <UserMinus size={20} />, color: "text-fuchsia-500", bg: "bg-fuchsia-500/10" },
+              ].map((item, idx) => (
+                <div key={idx} className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-4 p-4 md:px-6 md:py-2 w-full hover:scale-105 transition-transform duration-300 cursor-default group bg-white/40 md:bg-transparent rounded-2xl md:rounded-none border border-slate-100 md:border-none shadow-sm md:shadow-none">
+                  <div className={`w-12 h-12 rounded-[1rem] flex items-center justify-center shrink-0 ${item.bg} ${item.color} shadow-inner group-hover:shadow-md transition-all mx-auto sm:mx-0`}>
+                    {item.icon}
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    <h3 className="text-sm font-black text-slate-800 tracking-tight">{item.title}</h3>
+                    <p className="text-[9px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">{item.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-sm font-black text-slate-800 tracking-tight">{item.title}</h3>
-                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{item.desc}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
 
           </div>
         </div>
