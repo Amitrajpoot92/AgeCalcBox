@@ -36,10 +36,10 @@ export default function TrustAndInfo() {
             {/* Grid specifically designed for mobile 2x2 and desktop 1x4 */}
             <div className="grid grid-cols-2 md:flex md:flex-row items-center justify-between gap-4 md:gap-0 md:divide-x divide-slate-200/50">
               {[
-                { title: "100% Free", desc: "No hidden charges", icon: <Unlock size={20} />, color: "text-blue-500", bg: "bg-blue-500/10" },
-                { title: "Zero Data", desc: "Absolute privacy", icon: <ShieldCheck size={20} />, color: "text-emerald-500", bg: "bg-emerald-500/10" },
-                { title: "High Precision", desc: "Exact accuracy", icon: <Target size={20} />, color: "text-orange-500", bg: "bg-orange-500/10" },
-                { title: "No Signup", desc: "Instant access", icon: <UserMinus size={20} />, color: "text-fuchsia-500", bg: "bg-fuchsia-500/10" },
+                { title: "100% Free", desc: "No hidden charges or subscriptions.", icon: <Unlock size={20} />, color: "text-blue-500", bg: "bg-blue-500/10" },
+                { title: "Zero Data Collection", desc: "Your calculations stay completely private.", icon: <ShieldCheck size={20} />, color: "text-emerald-500", bg: "bg-emerald-500/10" },
+                { title: "High Precision", desc: "Get exact and accurate age results instantly.", icon: <Target size={20} />, color: "text-orange-500", bg: "bg-orange-500/10" },
+                { title: "No Signup", desc: "Use all tools instantly without creating an account", icon: <UserMinus size={20} />, color: "text-fuchsia-500", bg: "bg-fuchsia-500/10" },
               ].map((item, idx) => (
                 <div key={idx} className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-4 p-4 md:px-6 md:py-2 w-full hover:scale-105 transition-transform duration-300 cursor-default group bg-white/40 md:bg-transparent rounded-2xl md:rounded-none border border-slate-100 md:border-none shadow-sm md:shadow-none">
                   <div className={`w-12 h-12 rounded-[1rem] flex items-center justify-center shrink-0 ${item.bg} ${item.color} shadow-inner group-hover:shadow-md transition-all mx-auto sm:mx-0`}>
@@ -64,9 +64,7 @@ export default function TrustAndInfo() {
           <div className="text-center mb-10 space-y-4">
             <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-md rounded-full shadow-sm border border-white">
               <Sparkles size={16} className="text-violet-500" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600">
-                Discover The Engine
-              </span>
+               
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-slate-800 tracking-tighter leading-tight">
               Everything You Need to <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600">Know.</span>
@@ -87,7 +85,9 @@ export default function TrustAndInfo() {
                 </div>
                 <h3 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tight drop-shadow-md">What is Age Calculator Box?</h3>
                 <p className="text-blue-100 font-medium leading-relaxed max-w-xl text-sm md:text-base">
-                  A premium suite of digital utility tools engineered to calculate chronological data with absolute precision. From finding your exact age down to the second, to projecting future milestones, our engine handles complex date math instantly without storing your personal information.
+                  Age Calculator Box is a free online platform that helps you calculate exact age instantly. You can check age in years, months, days, hours, minutes, and live seconds using simple and accurate tools.
+
+Our platform also includes Age Difference Calculator and Future Age Calculator to make age-related calculations fast, easy, and mobile-friendly for everyone.
                 </p>
               </div>
             </div>
@@ -102,7 +102,9 @@ export default function TrustAndInfo() {
                 </div>
                 <h3 className="text-2xl font-black text-white mb-4 tracking-tight drop-shadow-md">Why is this useful?</h3>
                 <p className="text-rose-100 font-medium leading-relaxed text-sm">
-                  Manual date math is frustrating and prone to errors. Whether you're tracking a baby's age or planning for retirement, we eliminate the guesswork with timezone-aware, instant computations.
+                  Age Calculator Box makes it easy to calculate exact age and age differences instantly without any manual calculations. It helps users quickly check age in years, months, days, hours, and live seconds with accurate results.
+
+Whether you want to know your current age, compare ages between two people, or predict your future age, our tools provide fast, free, and mobile-friendly calculations anytime.
                 </p>
               </div>
             </div>
@@ -120,7 +122,9 @@ export default function TrustAndInfo() {
               <div className="relative z-10 text-center md:text-left">
                 <h3 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight drop-shadow-md">What do we offer?</h3>
                 <p className="text-emerald-50 font-medium leading-relaxed text-sm md:text-base max-w-3xl">
-                  A growing ecosystem of high-end calculators. Experience Exact Age tracking, chronological Age Differences, Future Projections, and a dedicated —all wrapped in a seamless, zero-friction interface designed by CodeWebX.
+                  Age Calculator Box helps people quickly calculate exact age without manual counting or confusing date calculations. It provides fast and accurate results in years, months, days, hours, and live seconds.
+
+People use our tools for school forms, job applications, official documents, birthday planning, future age predictions, and comparing age differences between two people — all in one simple and mobile-friendly platform.
                 </p>
               </div>
             </div>

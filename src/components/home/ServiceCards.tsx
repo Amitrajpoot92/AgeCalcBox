@@ -12,7 +12,7 @@ import {
 const tools = [
   {
     title: "Age Calculator",
-    desc: "Calculate your exact age in years, months, and days with a live second counter.",
+    desc: "Find your exact age instantly in years, months, days, hours, minutes, and live seconds with our free online age calculator.",
     href: "/age-calculator",
     actionText: "Calculate Age",
     icon: <Calculator size={22} className="text-white" />,
@@ -27,8 +27,8 @@ const tools = [
     }
   },
   {
-    title: "Age Difference",
-    desc: "Find the exact age gap between two people with custom relationship labels.",
+    title: "Age Difference Calculator",
+    desc: "Compare the exact age difference between two people in years, months, days, and more with instant results.",
     href: "/age-difference",
     actionText: "Compare Ages",
     icon: <Users size={22} className="text-white" />,
@@ -43,10 +43,10 @@ const tools = [
     }
   },
   {
-    title: "Future Age",
-    desc: "Predict how old you will be on any specific date in the future with milestones.",
+    title: "Future Age Calculator",
+    desc: "Find out exactly how old you will be on any future date with accurate age predictions and milestone tracking.",
     href: "/future-age",
-    actionText: "Predict Future",
+    actionText: "PREDICT FUTURE AGE",
     icon: <FastForward size={22} className="text-white" />,
     theme: {
       cardBg: "bg-gradient-to-br from-orange-50/80 to-rose-100/50",
@@ -62,7 +62,8 @@ const tools = [
 
 const ServiceCards = () => {
   return (
-    <section className="py-24 md:py-32 relative overflow-visible z-0">
+    // Reduced vertical padding: py-12 for mobile, py-20 for desktop
+    <section className="py-12 md:py-20 relative overflow-visible z-0" id="calculators-section">
       
       {/* Super Colorful Background Ambience */}
       <div className="absolute inset-0 bg-[#f8fafc] -z-20 pointer-events-none"></div>
@@ -74,63 +75,63 @@ const ServiceCards = () => {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         
-        {/* Header Section */}
-        <div className="mb-24 text-center space-y-4">
+        {/* Header Section - Reduced bottom margin */}
+        <div className="mb-12 md:mb-16 text-center space-y-3">
           <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-slate-100">
             <Sparkles size={16} className="text-violet-500" />
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600">
               Smart Intelligence
             </span>
           </div>
-          <h2 className="text-5xl md:text-7xl font-black text-slate-800 tracking-tighter leading-tight drop-shadow-sm">
+          <h2 className="text-4xl md:text-6xl font-black text-slate-800 tracking-tighter leading-tight drop-shadow-sm">
             Precision <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00a63e] to-[#007a2d]">Simplified.</span>
           </h2>
         </div>
 
-        {/* 3-Column Perfect Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 max-w-5xl mx-auto">
+        {/* 3-Column Perfect Grid - Tightened gap for mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 md:gap-y-10 max-w-5xl mx-auto">
           {tools.map((tool, index) => (
             <Link 
               key={index} 
               href={tool.href}
-              className="group relative block transition-all duration-500 hover:-translate-y-2"
+              className="group relative block transition-all duration-500 hover:-translate-y-1.5"
             >
               
               {/* --- 1. HOVER GLOW AURA --- */}
-              <div className={`absolute inset-0 rounded-[2.5rem] bg-gradient-to-br ${tool.theme.aura} blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 transform group-hover:scale-105`}></div>
+              <div className={`absolute inset-0 rounded-[2rem] bg-gradient-to-br ${tool.theme.aura} blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 transform group-hover:scale-[1.03]`}></div>
 
-              {/* --- 2. VIBRANT CARD BODY (Tinted Glassmorphism without Images) --- */}
-              <div className={`relative h-full z-10 ${tool.theme.cardBg} backdrop-blur-md rounded-[2.4rem] p-8 md:p-10 flex flex-col border ${tool.theme.border} shadow-[0_15px_40px_rgba(0,0,0,0.05)] group-hover:shadow-[0_25px_50px_rgba(0,0,0,0.1)] transition-all overflow-hidden`}>
+              {/* --- 2. VIBRANT CARD BODY - Reduced internal padding for mobile --- */}
+              <div className={`relative h-full z-10 ${tool.theme.cardBg} backdrop-blur-md rounded-[2rem] p-6 md:p-8 flex flex-col border ${tool.theme.border} shadow-[0_10px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all overflow-hidden`}>
                 
-                {/* --- 3. CONTENT AREA --- */}
-                <div className="relative z-30 flex-grow space-y-6"> 
+                {/* --- 3. CONTENT AREA - Reduced vertical space --- */}
+                <div className="relative z-30 flex-grow space-y-4 md:space-y-5"> 
                   {/* Vibrant Solid Icon Box */}
-                  <div className={`inline-flex p-4 rounded-[1.2rem] ${tool.theme.iconBg} shadow-lg shadow-${tool.theme.solid}/30 transition-transform group-hover:scale-110 duration-300`}>
+                  <div className={`inline-flex p-3 md:p-4 rounded-[1rem] md:rounded-[1.2rem] ${tool.theme.iconBg} shadow-lg shadow-${tool.theme.solid}/30 transition-transform group-hover:scale-110 duration-300`}>
                     {tool.icon}
                   </div>
                   
-                  <div className="space-y-3">
-                    <h3 className={`text-2xl md:text-3xl font-black text-slate-800 tracking-tight leading-tight ${tool.theme.hoverText} transition-colors duration-300`}>
+                  <div className="space-y-2">
+                    <h3 className={`text-xl md:text-2xl font-black text-slate-800 tracking-tight leading-tight ${tool.theme.hoverText} transition-colors duration-300`}>
                       {tool.title}
                     </h3>
-                    <p className="text-slate-600 text-sm font-semibold leading-relaxed">
+                    <p className="text-slate-600 text-sm font-medium leading-relaxed line-clamp-4 md:line-clamp-none">
                       {tool.desc}
                     </p>
                   </div>
                 </div>
 
-                {/* --- 4. DYNAMIC ACTION FOOTER --- */}
-                <div className={`relative z-30 mt-10 pt-6 border-t ${tool.theme.border} flex items-center justify-between`}>
-                  <div className="flex items-center gap-3">
-                    <div className={`w-3 h-3 rounded-full ${tool.theme.solid} animate-pulse shadow-sm`}></div>
-                    <span className={`text-[11px] font-black uppercase tracking-[0.2em] ${tool.theme.hoverText} text-slate-500 transition-colors`}>
+                {/* --- 4. DYNAMIC ACTION FOOTER - Reduced top margin --- */}
+                <div className={`relative z-30 mt-6 md:mt-8 pt-4 md:pt-5 border-t ${tool.theme.border} flex items-center justify-between`}>
+                  <div className="flex items-center gap-2 md:gap-3">
+                    <div className={`w-2.5 h-2.5 rounded-full ${tool.theme.solid} animate-pulse shadow-sm`}></div>
+                    <span className={`text-[10px] md:text-[11px] font-black uppercase tracking-[0.15em] ${tool.theme.hoverText} text-slate-500 transition-colors`}>
                       {tool.actionText}
                     </span>
                   </div>
                   
                   {/* Action Arrow Button */}
-                  <div className={`p-3 rounded-full bg-white text-slate-400 border ${tool.theme.border} group-hover:${tool.theme.solid} group-hover:bg-opacity-10 transition-all transform group-hover:rotate-45 shadow-sm`}>
-                    <ArrowUpRight size={20} className={tool.theme.hoverText} />
+                  <div className={`p-2.5 md:p-3 rounded-full bg-white text-slate-400 border ${tool.theme.border} group-hover:${tool.theme.solid} group-hover:bg-opacity-10 transition-all transform group-hover:rotate-45 shadow-sm`}>
+                    <ArrowUpRight size={18} className={`md:w-5 md:h-5 ${tool.theme.hoverText}`} />
                   </div>
                 </div>
 

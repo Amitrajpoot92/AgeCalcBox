@@ -116,10 +116,10 @@ const FeaturedProducts = () => {
               </span>
             </div>
             <h2 className="text-4xl md:text-6xl font-black text-slate-800 tracking-tighter leading-tight drop-shadow-sm">
-              Exclusive <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00a63e] to-[#007a2d] drop-shadow-md">Offers.</span>
+              Exclusive <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00a63e] to-[#007a2d] drop-shadow-md">Amazon Deals.</span>
             </h2>
             <p className="text-slate-500 font-medium max-w-md text-sm md:text-base">
-              Handpicked tech deals curated by CodeWebX to fuel your digital growth. Swipe to explore.
+              Explore handpicked Amazon products, trending gadgets, and smart daily essentials in one place.
             </p>
           </div>
           
