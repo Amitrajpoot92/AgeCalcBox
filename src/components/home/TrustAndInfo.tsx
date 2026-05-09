@@ -8,8 +8,7 @@ import {
   UserMinus, 
   Info, 
   Lightbulb, 
-  Layers, 
-  Sparkles 
+  Layers 
 } from 'lucide-react';
 
 export default function TrustAndInfo() {
@@ -62,10 +61,6 @@ export default function TrustAndInfo() {
         <div className="space-y-6">
           
           <div className="text-center mb-10 space-y-4">
-            <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-md rounded-full shadow-sm border border-white">
-              <Sparkles size={16} className="text-violet-500" />
-               
-            </div>
             <h2 className="text-4xl md:text-5xl font-black text-slate-800 tracking-tighter leading-tight">
               Everything You Need to <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600">Know.</span>
             </h2>

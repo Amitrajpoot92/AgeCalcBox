@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { 
   ArrowUpRight, 
   Sparkles, 
-  Calculator, 
   Users, 
   FastForward 
 } from 'lucide-react';
@@ -15,7 +14,8 @@ const tools = [
     desc: "Find your exact age instantly in years, months, days, hours, minutes, and live seconds with our free online age calculator.",
     href: "/age-calculator",
     actionText: "Calculate Age",
-    icon: <Calculator size={22} className="text-white" />,
+    // Yahan Calculator icon ki jagah Cake Emoji (🎂) laga diya hai
+    icon: <span className="text-2xl leading-none drop-shadow-sm">🎂</span>,
     theme: {
       cardBg: "bg-gradient-to-br from-emerald-50/80 to-teal-100/50",
       iconBg: "bg-gradient-to-br from-emerald-400 to-teal-500",
@@ -80,11 +80,11 @@ const ServiceCards = () => {
           <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-slate-100">
             <Sparkles size={16} className="text-violet-500" />
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600">
-              Smart Intelligence
+              ALL-IN-ONE AGE TOOLS
             </span>
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-slate-800 tracking-tighter leading-tight drop-shadow-sm">
-            Precision <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00a63e] to-[#007a2d]">Simplified.</span>
+            Everything You Need,<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00a63e] to-[#007a2d]">In One Place</span>
           </h2>
         </div>
 
@@ -106,7 +106,7 @@ const ServiceCards = () => {
                 {/* --- 3. CONTENT AREA - Reduced vertical space --- */}
                 <div className="relative z-30 flex-grow space-y-4 md:space-y-5"> 
                   {/* Vibrant Solid Icon Box */}
-                  <div className={`inline-flex p-3 md:p-4 rounded-[1rem] md:rounded-[1.2rem] ${tool.theme.iconBg} shadow-lg shadow-${tool.theme.solid}/30 transition-transform group-hover:scale-110 duration-300`}>
+                  <div className={`inline-flex items-center justify-center p-3 md:p-4 rounded-[1rem] md:rounded-[1.2rem] ${tool.theme.iconBg} shadow-lg shadow-${tool.theme.solid}/30 transition-transform group-hover:scale-110 duration-300 w-[54px] h-[54px]`}>
                     {tool.icon}
                   </div>
                   
