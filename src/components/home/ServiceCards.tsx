@@ -14,7 +14,6 @@ const tools = [
     desc: "Find your exact age instantly in years, months, days, hours, minutes, and live seconds with our free online age calculator.",
     href: "/age-calculator",
     actionText: "Calculate Age",
-    // Yahan Calculator icon ki jagah Cake Emoji (🎂) laga diya hai
     icon: <span className="text-2xl leading-none drop-shadow-sm">🎂</span>,
     theme: {
       cardBg: "bg-gradient-to-br from-emerald-50/80 to-teal-100/50",
@@ -62,8 +61,8 @@ const tools = [
 
 const ServiceCards = () => {
   return (
-    // Reduced vertical padding: py-12 for mobile, py-20 for desktop
-    <section className="py-12 md:py-20 relative overflow-visible z-0" id="calculators-section">
+    // Mobile ke liye padding top (pt-4) bahut kam kar di hai taaki hero section se chipak kar aaye
+    <section className="pt-4 pb-12 md:py-20 relative overflow-visible z-0" id="calculators-section">
       
       {/* Super Colorful Background Ambience */}
       <div className="absolute inset-0 bg-[#f8fafc] -z-20 pointer-events-none"></div>
@@ -75,8 +74,8 @@ const ServiceCards = () => {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         
-        {/* Header Section - Reduced bottom margin */}
-        <div className="mb-12 md:mb-16 text-center space-y-3">
+        {/* Header Section - Mobile ke liye mb-8 kar diya hai */}
+        <div className="mb-8 md:mb-16 text-center space-y-3">
           <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-slate-100">
             <Sparkles size={16} className="text-violet-500" />
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600">
@@ -88,7 +87,7 @@ const ServiceCards = () => {
           </h2>
         </div>
 
-        {/* 3-Column Perfect Grid - Tightened gap for mobile */}
+        {/* 3-Column Perfect Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 md:gap-y-10 max-w-5xl mx-auto">
           {tools.map((tool, index) => (
             <Link 
@@ -100,10 +99,10 @@ const ServiceCards = () => {
               {/* --- 1. HOVER GLOW AURA --- */}
               <div className={`absolute inset-0 rounded-[2rem] bg-gradient-to-br ${tool.theme.aura} blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 transform group-hover:scale-[1.03]`}></div>
 
-              {/* --- 2. VIBRANT CARD BODY - Reduced internal padding for mobile --- */}
+              {/* --- 2. VIBRANT CARD BODY --- */}
               <div className={`relative h-full z-10 ${tool.theme.cardBg} backdrop-blur-md rounded-[2rem] p-6 md:p-8 flex flex-col border ${tool.theme.border} shadow-[0_10px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all overflow-hidden`}>
                 
-                {/* --- 3. CONTENT AREA - Reduced vertical space --- */}
+                {/* --- 3. CONTENT AREA --- */}
                 <div className="relative z-30 flex-grow space-y-4 md:space-y-5"> 
                   {/* Vibrant Solid Icon Box */}
                   <div className={`inline-flex items-center justify-center p-3 md:p-4 rounded-[1rem] md:rounded-[1.2rem] ${tool.theme.iconBg} shadow-lg shadow-${tool.theme.solid}/30 transition-transform group-hover:scale-110 duration-300 w-[54px] h-[54px]`}>
@@ -120,7 +119,7 @@ const ServiceCards = () => {
                   </div>
                 </div>
 
-                {/* --- 4. DYNAMIC ACTION FOOTER - Reduced top margin --- */}
+                {/* --- 4. DYNAMIC ACTION FOOTER --- */}
                 <div className={`relative z-30 mt-6 md:mt-8 pt-4 md:pt-5 border-t ${tool.theme.border} flex items-center justify-between`}>
                   <div className="flex items-center gap-2 md:gap-3">
                     <div className={`w-2.5 h-2.5 rounded-full ${tool.theme.solid} animate-pulse shadow-sm`}></div>

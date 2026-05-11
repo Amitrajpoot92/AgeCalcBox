@@ -19,8 +19,11 @@ export default function AgeCalc() {
   
   const [age, setAge] = useState<{ years: number; months: number; days: number } | null>(null);
   
+  // === UPDATE: Added totalDays and totalHours in state ===
   const [liveData, setLiveData] = useState({
     totalWeeks: 0,
+    totalDays: 0,
+    totalHours: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
@@ -103,10 +106,15 @@ export default function AgeCalc() {
     const updateLiveStats = () => {
       const now = new Date();
       const diffMs = now.getTime() - lockedDate.getTime();
-      const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      
+      // === UPDATE: Calculating Days and Hours ===
+      const totalDaysCalc = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const totalHoursCalc = Math.floor(diffMs / (1000 * 60 * 60));
       
       setLiveData({
-        totalWeeks: Math.floor(totalDays / 7),
+        totalWeeks: Math.floor(totalDaysCalc / 7),
+        totalDays: totalDaysCalc,
+        totalHours: totalHoursCalc,
         hours: now.getHours(),
         minutes: now.getMinutes(),
         seconds: now.getSeconds(),
@@ -229,11 +237,34 @@ export default function AgeCalc() {
                 ))}
               </div>
 
-              <div className="bg-[#fef9e6] rounded-2xl p-4 flex items-center justify-center gap-3">
-                <BarChart2 size={20} className="text-emerald-500" />
-                <span className="text-[17px] font-bold text-slate-800">
-                  Total Weeks: <span className="text-amber-700">{liveData.totalWeeks.toLocaleString()}</span>
-                </span>
+              {/* === UPDATE: Naya Compact 3-Bar Stack (Weeks, Days, Hours) === */}
+              <div className="space-y-2 md:space-y-3 mb-6 mt-4">
+                {/* Total Weeks */}
+                <div className="bg-[#fef9e6] rounded-xl p-3 md:p-4 flex items-center justify-between px-4 md:px-5 border border-amber-100">
+                  <div className="flex items-center gap-2.5">
+                    <BarChart2 size={18} className="text-amber-500" />
+                    <span className="text-[14px] md:text-[15px] font-bold text-slate-800">Total Weeks</span>
+                  </div>
+                  <span className="text-[15px] md:text-[16px] font-black text-amber-700">{liveData.totalWeeks.toLocaleString()}</span>
+                </div>
+
+                {/* Total Days */}
+                <div className="bg-[#f0fdf4] rounded-xl p-3 md:p-4 flex items-center justify-between px-4 md:px-5 border border-emerald-100">
+                  <div className="flex items-center gap-2.5">
+                    <CalendarDays size={18} className="text-emerald-500" />
+                    <span className="text-[14px] md:text-[15px] font-bold text-slate-800">Total Days</span>
+                  </div>
+                  <span className="text-[15px] md:text-[16px] font-black text-emerald-700">{liveData.totalDays.toLocaleString()}</span>
+                </div>
+
+                {/* Total Hours */}
+                <div className="bg-[#f5f3ff] rounded-xl p-3 md:p-4 flex items-center justify-between px-4 md:px-5 border border-purple-100">
+                  <div className="flex items-center gap-2.5">
+                    <Clock size={18} className="text-purple-500" />
+                    <span className="text-[14px] md:text-[15px] font-bold text-slate-800">Total Hours</span>
+                  </div>
+                  <span className="text-[15px] md:text-[16px] font-black text-purple-700">{liveData.totalHours.toLocaleString()}</span>
+                </div>
               </div>
 
               <div className="pt-2">
@@ -268,7 +299,6 @@ export default function AgeCalc() {
 
         {/* =========================================
             EMPTY STATE: SEO & FEATURE EXPLANATION
-            (This completely hides once a date is calculated)
         ========================================= */}
         {!age && (
           <div className="animate-in fade-in slide-in-from-bottom-8 duration-700 text-center px-4 relative z-10 pt-4">
@@ -321,7 +351,6 @@ export default function AgeCalc() {
         {age && (
           <div className="bg-[#fcfaff] rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.05)] overflow-hidden border border-fuchsia-50 max-w-[400px] mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
             
-            {/* Header (Vibrant Gradient) */}
             <div className="bg-gradient-to-r from-[#fc238c] to-[#5951f8] p-5 flex items-center relative">
               <span className="absolute left-6 text-3xl drop-shadow-md">🎂</span>
               <h2 className="text-white font-bold text-2xl text-center w-full leading-tight drop-shadow-sm">
@@ -329,7 +358,6 @@ export default function AgeCalc() {
               </h2>
             </div>
 
-            {/* Body */}
             <div className="p-6 flex flex-col items-center">
               
               {bdayData.isToday ? (

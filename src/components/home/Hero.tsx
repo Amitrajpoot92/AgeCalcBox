@@ -5,13 +5,14 @@ import Link from 'next/link';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[70vh] flex items-center pt-32 md:pt-40 pb-10 px-4 md:px-8 overflow-hidden bg-[#fafafa]">
+    // Mobile ke liye min-h-[50vh], pt-28 aur pb-4 kar diya taaki extra lamba na khinche
+    <section className="relative min-h-[50vh] md:min-h-[70vh] flex items-center pt-28 md:pt-40 pb-4 md:pb-10 px-4 md:px-8 overflow-hidden bg-[#fafafa]">
       
       {/* Background Decorative Glow (Centered) */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-[#00a63e]/5 blur-[100px] pointer-events-none"></div>
 
-      {/* Centered Content Wrapper since video is removed */}
-      <div className="max-w-4xl mx-auto w-full relative z-10 flex flex-col items-center justify-center text-center space-y-6 md:space-y-8">
+      {/* Centered Content Wrapper: Mobile ke liye space-y-4 kar diya taaki text aur button paas aa jayein */}
+      <div className="max-w-4xl mx-auto w-full relative z-10 flex flex-col items-center justify-center text-center space-y-4 md:space-y-8">
         
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 tracking-tighter leading-tight">
           <span className="text-[#00a63e]">All Age Calculators</span> <br />
