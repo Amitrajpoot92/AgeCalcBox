@@ -13,7 +13,8 @@ import {
 
 export default function TrustAndInfo() {
   return (
-    <section className="relative py-24 overflow-hidden z-0 bg-slate-50">
+    // yahan pt-0 ki jagah pt-8 md:pt-10 kar diya hai taaki ekdam halka sa clean gap mile
+    <section className="relative pt-8 md:pt-10 pb-24 overflow-hidden z-0 bg-slate-50">
       
       {/* =========================================
           AURORA COLORFUL BACKGROUND

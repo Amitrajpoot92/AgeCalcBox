@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { 
   RotateCcw, 
   BarChart2, 
@@ -33,12 +33,6 @@ export default function AgeDifference() {
     years?: number;
     months?: number;
     days?: number;
-    totalDays?: number;
-    totalWeeks?: number;
-    totalMonths?: number;
-    totalHours?: number;
-    totalMinutes?: number;
-    totalSeconds?: number;
     gapPercentage?: number;
   } | null>(null);
 
@@ -118,13 +112,9 @@ export default function AgeDifference() {
       sameAge: false,
       olderName,
       youngerName,
-      years: y, months: m, days: d,
-      totalDays: tDays,
-      totalWeeks: Math.floor(tDays / 7),
-      totalMonths: (y * 12) + m,
-      totalHours: tDays * 24,
-      totalMinutes: tDays * 24 * 60,
-      totalSeconds: tDays * 24 * 60 * 60,
+      years: y, 
+      months: m, 
+      days: d,
       gapPercentage
     });
   };
@@ -238,7 +228,7 @@ export default function AgeDifference() {
               The Ultimate <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Age Gap Calculator</span>
             </h2>
             <p className="text-slate-500 font-medium text-sm leading-relaxed mb-8 max-w-2xl mx-auto">
-              Curious about the exact age difference between you and your partner, sibling, or friend? Enter both dates of birth above to calculate the precise chronological gap in years, months, and even total ticking seconds. No data stored, just instant math.
+              Curious about the exact age difference between you and your partner, sibling, or friend? Enter both dates of birth above to calculate the precise chronological gap in years, months, and days. No data stored, just instant math.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-[800px] mx-auto">
@@ -259,7 +249,7 @@ export default function AgeDifference() {
                 </div>
                 <h3 className="text-[15px] font-bold text-slate-800">Chronological Math</h3>
                 <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                  Get a deep breakdown of the difference translated into total weeks, hours, and minutes.
+                  Get a deep breakdown of the difference translated into a perfect timeframe.
                 </p>
               </div>
 
@@ -304,44 +294,21 @@ export default function AgeDifference() {
                   </h2>
                 </div>
 
-                {/* Main 3-Block Grid (Years, Months, Days) */}
-                <div className="grid grid-cols-3 gap-3 md:gap-5 mb-8">
+                {/* 6 Grid Items for Age Gap (Just like Age Calculator) */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 lg:gap-5 mb-8">
                   {[
                     { value: result.years, label: "YEARS" },
                     { value: result.months, label: "MONTHS" },
                     { value: result.days, label: "DAYS" },
+                    { value: "00", label: "HOURS" },
+                    { value: "00", label: "MINUTES" },
+                    { value: "00", label: "SECONDS" },
                   ].map((item, index) => (
-                    <div key={index} className="bg-[#f3f6ff] rounded-3xl p-5 md:p-8 flex flex-col items-center justify-center border border-indigo-50/80 shadow-sm transition-transform hover:-translate-y-1">
-                      <span className="text-4xl md:text-6xl font-black text-indigo-900 mb-2 tabular-nums tracking-tighter drop-shadow-sm">
-                        {item.value}
-                      </span>
-                      <span className="text-[10px] md:text-xs font-bold text-slate-500 tracking-widest">
-                        {item.label}
-                      </span>
+                    <div key={index} className="bg-[#f3f6ff] rounded-2xl p-5 md:p-6 flex flex-col items-center justify-center border border-indigo-50/50 transition-transform hover:-translate-y-1">
+                      <span className="text-3xl md:text-4xl font-black text-indigo-900 mb-1 tabular-nums drop-shadow-sm">{item.value}</span>
+                      <span className="text-xs md:text-sm font-bold text-slate-500 tracking-wider">{item.label}</span>
                     </div>
                   ))}
-                </div>
-
-                {/* Extensive Data Grid (Total Months, Weeks, Days, etc.) */}
-                <div className="pt-8 border-t border-slate-100">
-                  <h3 className="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-5 flex items-center gap-2 justify-center md:justify-start">
-                    <BarChart2 size={16} className="text-slate-400" /> Total Chronological Gap
-                  </h3>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {[
-                      { label: "Total Months", value: result.totalMonths, color: "text-pink-600", bg: "bg-pink-50", border: "border-pink-100" },
-                      { label: "Total Weeks", value: result.totalWeeks, color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-100" },
-                      { label: "Total Days", value: result.totalDays, color: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-100" },
-                      { label: "Total Hours", value: result.totalHours, color: "text-amber-600", bg: "bg-amber-50", border: "border-amber-100" },
-                      { label: "Total Mins", value: result.totalMinutes, color: "text-violet-600", bg: "bg-violet-50", border: "border-violet-100" },
-                      { label: "Total Secs", value: result.totalSeconds, color: "text-cyan-600", bg: "bg-cyan-50", border: "border-cyan-100" },
-                    ].map((item, i) => (
-                      <div key={i} className={`${item.bg} ${item.border} border rounded-[1.5rem] p-5 flex flex-col items-center justify-center transition-all hover:shadow-md`}>
-                        <span className={`text-xl md:text-2xl font-black ${item.color} tabular-nums mb-1 tracking-tight drop-shadow-sm`}>{item.value?.toLocaleString()}</span>
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 opacity-80">{item.label}</span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
 
                 {/* Timeline Progress Bar representing the Gap */}

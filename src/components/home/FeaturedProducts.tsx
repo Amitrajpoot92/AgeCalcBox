@@ -41,7 +41,8 @@ export default function FeaturedProducts() {
   }, []);
 
   return (
-    <section className="py-24 bg-[#f8fafc] relative overflow-hidden z-0">
+    // yahan py-24 hata kar pt-0 pb-24 kar diya taaki upar ka space zero ho jaye
+    <section className="pt-0 pb-24 bg-[#f8fafc] relative overflow-hidden z-0">
       
       {/* Soft Pastel Background Orbs */}
       <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-blue-400/10 blur-[120px] rounded-full pointer-events-none -z-10 animate-pulse"></div>

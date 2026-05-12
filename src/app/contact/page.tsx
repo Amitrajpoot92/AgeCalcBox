@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Mail, Phone, MapPin, Send, Sparkles } from 'lucide-react';
+import { Mail, Send, Sparkles } from 'lucide-react';
 
 export default function ContactPage() {
   return (
@@ -31,14 +31,14 @@ export default function ContactPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 max-w-5xl mx-auto">
           
-          {/* Contact Information (Left Side) */}
+          {/* Contact Information (Left Side) - Only Email now */}
           <div className="lg:col-span-5 flex flex-col">
             <div className="bg-white/80 backdrop-blur-xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.04)] md:shadow-[0_15px_40px_rgba(0,0,0,0.06)] rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 transition-all hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] flex-grow flex flex-col justify-center">
               <h3 className="text-xl md:text-2xl font-black text-slate-800 mb-6 md:mb-8 tracking-tight">Contact Info</h3>
               
               <div className="space-y-6 md:space-y-8">
                 <a href="mailto:info@agecalculatorbox.com" className="flex items-center gap-4 md:gap-5 group">
-                  <div className="w-12 h-12 md:w-14 md:h-14 shrink-0 bg-[#00a63e]/10 rounded-xl md:rounded-2xl flex items-center justify-center text-[#00a63e] group-hover:bg-[#00a63e] group-hover:text-white transition-all duration-300 shadow-inner">
+                  <div className="w-12 h-12 md:w-14 h-14 shrink-0 bg-[#00a63e]/10 rounded-xl md:rounded-2xl flex items-center justify-center text-[#00a63e] group-hover:bg-[#00a63e] group-hover:text-white transition-all duration-300 shadow-inner">
                     <Mail size={20} className="md:w-6 md:h-6" />
                   </div>
                   <div className="overflow-hidden">
@@ -46,26 +46,6 @@ export default function ContactPage() {
                     <p className="text-slate-700 font-bold text-sm md:text-base group-hover:text-[#00a63e] transition-colors truncate">info@agecalculatorbox.com</p>
                   </div>
                 </a>
-
-                <a href="tel:+918103420637" className="flex items-center gap-4 md:gap-5 group">
-                  <div className="w-12 h-12 md:w-14 md:h-14 shrink-0 bg-blue-500/10 rounded-xl md:rounded-2xl flex items-center justify-center text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300 shadow-inner">
-                    <Phone size={20} className="md:w-6 md:h-6" />
-                  </div>
-                  <div>
-                    <p className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5 md:mb-1">Call Us</p>
-                    <p className="text-slate-700 font-bold text-sm md:text-base group-hover:text-blue-500 transition-colors">+91 81034 20637</p>
-                  </div>
-                </a>
-
-                <div className="flex items-center gap-4 md:gap-5 group">
-                  <div className="w-12 h-12 md:w-14 md:h-14 shrink-0 bg-orange-500/10 rounded-xl md:rounded-2xl flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300 shadow-inner">
-                    <MapPin size={20} className="md:w-6 md:h-6" />
-                  </div>
-                  <div>
-                    <p className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5 md:mb-1">Location</p>
-                    <p className="text-slate-700 font-bold text-sm md:text-base">Raipur Region, Chhattisgarh</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

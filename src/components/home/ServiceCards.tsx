@@ -61,8 +61,8 @@ const tools = [
 
 const ServiceCards = () => {
   return (
-    // Mobile ke liye padding top (pt-4) bahut kam kar di hai taaki hero section se chipak kar aaye
-    <section className="pt-4 pb-12 md:py-20 relative overflow-visible z-0" id="calculators-section">
+    // Desktop se md:py-20 hata kar md:pb-20 aur md:pt-4 kiya hai taaki upar ka gap khatam ho jaye
+    <section className="pt-2 md:pt-4 pb-12 md:pb-20 relative overflow-visible z-0" id="calculators-section">
       
       {/* Super Colorful Background Ambience */}
       <div className="absolute inset-0 bg-[#f8fafc] -z-20 pointer-events-none"></div>
@@ -74,8 +74,8 @@ const ServiceCards = () => {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         
-        {/* Header Section - Mobile ke liye mb-8 kar diya hai */}
-        <div className="mb-8 md:mb-16 text-center space-y-3">
+        {/* Header Section */}
+        <div className="mb-8 md:mb-12 text-center space-y-3">
           <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-slate-100">
             <Sparkles size={16} className="text-violet-500" />
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600">
