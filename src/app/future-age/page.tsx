@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { 
   Rocket, 
   Sparkles, 
@@ -9,12 +9,12 @@ import {
   Hourglass,
   CalendarDays,
   RotateCcw,
-  Star,
-  Moon,
-  Sun,
   ArrowRightLeft,
   Timer,
-  FastForward
+  FastForward,
+  MessageCircle,
+  Copy,
+  Check
 } from 'lucide-react';
 import CalcShell from "@/components/calculators/CalcShell";
 
@@ -23,6 +23,7 @@ export default function FutureAge() {
   const [targetStr, setTargetStr] = useState("");
   
   const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
   const [result, setResult] = useState<{
     years: number;
     months: number;
@@ -79,6 +80,7 @@ export default function FutureAge() {
     }
 
     setError("");
+    setCopied(false);
 
     let y = targetDate.getFullYear() - birthDate.getFullYear();
     let m = targetDate.getMonth() - birthDate.getMonth();
@@ -107,6 +109,37 @@ export default function FutureAge() {
     setTargetStr("");
     setResult(null); 
     setError("");
+    setCopied(false);
+  };
+
+  // SHARE & COPY LOGIC
+  const generateShareText = () => {
+    if (!result) return "";
+    
+    let text = `*My Future Age Projection* 🚀\n\n`;
+    text += `Target Date: ${targetStr}\n`;
+    text += `Projected Age: ${result.years} Years, ${result.months} Months, and ${result.days} Days.\n\n`;
+    
+    if (result.isPast) {
+      text += `Status: ${Math.abs(result.daysToWait).toLocaleString()} Days Ago ⏳\n\n`;
+    } else {
+      text += `Status: ${result.daysToWait.toLocaleString()} Days to go! ✨\n\n`;
+    }
+    
+    text += `Calculate yours instantly at Age Calculator Box: https://agecalculatorbox.com/future-age`;
+    return text;
+  };
+
+  const handleWhatsAppShare = () => {
+    const text = generateShareText();
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  const handleCopy = () => {
+    const text = generateShareText();
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -294,6 +327,26 @@ export default function FutureAge() {
                   {result.isPast ? "Days Ago" : "Days to Go"}
                 </span>
               </div>
+            </div>
+
+            {/* =========================================
+                SHARE & COPY ACTION BUTTONS
+            ========================================= */}
+            <div className="mt-8 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button 
+                onClick={handleWhatsAppShare}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#25D366] text-white px-8 py-3.5 rounded-full font-bold text-sm hover:bg-[#1ebd5a] hover:shadow-[0_10px_20px_rgba(37,211,102,0.3)] transition-all active:scale-95"
+              >
+                <MessageCircle size={18} /> Share on WhatsApp
+              </button>
+              
+              <button 
+                onClick={handleCopy}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-slate-800 text-white px-8 py-3.5 rounded-full font-bold text-sm hover:bg-slate-700 hover:shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-all active:scale-95"
+              >
+                {copied ? <Check size={18} className="text-emerald-400" /> : <Copy size={18} />} 
+                {copied ? "Copied!" : "Copy Result"}
+              </button>
             </div>
 
           </div>

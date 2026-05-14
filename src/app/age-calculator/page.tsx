@@ -9,7 +9,10 @@ import {
   CalendarDays,
   Clock,
   Timer,
-  Target
+  Target,
+  MessageCircle,
+  Copy,
+  Check
 } from "lucide-react";
 import CalcShell from "@/components/calculators/CalcShell";
 
@@ -17,6 +20,7 @@ export default function AgeCalc() {
   const [dobStr, setDobStr] = useState("");
   const [lockedDate, setLockedDate] = useState<Date | null>(null);
   const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
   
   const [age, setAge] = useState<{ years: number; months: number; days: number } | null>(null);
   
@@ -89,6 +93,7 @@ export default function AgeCalc() {
 
     setError("");
     setLockedDate(birthDate);
+    setCopied(false);
 
     // Initial Static Age Calculation
     let calcY = now.getFullYear() - birthDate.getFullYear();
@@ -209,6 +214,43 @@ export default function AgeCalc() {
     setLockedDate(null);
     setAge(null);
     setError("");
+    setCopied(false);
+  };
+
+  // SHARE & COPY LOGIC
+  const generateShareText = () => {
+    if (!age) return "";
+    
+    let text = `*My Exact Age Details* 🎂\n\n`;
+    text += `Current Age: ${age.years} Years, ${age.months} Months, ${age.days} Days\n`;
+    text += `Total Time: ${liveData.totalWeeks.toLocaleString()} Weeks | ${liveData.totalDays.toLocaleString()} Days\n\n`;
+    
+    if (!milestoneData.isReached) {
+      text += `🎯 Road to ${milestoneData.targetAge} Years:\n`;
+      text += `${milestoneData.years > 0 ? milestoneData.years + ' Years, ' : ''}${milestoneData.months} Months, ${milestoneData.days} Days to go!\n\n`;
+    }
+    
+    text += `🎈 Next Birthday:\n`;
+    if (bdayData.isToday) {
+      text += `It's my birthday today! 🎉\n\n`;
+    } else {
+      text += `${bdayData.nextDateStr} (in ${bdayData.months}M, ${bdayData.days}D)\n\n`;
+    }
+    
+    text += `Calculate yours instantly at Age Calculator Box: https://agecalculatorbox.com/age-calculator`;
+    return text;
+  };
+
+  const handleWhatsAppShare = () => {
+    const text = generateShareText();
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  const handleCopy = () => {
+    const text = generateShareText();
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const exactPercentage = age ? Number((((age.years * 365 + age.months * 30 + age.days) / (80 * 365)) * 100).toFixed(1)) : 0;
@@ -310,7 +352,7 @@ export default function AgeCalc() {
 
                 <div className="pt-4">
                   <div className="flex items-center gap-2 text-slate-800 font-bold mb-6 text-lg">
-                    <TrendingUp size={20} className="text-red-400" /> Life Progress <span className="text-slate-500 font-normal text-sm">(based on 80 years)</span>
+                    <TrendingUp size={20} className="text-red-400" /> Life Journey Progress <span className="text-slate-500 font-normal text-sm">(based on 80 years)</span>
                   </div>
                   <div className="relative mb-10">
                     <div className="w-full h-4 rounded-full flex overflow-hidden">
@@ -348,12 +390,33 @@ export default function AgeCalc() {
                   )}
 
                 </div>
+
+                {/* =========================================
+                    SHARE & COPY ACTION BUTTONS
+                ========================================= */}
+                <div className="mt-8 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <button 
+                    onClick={handleWhatsAppShare}
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#25D366] text-white px-8 py-3.5 rounded-full font-bold text-sm hover:bg-[#1ebd5a] hover:shadow-[0_10px_20px_rgba(37,211,102,0.3)] transition-all active:scale-95"
+                  >
+                    <MessageCircle size={18} /> Share on WhatsApp
+                  </button>
+                  
+                  <button 
+                    onClick={handleCopy}
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 bg-slate-800 text-white px-8 py-3.5 rounded-full font-bold text-sm hover:bg-slate-700 hover:shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-all active:scale-95"
+                  >
+                    {copied ? <Check size={18} className="text-emerald-400" /> : <Copy size={18} />} 
+                    {copied ? "Copied!" : "Copy Result"}
+                  </button>
+                </div>
+
               </div>
             )}
           </div>
 
           {/* =========================================
-              CARD 2: CLIENT'S NEXT BIRTHDAY WIDGET (Right Side)
+              CARD 2: CLIENT'S NEXT BIRTHDAY WIDGET (Shows side-by-side on desktop)
           ========================================= */}
           {age && (
             <div className="bg-[#fcfaff] rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.05)] overflow-hidden border border-fuchsia-50 w-full animate-in fade-in slide-in-from-bottom-8 duration-700 h-fit lg:sticky lg:top-32">

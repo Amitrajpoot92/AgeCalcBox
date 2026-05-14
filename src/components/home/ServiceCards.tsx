@@ -61,8 +61,8 @@ const tools = [
 
 const ServiceCards = () => {
   return (
-    // Desktop se md:py-20 hata kar md:pb-20 aur md:pt-4 kiya hai taaki upar ka gap khatam ho jaye
-    <section className="pt-2 md:pt-4 pb-12 md:pb-20 relative overflow-visible z-0" id="calculators-section">
+    // Yahan maine pt-2 md:pt-4 ko hata kar completely pt-0 kar diya hai
+    <section className="pt-0 pb-12 md:pb-20 relative overflow-visible z-0" id="calculators-section">
       
       {/* Super Colorful Background Ambience */}
       <div className="absolute inset-0 bg-[#f8fafc] -z-20 pointer-events-none"></div>

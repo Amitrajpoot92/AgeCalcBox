@@ -5,9 +5,8 @@ import Link from 'next/link';
 
 const Hero = () => {
   return (
-    // min-height aur items-center hata diya taaki vertical stretching na ho. 
-    // pt-24 lagaya taaki floating navbar ke theek niche se start ho aur extra gap na bache.
-    <section className="relative pt-24 md:pt-28 pb-8 px-4 md:px-8 overflow-hidden bg-[#fafafa]">
+    // pb-8 ko hata kar pb-0 kar diya taaki bottom ka extra gap completely khatam ho jaye.
+    <section className="relative pt-24 md:pt-28 pb-0 px-4 md:px-8 overflow-hidden bg-[#fafafa]">
       
       {/* Background Decorative Glow (Centered) */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-[#00a63e]/5 blur-[100px] pointer-events-none"></div>

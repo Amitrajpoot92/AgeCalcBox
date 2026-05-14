@@ -11,7 +11,11 @@ import {
   User,
   Users,
   Clock,
-  HeartHandshake
+  HeartHandshake,
+  CalendarDays,
+  MessageCircle,
+  Copy,
+  Check
 } from "lucide-react";
 import CalcShell from "@/components/calculators/CalcShell";
 
@@ -33,6 +37,7 @@ export default function AgeDifference() {
 
   // Result States
   const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
   const [result, setResult] = useState<{
     sameAge: boolean;
     olderName?: string;
@@ -40,7 +45,7 @@ export default function AgeDifference() {
     years?: number;
     months?: number;
     days?: number;
-    gapPercentage?: number;
+    totalDays?: number; // ADDED THIS
     p1Info?: { name: string; milestone: MilestoneData | null };
     p2Info?: { name: string; milestone: MilestoneData | null };
   } | null>(null);
@@ -145,10 +150,9 @@ export default function AgeDifference() {
     }
     if (m < 0) { y--; m += 12; }
 
-    // Gap Percentage based on an 80-year lifespan
+    // Total Days Calculation
     const diffMs = younger.getTime() - older.getTime();
     const tDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-    const gapPercentage = Math.min((tDays / (80 * 365)) * 100, 100);
 
     // Calculate Milestones
     const milestone1 = calculateMilestone(date1, now);
@@ -161,16 +165,41 @@ export default function AgeDifference() {
       years: y, 
       months: m, 
       days: d,
-      gapPercentage,
+      totalDays: tDays, // Saved for display and sharing
       p1Info: { name: name1, milestone: milestone1 },
       p2Info: { name: name2, milestone: milestone2 },
     });
+    setCopied(false);
   };
 
   const handleReset = () => {
     setDob1(""); setP1Name("");
     setDob2(""); setP2Name("");
     setResult(null); setError("");
+    setCopied(false);
+  };
+
+  // Generate neat text for Sharing / Copying
+  const generateShareText = () => {
+    if (!result) return "";
+    
+    if (result.sameAge) {
+      return `We are the exact same age! 🎯\n\nCalculate yours instantly at Age Calculator Box: https://agecalculatorbox.com/age-difference`;
+    }
+
+    return `*Age Difference Result* 📊\n\n${result.olderName} is older than ${result.youngerName} by:\n🎂 ${result.years} Years, ${result.months} Months, and ${result.days} Days.\n\n🗓️ Total Difference: ${result.totalDays?.toLocaleString()} Days.\n\nCalculate yours instantly at Age Calculator Box: https://agecalculatorbox.com/age-difference`;
+  };
+
+  const handleWhatsAppShare = () => {
+    const text = generateShareText();
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  const handleCopy = () => {
+    const text = generateShareText();
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -356,22 +385,19 @@ export default function AgeDifference() {
                   ))}
                 </div>
 
-                {/* Timeline Progress Bar representing the Gap (Based on 80 years) */}
-                <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100 mt-8 shadow-sm">
-                  <div className="flex justify-between items-center mb-5">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-slate-500 flex items-center gap-2">
-                      <TrendingUp size={16} className="text-indigo-400" /> Timeline Span
-                    </span>
+                {/* Total Days Difference Box (Replaced Timeline) */}
+                <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100 mt-6 shadow-sm flex items-center justify-between transition-all hover:bg-slate-100">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center shadow-inner shrink-0">
+                      <CalendarDays size={22} />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">Total Difference</h4>
+                      <p className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">
+                        {result.totalDays?.toLocaleString()} Days
+                      </p>
+                    </div>
                   </div>
-                  <div className="w-full h-4 bg-slate-200 rounded-full overflow-hidden shadow-inner">
-                    <div 
-                      className="h-full bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 relative transition-all duration-1000 ease-out"
-                      style={{ width: `${result.gapPercentage}%` }}
-                    ></div>
-                  </div>
-                  <p className="text-center text-[10px] md:text-xs font-bold text-slate-400 mt-4 tracking-wide">
-                    Visual representation of the age difference span relative to an 80-Year lifetime.
-                  </p>
                 </div>
 
                 {/* =========================================
@@ -427,6 +453,26 @@ export default function AgeDifference() {
                     </div>
                   </div>
                 )}
+
+                {/* =========================================
+                    SHARE & COPY ACTION BUTTONS
+                ========================================= */}
+                <div className="mt-8 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <button 
+                    onClick={handleWhatsAppShare}
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#25D366] text-white px-8 py-3.5 rounded-full font-bold text-sm hover:bg-[#1ebd5a] hover:shadow-[0_10px_20px_rgba(37,211,102,0.3)] transition-all active:scale-95"
+                  >
+                    <MessageCircle size={18} /> Share on WhatsApp
+                  </button>
+                  
+                  <button 
+                    onClick={handleCopy}
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 bg-slate-800 text-white px-8 py-3.5 rounded-full font-bold text-sm hover:bg-slate-700 hover:shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-all active:scale-95"
+                  >
+                    {copied ? <Check size={18} className="text-emerald-400" /> : <Copy size={18} />} 
+                    {copied ? "Copied!" : "Copy Result"}
+                  </button>
+                </div>
 
               </>
             )}
