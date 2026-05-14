@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  // Niche wali line se favicon (logo) set hoga
+  icons: {
+    icon: '/logo.webp',
+  },
 };
 
 export default function RootLayout({
