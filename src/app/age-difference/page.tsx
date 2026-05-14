@@ -15,6 +15,13 @@ import {
 } from "lucide-react";
 import CalcShell from "@/components/calculators/CalcShell";
 
+interface MilestoneData {
+  targetAge: number;
+  years: number;
+  months: number;
+  days: number;
+}
+
 export default function AgeDifference() {
   // States for Person A
   const [p1Name, setP1Name] = useState("");
@@ -34,6 +41,8 @@ export default function AgeDifference() {
     months?: number;
     days?: number;
     gapPercentage?: number;
+    p1Info?: { name: string; milestone: MilestoneData | null };
+    p2Info?: { name: string; milestone: MilestoneData | null };
   } | null>(null);
 
   // Auto-format input to DD/MM/YYYY
@@ -47,6 +56,36 @@ export default function AgeDifference() {
       return `${v.slice(0, 2)}/${v.slice(2)}`;
     }
     return v;
+  };
+
+  // Helper function to calculate milestone (18, 50, or 80)
+  const calculateMilestone = (birthDate: Date, now: Date): MilestoneData | null => {
+    let y = now.getFullYear() - birthDate.getFullYear();
+    let m = now.getMonth() - birthDate.getMonth();
+    let d = now.getDate() - birthDate.getDate();
+    if (d < 0) m--;
+    if (m < 0) y--;
+
+    let targetAge = y < 18 ? 18 : y < 50 ? 50 : 80;
+    let targetDate = new Date(birthDate.getFullYear() + targetAge, birthDate.getMonth(), birthDate.getDate());
+
+    if (now >= targetDate) return null;
+
+    let leftY = targetDate.getFullYear() - now.getFullYear();
+    let leftM = targetDate.getMonth() - now.getMonth();
+    let leftD = targetDate.getDate() - now.getDate();
+
+    if (leftD < 0) {
+      leftM--;
+      const prevTemp = new Date(targetDate.getFullYear(), targetDate.getMonth(), 0);
+      leftD += prevTemp.getDate();
+    }
+    if (leftM < 0) {
+      leftY--;
+      leftM += 12;
+    }
+
+    return { targetAge, years: leftY, months: leftM, days: leftD };
   };
 
   const handleCalculate = () => {
@@ -76,17 +115,20 @@ export default function AgeDifference() {
     }
 
     setError("");
+    const now = new Date();
     let older, younger, olderName, youngerName;
+    const name1 = p1Name.trim() || "Person 1";
+    const name2 = p2Name.trim() || "Person 2";
 
     // Determine Older/Younger
     if (date1.getTime() < date2.getTime()) {
       older = date1; younger = date2;
-      olderName = p1Name.trim() || "Person A";
-      youngerName = p2Name.trim() || "Person B";
+      olderName = name1;
+      youngerName = name2;
     } else if (date2.getTime() < date1.getTime()) {
       older = date2; younger = date1;
-      olderName = p2Name.trim() || "Person B";
-      youngerName = p1Name.trim() || "Person A";
+      olderName = name2;
+      youngerName = name1;
     } else {
       setResult({ sameAge: true }); return;
     }
@@ -103,10 +145,14 @@ export default function AgeDifference() {
     }
     if (m < 0) { y--; m += 12; }
 
-    // Extensive Data Calculation
+    // Gap Percentage based on an 80-year lifespan
     const diffMs = younger.getTime() - older.getTime();
     const tDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-    const gapPercentage = Math.min((tDays / 36500) * 100, 100);
+    const gapPercentage = Math.min((tDays / (80 * 365)) * 100, 100);
+
+    // Calculate Milestones
+    const milestone1 = calculateMilestone(date1, now);
+    const milestone2 = calculateMilestone(date2, now);
 
     setResult({
       sameAge: false,
@@ -115,7 +161,9 @@ export default function AgeDifference() {
       years: y, 
       months: m, 
       days: d,
-      gapPercentage
+      gapPercentage,
+      p1Info: { name: name1, milestone: milestone1 },
+      p2Info: { name: name2, milestone: milestone2 },
     });
   };
 
@@ -294,24 +342,21 @@ export default function AgeDifference() {
                   </h2>
                 </div>
 
-                {/* 6 Grid Items for Age Gap (Just like Age Calculator) */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 lg:gap-5 mb-8">
+                {/* 3 Grid Items for Age Gap (Years, Months, Days only) */}
+                <div className="grid grid-cols-3 gap-3 md:gap-4 lg:gap-5 mb-8">
                   {[
                     { value: result.years, label: "YEARS" },
                     { value: result.months, label: "MONTHS" },
                     { value: result.days, label: "DAYS" },
-                    { value: "00", label: "HOURS" },
-                    { value: "00", label: "MINUTES" },
-                    { value: "00", label: "SECONDS" },
                   ].map((item, index) => (
-                    <div key={index} className="bg-[#f3f6ff] rounded-2xl p-5 md:p-6 flex flex-col items-center justify-center border border-indigo-50/50 transition-transform hover:-translate-y-1">
-                      <span className="text-3xl md:text-4xl font-black text-indigo-900 mb-1 tabular-nums drop-shadow-sm">{item.value}</span>
+                    <div key={index} className="bg-[#f3f6ff] rounded-2xl p-5 md:p-8 flex flex-col items-center justify-center border border-indigo-50/50 transition-transform hover:-translate-y-1">
+                      <span className="text-4xl md:text-5xl font-black text-indigo-900 mb-1 tabular-nums drop-shadow-sm">{item.value}</span>
                       <span className="text-xs md:text-sm font-bold text-slate-500 tracking-wider">{item.label}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* Timeline Progress Bar representing the Gap */}
+                {/* Timeline Progress Bar representing the Gap (Based on 80 years) */}
                 <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100 mt-8 shadow-sm">
                   <div className="flex justify-between items-center mb-5">
                     <span className="text-[11px] font-bold uppercase tracking-widest text-slate-500 flex items-center gap-2">
@@ -324,10 +369,64 @@ export default function AgeDifference() {
                       style={{ width: `${result.gapPercentage}%` }}
                     ></div>
                   </div>
-                  <p className="text-center text-[10px] font-bold text-slate-400 mt-4 tracking-wide">
-                    Visual representation of the age difference span relative to a century (100 Years).
+                  <p className="text-center text-[10px] md:text-xs font-bold text-slate-400 mt-4 tracking-wide">
+                    Visual representation of the age difference span relative to an 80-Year lifetime.
                   </p>
                 </div>
+
+                {/* =========================================
+                    MILESTONES WIDGET (P1 & P2)
+                ========================================= */}
+                {(result.p1Info?.milestone || result.p2Info?.milestone) && (
+                  <div className="mt-8 pt-8 border-t border-slate-100">
+                    <div className="flex items-center gap-2 text-slate-800 font-bold mb-5">
+                      <Target size={20} className="text-indigo-500" /> Upcoming Milestones
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                      
+                      {/* Person 1 Milestone */}
+                      {result.p1Info?.milestone && (
+                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-3xl p-5 md:p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                          <div className="flex items-center justify-between mb-5">
+                            <div>
+                              <h4 className="text-[15px] font-black text-blue-900 tracking-tight">{result.p1Info.name}'s Goal</h4>
+                              <p className="text-[11px] font-bold text-blue-600 uppercase tracking-widest mt-1">Road to {result.p1Info.milestone.targetAge} Years</p>
+                            </div>
+                            <div className="w-10 h-10 shrink-0 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shadow-inner">
+                              <Target size={18} />
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="flex flex-col"><span className="text-2xl md:text-3xl font-black text-blue-700 leading-none tabular-nums">{result.p1Info.milestone.years}</span> <span className="text-[10px] text-blue-500 font-bold mt-1 uppercase">Years</span></div>
+                            <div className="flex flex-col"><span className="text-2xl md:text-3xl font-black text-blue-700 leading-none tabular-nums">{result.p1Info.milestone.months}</span> <span className="text-[10px] text-blue-500 font-bold mt-1 uppercase">Months</span></div>
+                            <div className="flex flex-col"><span className="text-2xl md:text-3xl font-black text-blue-700 leading-none tabular-nums">{result.p1Info.milestone.days}</span> <span className="text-[10px] text-blue-500 font-bold mt-1 uppercase">Days</span></div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Person 2 Milestone */}
+                      {result.p2Info?.milestone && (
+                        <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-100 rounded-3xl p-5 md:p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                          <div className="flex items-center justify-between mb-5">
+                            <div>
+                              <h4 className="text-[15px] font-black text-purple-900 tracking-tight">{result.p2Info.name}'s Goal</h4>
+                              <p className="text-[11px] font-bold text-purple-600 uppercase tracking-widest mt-1">Road to {result.p2Info.milestone.targetAge} Years</p>
+                            </div>
+                            <div className="w-10 h-10 shrink-0 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center shadow-inner">
+                              <Target size={18} />
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="flex flex-col"><span className="text-2xl md:text-3xl font-black text-purple-700 leading-none tabular-nums">{result.p2Info.milestone.years}</span> <span className="text-[10px] text-purple-500 font-bold mt-1 uppercase">Years</span></div>
+                            <div className="flex flex-col"><span className="text-2xl md:text-3xl font-black text-purple-700 leading-none tabular-nums">{result.p2Info.milestone.months}</span> <span className="text-[10px] text-purple-500 font-bold mt-1 uppercase">Months</span></div>
+                            <div className="flex flex-col"><span className="text-2xl md:text-3xl font-black text-purple-700 leading-none tabular-nums">{result.p2Info.milestone.days}</span> <span className="text-[10px] text-purple-500 font-bold mt-1 uppercase">Days</span></div>
+                          </div>
+                        </div>
+                      )}
+
+                    </div>
+                  </div>
+                )}
 
               </>
             )}
