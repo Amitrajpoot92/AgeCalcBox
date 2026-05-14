@@ -35,7 +35,7 @@ const Hero = () => {
           </Link>
           <div className="flex items-center gap-1.5 text-xs font-black text-gray-400">
             <ShieldCheck size={16} className="text-[#00a63e]" />
-            Secure Protocol
+             
           </div>
         </div>
         
