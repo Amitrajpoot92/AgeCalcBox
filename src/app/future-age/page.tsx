@@ -352,6 +352,59 @@ export default function FutureAge() {
           </div>
         )}
 
+        {/* SEO CONTENT SECTION - JUST PASTE AT THE BOTTOM */}
+<div className="mt-16 bg-white p-6 md:p-10 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 max-w-4xl mx-auto mb-12">
+  <div className="prose prose-slate max-w-none">
+    <h2 className="text-2xl font-black text-slate-800 mb-4">What is Future Age Calculator?</h2>
+    <p className="text-slate-600 font-medium leading-relaxed mb-6">
+      A Future Age Calculator is an online tool that calculates how old you will be on a selected future date. The tool gives instant and accurate results without manual calculations.
+    </p>
+    
+    <div className="bg-indigo-50/50 p-5 rounded-2xl border border-indigo-100 mb-8 flex flex-col sm:flex-row gap-6">
+      <div className="flex-1">
+        <h4 className="font-bold text-indigo-900 mb-2">The calculator compares:</h4>
+        <ul className="list-disc pl-5 text-indigo-800/80 font-medium space-y-1">
+          <li>Your Date of Birth</li>
+          <li>Selected Future Date</li>
+        </ul>
+      </div>
+      <div className="flex-1">
+        <h4 className="font-bold text-indigo-900 mb-2">After calculation, it shows:</h4>
+        <ul className="list-disc pl-5 text-indigo-800/80 font-medium space-y-1">
+          <li>Future age in years, months, and days</li>
+          <li>Total remaining days to reach that age</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 className="text-xl font-bold text-slate-800 mb-3">How to Use the Future Age Calculator</h3>
+    <p className="text-slate-600 font-medium mb-3">Using this tool is very simple and beginner friendly. Steps to use:</p>
+    <ul className="list-decimal pl-5 text-slate-600 font-medium mb-8 space-y-2">
+      <li>Enter your Date of Birth.</li>
+      <li>Select a future target date.</li>
+      <li>Click on the <strong>Initialize Time Travel</strong> button.</li>
+      <li>Instantly view your exact future age result.</li>
+    </ul>
+
+    <h3 className="text-xl font-bold text-slate-800 mb-3">Common Mistakes While Calculating Future Age</h3>
+    <p className="text-slate-600 font-medium mb-4">Many people calculate age incorrectly because of small mistakes. Here are common errors:</p>
+    <div className="space-y-4">
+      <div className="bg-red-50/50 p-4 rounded-xl border border-red-100">
+        <h4 className="font-bold text-red-800">1. Wrong Date Format</h4>
+        <p className="text-slate-600 text-sm mt-1">Entering MM/DD/YYYY instead of DD/MM/YYYY can give incorrect results.</p>
+      </div>
+      <div className="bg-red-50/50 p-4 rounded-xl border border-red-100">
+        <h4 className="font-bold text-red-800">2. Not Adding 0 Before Single Digit Date/Month</h4>
+        <p className="text-slate-600 text-sm mt-1">One common mistake is entering single-digit dates or months without adding 0 in front.</p>
+        <p className="text-sm mt-2"><span className="font-bold text-red-500">Wrong:</span> 1/6/2000 | <span className="font-bold text-[#00a63e]">Correct:</span> 01/06/2000</p>
+      </div>
+    </div>
+    <p className="text-slate-600 font-medium mt-4 text-sm">
+      Always use proper DD/MM/YYYY format while entering your date of birth. Adding 0 before single-digit dates and months helps avoid confusion and ensures accurate age calculation.
+    </p>
+  </div>
+</div>
+
       </div>
     </CalcShell>
   );

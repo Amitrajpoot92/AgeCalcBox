@@ -537,6 +537,62 @@ export default function AgeCalc() {
           </div>
         )}
 
+        {/* SEO CONTENT SECTION - JUST PASTE AT THE BOTTOM */}
+<div className="mt-16 bg-white p-6 md:p-10 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 max-w-4xl mx-auto mb-12">
+  <div className="prose prose-slate max-w-none">
+    <h2 className="text-2xl font-black text-slate-800 mb-4">Exact Age Calculator</h2>
+    <p className="text-slate-600 font-medium leading-relaxed mb-8">
+      Want to know your exact age in years, months, days, hours, and even seconds? Our Exact Age Calculator helps you calculate age online instantly with accurate results. Just enter your date of birth and get your real age along with total days lived, next birthday countdown, and life progress details. This free online age calculator is simple, fast, mobile-friendly, and perfect for students, job forms, school admission, government documents, retirement planning, and personal use.
+    </p>
+
+    <h3 className="text-xl font-bold text-slate-800 mb-3">How to Use the Age Calculator</h3>
+    <p className="text-slate-600 font-medium mb-3">Using this online age calculator is very easy. Follow these simple steps:</p>
+    <ul className="list-decimal pl-5 text-slate-600 font-medium mb-6 space-y-2">
+      <li>Open the age calculator tool.</li>
+      <li>Enter your Date of Birth in DD/MM/YYYY format.</li>
+      <li>Click on the <strong>Calculate My Age</strong> button.</li>
+    </ul>
+    
+    <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 mb-8">
+      <h4 className="font-bold text-slate-800 mb-2">Instantly see your exact age result. You will get:</h4>
+      <ul className="list-disc pl-5 text-slate-600 font-medium space-y-1">
+        <li>Age in years, months, days, hours, minutes, and even seconds</li>
+        <li>Total Days Lived, Weeks, and Hours</li>
+        <li>Live Seconds Counter</li>
+        <li>Next Birthday Countdown & Life Journey Progress</li>
+        <li>Road to 18 and 50 Years Tracker</li>
+        <li>Copy or share your result on WhatsApp easily</li>
+      </ul>
+      <p className="text-sm text-[#00a63e] font-bold mt-3">The tool works instantly without signup or download.</p>
+    </div>
+
+    <h3 className="text-xl font-bold text-slate-800 mb-3">How Age is Calculated</h3>
+    <p className="text-slate-600 font-medium mb-4">
+      The age calculator checks the difference between your birth date and today’s current date. The formula is simple: <strong>Current Date − Date of Birth = Exact Age</strong>.
+    </p>
+    <p className="text-slate-600 font-medium mb-8">
+      For better accuracy, the calculator also considers leap years, month differences, total days in each month, and current time/timezone. This helps provide a precise age result without manual calculation mistakes.
+    </p>
+
+    <h3 className="text-xl font-bold text-slate-800 mb-3">Common Mistakes While Calculating Age</h3>
+    <p className="text-slate-600 font-medium mb-4">Many people calculate age incorrectly because of small mistakes. Here are common errors:</p>
+    <div className="space-y-4">
+      <div className="bg-red-50/50 p-4 rounded-xl border border-red-100">
+        <h4 className="font-bold text-red-800">1. Wrong Date Format</h4>
+        <p className="text-slate-600 text-sm mt-1">Entering MM/DD/YYYY instead of DD/MM/YYYY can give incorrect results.</p>
+      </div>
+      <div className="bg-red-50/50 p-4 rounded-xl border border-red-100">
+        <h4 className="font-bold text-red-800">2. Not Adding 0 Before Single Digit Date/Month</h4>
+        <p className="text-slate-600 text-sm mt-1">One common mistake is entering single-digit dates or months without adding 0 in front.</p>
+        <p className="text-sm mt-2"><span className="font-bold text-red-500">Wrong:</span> 1/6/2000 | <span className="font-bold text-[#00a63e]">Correct:</span> 01/06/2000</p>
+      </div>
+    </div>
+    <p className="text-slate-600 font-medium mt-4 text-sm">
+      Always use proper DD/MM/YYYY format while entering your date of birth. Adding 0 before single-digit dates and months helps avoid confusion and ensures accurate age calculation.
+    </p>
+  </div>
+</div>
+
       </div>
     </CalcShell>
   );

@@ -9,6 +9,8 @@ import {
   Package, Plus, Trash2, LogOut, LayoutGrid, Tag, 
   ShoppingBag, Link as LinkIcon, Image as ImageIcon, AlignLeft, ExternalLink, Edit3, XCircle
 } from "lucide-react";
+// 1. Naya ImageKit Upload Component Import Kiya 🚀
+import ImageUpload from "@/components/shared/ImageUpload";
 
 interface Product {
   id: string;
@@ -155,7 +157,6 @@ export default function AdminDashboard() {
               </div>
               
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Inputs Same as before... */}
                 <div>
                   <label className="block text-xs font-bold text-slate-500 mb-1.5 ml-1">Product Name *</label>
                   <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-[#00a63e] font-medium text-slate-800" required />
@@ -168,10 +169,32 @@ export default function AdminDashboard() {
                   <label className="block text-xs font-bold text-slate-500 mb-1.5 ml-1">Description</label>
                   <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-[#00a63e] font-medium text-slate-800 min-h-[80px]" />
                 </div>
+                
+                {/* 2. UPDATE: IMAGE UPLOAD UI INTEGRATION */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 mb-1.5 ml-1">Image URL</label>
-                  <input type="url" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-[#00a63e] font-medium text-slate-800" />
+                  <label className="block text-xs font-bold text-slate-500 mb-1.5 ml-1">Product Image *</label>
+                  <div className="space-y-3">
+                    {/* ImageKit Upload Button */}
+                    <ImageUpload onUploadSuccess={(url) => setImageUrl(url)} />
+                    
+                    {/* Purana manual input box bhi rakha hai, for manual link paste */}
+                    <input 
+                      type="url" 
+                      placeholder="Or paste URL manually"
+                      value={imageUrl} 
+                      onChange={(e) => setImageUrl(e.target.value)} 
+                      className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-[#00a63e] font-medium text-slate-800 text-sm" 
+                    />
+                    
+                    {/* Chota sa preview box taaki upload hote hi photo dikh jaye */}
+                    {imageUrl && (
+                      <div className="w-24 h-24 rounded-2xl border border-slate-200 overflow-hidden bg-slate-50 relative flex items-center justify-center">
+                        <img src={imageUrl} alt="Preview" className="w-full h-full object-contain p-2" />
+                      </div>
+                    )}
+                  </div>
                 </div>
+
                 <div>
                   <label className="block text-xs font-bold text-slate-500 mb-1.5 ml-1">Affiliate Link *</label>
                   <input type="url" value={affiliateUrl} onChange={(e) => setAffiliateUrl(e.target.value)} className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-[#00a63e] font-medium text-slate-800" required />

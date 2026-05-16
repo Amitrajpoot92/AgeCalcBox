@@ -479,6 +479,51 @@ export default function AgeDifference() {
           </div>
         )}
 
+{/* SEO CONTENT SECTION - JUST PASTE AT THE BOTTOM */}
+<div className="mt-16 bg-white p-6 md:p-10 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 max-w-4xl mx-auto mb-12">
+  <div className="prose prose-slate max-w-none">
+    <h2 className="text-2xl font-black text-slate-800 mb-4">What is Age Difference Calculator?</h2>
+    <p className="text-slate-600 font-medium leading-relaxed mb-6">
+      An Age Difference Calculator is a fast and easy online tool designed to find the exact age gap between two people. Whether you want to know the age difference between you and your partner, siblings, or friends, this tool calculates the exact time between two dates of birth with 100% accuracy.
+    </p>
+
+    <div className="bg-[#00a63e]/5 p-5 rounded-2xl border border-[#00a63e]/10 mb-8">
+      <h4 className="font-bold text-slate-800 mb-2">Instantly discover your age gap. The tool shows:</h4>
+      <ul className="list-disc pl-5 text-slate-600 font-medium space-y-1">
+        <li>Who is older and by exactly how much time</li>
+        <li>The exact difference in years, months, and days</li>
+        <li>Total time difference in weeks, hours, and seconds</li>
+      </ul>
+      <p className="text-sm text-[#00a63e] font-bold mt-3">The tool works instantly without signup or download.</p>
+    </div>
+
+    <h3 className="text-xl font-bold text-slate-800 mb-3">How to Use the Age Difference Calculator</h3>
+    <p className="text-slate-600 font-medium mb-3">Using this tool is very simple. Follow these steps:</p>
+    <ul className="list-decimal pl-5 text-slate-600 font-medium mb-8 space-y-2">
+      <li>Enter the Date of Birth of the First Person in DD/MM/YYYY format.</li>
+      <li>Enter the Date of Birth of the Second Person in DD/MM/YYYY format.</li>
+      <li>Click on the <strong>Calculate Difference</strong> button.</li>
+      <li>Instantly see the detailed age gap result.</li>
+    </ul>
+
+    <h3 className="text-xl font-bold text-slate-800 mb-3">Common Mistakes While Calculating Age Difference</h3>
+    <p className="text-slate-600 font-medium mb-4">Just like normal age calculation, people make small mistakes here too. Avoid these common errors:</p>
+    <div className="space-y-4">
+      <div className="bg-red-50/50 p-4 rounded-xl border border-red-100">
+        <h4 className="font-bold text-red-800">1. Wrong Date Format</h4>
+        <p className="text-slate-600 text-sm mt-1">Entering MM/DD/YYYY instead of DD/MM/YYYY can give incorrect age gap results.</p>
+      </div>
+      <div className="bg-red-50/50 p-4 rounded-xl border border-red-100">
+        <h4 className="font-bold text-red-800">2. Not Adding 0 Before Single Digit Date/Month</h4>
+        <p className="text-slate-600 text-sm mt-1">One common mistake is entering single-digit dates or months without adding 0 in front.</p>
+        <p className="text-sm mt-2"><span className="font-bold text-red-500">Wrong:</span> 1/6/2000 | <span className="font-bold text-[#00a63e]">Correct:</span> 01/06/2000</p>
+      </div>
+    </div>
+    <p className="text-slate-600 font-medium mt-4 text-sm">
+      Always use proper DD/MM/YYYY format while entering both dates. Adding 0 before single-digit dates and months helps avoid confusion and ensures a precise age calculation.
+    </p>
+  </div>
+</div>
       </div>
     </CalcShell>
   );
