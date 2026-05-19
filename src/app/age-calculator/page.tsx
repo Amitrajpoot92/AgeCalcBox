@@ -489,56 +489,7 @@ export default function AgeCalc() {
 
         </div>
 
-        {/* =========================================
-            EMPTY STATE: SEO & FEATURE EXPLANATION (Only shows before calculating)
-        ========================================= */}
-        {!age && (
-          <div className="animate-in fade-in slide-in-from-bottom-8 duration-700 text-center px-4 relative z-10 pt-10 mt-6">
-            <h2 className="text-3xl md:text-4xl font-black text-slate-800 tracking-tight mb-5">
-              More Than Just a <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Date of Birth Calculator</span>
-            </h2>
-            <p className="text-slate-500 font-medium text-base md:text-lg leading-relaxed mb-10 max-w-3xl mx-auto">
-              Enter your date of birth above to unlock a personalized chronological dashboard. Our exact age calculator goes beyond simple years and months, giving you real-time insights into your life's journey instantly.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
-              <div className="bg-white p-6 rounded-[2rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col items-center text-center gap-4">
-                <div className="w-14 h-14 bg-indigo-50 text-indigo-500 rounded-2xl flex items-center justify-center">
-                  <Timer size={26} />
-                </div>
-                <h3 className="text-lg font-black text-slate-800">Live Age Ticker</h3>
-                <p className="text-sm text-slate-500 font-medium leading-relaxed">
-                  Track your exact chronological age in hours, minutes, and live ticking seconds.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-[2rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col items-center text-center gap-4">
-                <div className="w-14 h-14 bg-pink-50 text-pink-500 rounded-2xl flex items-center justify-center text-3xl">
-                  🎂
-                </div>
-                <h3 className="text-lg font-black text-slate-800">Birthday Countdown</h3>
-                <p className="text-sm text-slate-500 font-medium leading-relaxed">
-                  Get a vibrant, real-time timer tracking exact months and days to your next birthday.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-[2rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col items-center text-center gap-4">
-                <div className="w-14 h-14 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center">
-                  <TrendingUp size={26} />
-                </div>
-                <h3 className="text-lg font-black text-slate-800">Life Progress</h3>
-                <p className="text-sm text-slate-500 font-medium leading-relaxed">
-                  Visualize your life journey with our intuitive 80-year graphical milestone tracker.
-                </p>
-              </div>
-
-            </div>
-          </div>
-        )}
-
-        {/* SEO CONTENT SECTION - JUST PASTE AT THE BOTTOM */}
-<div className="mt-16 bg-white p-6 md:p-10 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 max-w-4xl mx-auto mb-12">
+        <div className="mt-16 bg-white p-6 md:p-10 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 max-w-4xl mx-auto mb-12">
   <div className="prose prose-slate max-w-none">
     <h2 className="text-2xl font-black text-slate-800 mb-4">Exact Age Calculator</h2>
     <p className="text-slate-600 font-medium leading-relaxed mb-8">

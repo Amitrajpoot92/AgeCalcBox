@@ -218,53 +218,7 @@ export default function FutureAge() {
           </div>
         </div>
 
-        {/* =========================================
-            EMPTY STATE: SEO & FEATURE EXPLANATION
-        ========================================= */}
-        {!result && (
-          <div className="animate-in fade-in slide-in-from-bottom-8 duration-700 text-center px-4 relative z-10 pt-4">
-            <h2 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight mb-4">
-              The Ultimate <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500">Future Age Predictor</span>
-            </h2>
-            <p className="text-slate-500 font-medium text-sm leading-relaxed mb-8 max-w-2xl mx-auto">
-              Want to know exactly how old you will be in 2050? Or maybe you want to calculate your age on a specific upcoming milestone. Simply enter your birth date and any future date to simulate your exact chronological age instantly.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-[800px] mx-auto">
-              
-              <div className="bg-white p-6 rounded-[1.5rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col items-center text-center gap-3">
-                <div className="w-12 h-12 bg-blue-50 text-blue-500 rounded-[14px] flex items-center justify-center border border-blue-100">
-                  <Rocket size={22} />
-                </div>
-                <h3 className="text-[15px] font-bold text-slate-800">Time Travel Math</h3>
-                <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                  Project your age decades into the future with absolute timezone-aware precision.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-[1.5rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col items-center text-center gap-3">
-                <div className="w-12 h-12 bg-purple-50 text-purple-500 rounded-[14px] flex items-center justify-center border border-purple-100">
-                  <FastForward size={22} />
-                </div>
-                <h3 className="text-[15px] font-bold text-slate-800">Milestone Projection</h3>
-                <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                  Get a deep breakdown of your future age translated into exact years, months, and days.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-[1.5rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col items-center text-center gap-3">
-                <div className="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-[14px] flex items-center justify-center border border-emerald-100">
-                  <Timer size={22} />
-                </div>
-                <h3 className="text-[15px] font-bold text-slate-800">Distance Tracker</h3>
-                <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                  Instantly see how many exact days are left until you reach that future milestone from today.
-                </p>
-              </div>
-
-            </div>
-          </div>
-        )}
+         
 
         {/* =========================================
             VIBRANT RESULTS SECTION

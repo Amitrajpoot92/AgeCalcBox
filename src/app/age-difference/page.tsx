@@ -296,53 +296,7 @@ export default function AgeDifference() {
           </div>
         </div>
 
-        {/* =========================================
-            EMPTY STATE: SEO & FEATURE EXPLANATION
-        ========================================= */}
-        {!result && (
-          <div className="animate-in fade-in slide-in-from-bottom-8 duration-700 text-center px-4 relative z-10 pt-4">
-            <h2 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight mb-4">
-              The Ultimate <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Age Gap Calculator</span>
-            </h2>
-            <p className="text-slate-500 font-medium text-sm leading-relaxed mb-8 max-w-2xl mx-auto">
-              Curious about the exact age difference between you and your partner, sibling, or friend? Enter both dates of birth above to calculate the precise chronological gap in years, months, and days. No data stored, just instant math.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-[800px] mx-auto">
-              
-              <div className="bg-white p-6 rounded-[1.5rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col items-center text-center gap-3">
-                <div className="w-12 h-12 bg-pink-50 text-pink-500 rounded-[14px] flex items-center justify-center border border-pink-100">
-                  <HeartHandshake size={22} />
-                </div>
-                <h3 className="text-[15px] font-bold text-slate-800">Relationship Gap</h3>
-                <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                  Discover who is older and by exactly how many years, months, and days.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-[1.5rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col items-center text-center gap-3">
-                <div className="w-12 h-12 bg-indigo-50 text-indigo-500 rounded-[14px] flex items-center justify-center border border-indigo-100">
-                  <Clock size={22} />
-                </div>
-                <h3 className="text-[15px] font-bold text-slate-800">Chronological Math</h3>
-                <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                  Get a deep breakdown of the difference translated into a perfect timeframe.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-[1.5rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col items-center text-center gap-3">
-                <div className="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-[14px] flex items-center justify-center border border-emerald-100">
-                  <BarChart2 size={22} />
-                </div>
-                <h3 className="text-[15px] font-bold text-slate-800">Visual Timeline</h3>
-                <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                  See a visual percentage bar representing the age gap relative to a full century.
-                </p>
-              </div>
-
-            </div>
-          </div>
-        )}
+         
 
         {/* =========================================
             VIBRANT RESULTS SECTION
