@@ -54,7 +54,7 @@ export default function ShopPage() {
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl font-black text-slate-800 tracking-tighter leading-tight drop-shadow-sm">
-            Exclusive<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00a63e] to-[#007a2d] drop-shadow-md">Amazon Deals.</span>
+            Exclusive <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00a63e] to-[#007a2d] drop-shadow-md">Amazon Deals.</span>
           </h1>
         </div>
 
