@@ -12,7 +12,7 @@ const tools = [
   {
     title: "Age Calculator",
     desc: "Find your exact age instantly in years, months, days, hours, minutes, and live seconds with our free online age calculator.",
-    href: "/age-calculator",
+    href: "/age-calculator-online",
     actionText: "Calculate Age",
     icon: <span className="text-2xl leading-none drop-shadow-sm">🎂</span>,
     theme: {
@@ -28,7 +28,7 @@ const tools = [
   {
     title: "Age Difference Calculator",
     desc: "Compare the exact age difference between two people in years, months, days, and more with instant results.",
-    href: "/age-difference",
+    href: "/age-difference-calculator",
     actionText: "Compare Ages",
     icon: <Users size={22} className="text-white" />,
     theme: {
@@ -44,7 +44,7 @@ const tools = [
   {
     title: "Future Age Calculator",
     desc: "Find out exactly how old you will be on any future date with accurate age predictions and milestone tracking.",
-    href: "/future-age",
+    href: "/future-age-calculator",
     actionText: "PREDICT FUTURE AGE",
     icon: <FastForward size={22} className="text-white" />,
     theme: {

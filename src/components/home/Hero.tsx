@@ -26,7 +26,7 @@ const Hero = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-5 pt-2">
           <Link 
-            href="/age-calculator" 
+            href="/age-calculator-online" 
             className="w-full sm:w-auto bg-[#00a63e] text-white px-8 py-3.5 rounded-2xl font-black text-base shadow-[0_12px_25px_rgba(0,166,62,0.2)] hover:bg-[#008a34] transition-all flex items-center justify-center gap-2.5"
           >
             Start Calculating

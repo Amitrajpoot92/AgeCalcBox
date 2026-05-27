@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Client ka asli live website link set kar diya hai 🚀
-  const baseUrl = 'https://www.agecalculatorbox.com';
+  // Client ke kahe mutabik bina www wala exact live link set kar diya hai 🚀
+  const baseUrl = 'https://agecalculatorbox.com';
 
   return [
     {

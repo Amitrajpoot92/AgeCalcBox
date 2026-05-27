@@ -31,9 +31,9 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', href: '/', icon: <Home size={20} /> },
-    { name: 'Age', href: '/age-calculator', icon: <Calendar size={20} /> },
-    { name: 'Diff', href: '/age-difference', icon: <UserPlus size={20} /> },
-    { name: 'Future', href: '/future-age', icon: <FastForward size={20} /> },
+    { name: 'Age', href: '/age-calculator-online', icon: <Calendar size={20} /> },
+    { name: 'Diff', href: '/age-difference-calculator', icon: <UserPlus size={20} /> },
+    { name: 'Future', href: '/future-age-calculator', icon: <FastForward size={20} /> },
     { name: 'Contact', href: '/contact', icon: <Briefcase size={20} /> },
   ];
 
