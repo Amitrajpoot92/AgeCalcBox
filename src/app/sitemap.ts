@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Client ke kahe mutabik bina www wala exact live link set kar diya hai 🚀
+  // Client ka exact non-www domain 🚀
   const baseUrl = 'https://agecalculatorbox.com';
 
   return [
@@ -12,7 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/age-calculator`,
+      // 🚀 Folder rename ke mutabik sahi naya URL:
+      url: `${baseUrl}/age-calculator-online`, 
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,

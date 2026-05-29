@@ -144,10 +144,24 @@ export default function FutureAge() {
 
   return (
     <CalcShell 
-      title="Future Age Predictor" 
-      description="Time-travel to any date and simulate exactly how old you will be with high precision."
+      title="" 
+      description=""
     >
-      <div className="max-w-[800px] mx-auto font-sans space-y-8">
+      {/* RESPONSIVE WRAPPER: Upgraded to maximum width consistency */}
+      <div className="mx-auto font-sans w-full px-2 md:px-4 lg:px-8 max-w-4xl space-y-8">
+        
+        {/* PREMIUM GRADIENT HEADLINE SECTION (MATCHING MAIN PAGES) 🚀 */}
+        <div className="text-center mb-10 mt-2">
+          <div className="inline-flex items-center gap-1.5 bg-white border border-slate-100 shadow-sm px-4 py-1.5 rounded-full text-xs font-bold text-[#00a63e] tracking-wide mb-3">
+            <Sparkles size={13} className="fill-[#00a63e]" /> CURATED MARKETPLACE
+          </div>
+          <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-800 leading-tight">
+            Future Age <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00a63e] to-[#007a2d] drop-shadow-sm">Calculator.</span>
+          </h1>
+          <p className="text-slate-500 font-medium text-sm md:text-base max-w-2xl mx-auto mt-2.5">
+            Calculate your future age instantly in years, months, and days. Check how old you will be on any upcoming date with accurate results.
+          </p>
+        </div>
         
         {/* =========================================
             MAIN DUAL INPUT WIDGET

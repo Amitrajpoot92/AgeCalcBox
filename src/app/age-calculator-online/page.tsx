@@ -18,7 +18,9 @@ import CalcShell from "@/components/calculators/CalcShell";
 
 export default function AgeCalc() {
   const [dobStr, setDobStr] = useState("");
+  const [currentDateStr, setCurrentDateStr] = useState(""); // Naya State: Optional Target Date ke liye
   const [lockedDate, setLockedDate] = useState<Date | null>(null);
+  const [customNowDate, setCustomNowDate] = useState<Date | null>(null); // Naya State: Target date lock karne ke liye
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
   
@@ -53,7 +55,7 @@ export default function AgeCalc() {
   });
 
   // Auto-format input to DD/MM/YYYY
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, type: "dob" | "current") => {
     let val = e.target.value.replace(/\D/g, ''); 
     if (val.length > 8) val = val.slice(0, 8); 
     
@@ -62,47 +64,71 @@ export default function AgeCalc() {
     } else if (val.length >= 3) {
       val = `${val.slice(0, 2)}/${val.slice(2)}`;
     }
-    setDobStr(val);
+    
+    if (type === "dob") {
+      setDobStr(val);
+    } else {
+      setCurrentDateStr(val);
+    }
   };
 
   const handleCalculate = () => {
     if (dobStr.length !== 10) {
-      setError("Please enter a complete date (DD/MM/YYYY)");
+      setError("Please enter a complete Date of Birth (DD/MM/YYYY)");
       return;
     }
 
     const [day, month, year] = dobStr.split('/').map(Number);
 
     if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1900 || year > 2100) {
-      setError("Please enter a valid date.");
+      setError("Please enter a valid Date of Birth.");
       return;
     }
 
     const birthDate = new Date(year, month - 1, day);
-    const now = new Date();
+    
+    // --- Naya Optional Current Date Logic ---
+    let targetNow = new Date(); 
+    if (currentDateStr.trim().length > 0) {
+      if (currentDateStr.length !== 10) {
+        setError("Please enter a complete Current Date (DD/MM/YYYY) or leave it empty.");
+        return;
+      }
+      const [cDay, cMonth, cYear] = currentDateStr.split('/').map(Number);
+      if (cDay < 1 || cDay > 31 || cMonth < 1 || cMonth > 12 || cYear < 1900 || cYear > 2100) {
+        setError("Please enter a valid Current Target Date.");
+        return;
+      }
+      targetNow = new Date(cYear, cMonth - 1, cDay, 23, 59, 59); // Custom target logic ke liye day end point lia
+      if (targetNow.getDate() !== cDay || targetNow.getMonth() !== cMonth - 1) {
+        setError("The provided Current Target Date doesn't exist.");
+        return;
+      }
+    }
 
     if (birthDate.getDate() !== day || birthDate.getMonth() !== month - 1) {
       setError("This calendar date doesn't exist.");
       return;
     }
 
-    if (birthDate > now) {
-      setError("Date of birth cannot be in the future.");
+    if (birthDate > targetNow) {
+      setError("Date of birth cannot be in the future relative to the target current date.");
       return;
     }
 
     setError("");
     setLockedDate(birthDate);
+    setCustomNowDate(currentDateStr.trim().length > 0 ? targetNow : null);
     setCopied(false);
 
     // Initial Static Age Calculation
-    let calcY = now.getFullYear() - birthDate.getFullYear();
-    let calcM = now.getMonth() - birthDate.getMonth();
-    let calcD = now.getDate() - birthDate.getDate();
+    let calcY = targetNow.getFullYear() - birthDate.getFullYear();
+    let calcM = targetNow.getMonth() - birthDate.getMonth();
+    let calcD = targetNow.getDate() - birthDate.getDate();
 
     if (calcD < 0) {
       calcM--;
-      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+      const prevMonth = new Date(targetNow.getFullYear(), targetNow.getMonth(), 0);
       calcD += prevMonth.getDate();
     }
     if (calcM < 0) {
@@ -117,7 +143,8 @@ export default function AgeCalc() {
     if (!lockedDate || !age) return;
 
     const updateLiveStats = () => {
-      const now = new Date();
+      // Agar custom now date set h toh runtime calculation static custom target p chalegi, nahi to live time ticker update hoga.
+      const now = customNowDate ? new Date(customNowDate) : new Date();
       const diffMs = now.getTime() - lockedDate.getTime();
       
       const totalDaysCalc = Math.floor(diffMs / (1000 * 60 * 60 * 24));
@@ -205,13 +232,18 @@ export default function AgeCalc() {
     };
 
     updateLiveStats();
-    const timer = setInterval(updateLiveStats, 1000);
-    return () => clearInterval(timer);
-  }, [lockedDate, age]);
+    // Agar static type execution h to calculation bar bar trigger nahi karni
+    const timer = !customNowDate ? setInterval(updateLiveStats, 1000) : undefined;
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [lockedDate, age, customNowDate]);
 
   const handleReset = () => {
     setDobStr("");
+    setCurrentDateStr("");
     setLockedDate(null);
+    setCustomNowDate(null);
     setAge(null);
     setError("");
     setCopied(false);
@@ -237,7 +269,7 @@ export default function AgeCalc() {
       text += `${bdayData.nextDateStr} (in ${bdayData.months}M, ${bdayData.days}D)\n\n`;
     }
     
-    text += `Calculate yours instantly at Age Calculator Box: https://agecalculatorbox.com/age-calculator`;
+    text += `Calculate yours instantly at Age Calculator Box: https://agecalculatorbox.com/age-calculator-online`;
     return text;
   };
 
@@ -258,22 +290,36 @@ export default function AgeCalc() {
 
   return (
     <CalcShell 
-      title="Exact Age Calculator" 
-      description="Calculate your precise chronological age, track life progress, and get a live countdown to your next birthday."
+      title="" 
+      description=""
     >
       
-      {/* FIXED RESPONSIVE WRAPPER: Back to a stable, wide max-w-6xl instead of breaking at 1500px */}
+      {/* FIXED RESPONSIVE WRAPPER */}
       <div className={`mx-auto font-sans transition-all duration-500 w-full px-2 md:px-4 lg:px-8 ${age ? 'max-w-6xl' : 'max-w-[500px]'}`}>
         
-        {/* Simple 2-column grid layout (Prevents squishing) */}
+        {/* PREMIUM GRADIENT HEADLINE SECTION */}
+        <div className="text-center mb-10 mt-2">
+          <div className="inline-flex items-center gap-1.5 bg-white border border-slate-100 shadow-sm px-4 py-1.5 rounded-full text-xs font-bold text-[#00a63e] tracking-wide mb-3">
+            <Sparkles size={13} className="fill-[#00a63e]" /> CURATED MARKETPLACE
+          </div>
+          <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-800 leading-tight">
+            Age Calculator<span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00a63e] to-[#007a2d] drop-shadow-sm"> online.</span>
+          </h1>
+          <p className="text-slate-500 font-medium text-sm md:text-base max-w-xl mx-auto mt-2.5">
+            Calculate your exact age in years, months, days, hours, minutes, and live seconds instantly. Track your life journey progress and next birthday countdown with accurate real-time results.
+          </p>
+        </div>
+
+        {/* Simple 2-column grid layout */}
         <div className={`grid grid-cols-1 ${age ? 'lg:grid-cols-2 gap-8 lg:gap-12 items-start' : 'gap-8'}`}>
           
           {/* =========================================
               CARD 1: MAIN INPUT & AGE CALCULATOR (Left Side)
           ========================================= */}
-          <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] w-full relative z-20">
+          <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] w-full relative z-20 border border-slate-50">
             
-            <div className="mb-6">
+            {/* FIELD 1: Date of Birth */}
+            <div className="mb-5">
               <label className="block text-slate-700 font-bold mb-2 ml-1 text-[15px]">
                 Date of Birth <span className="font-normal text-slate-500">(DD/MM/YYYY)</span>
               </label>
@@ -281,17 +327,31 @@ export default function AgeCalc() {
                 type="text" 
                 placeholder="DD/MM/YYYY"
                 value={dobStr}
-                onChange={handleInputChange}
-                className={`w-full text-center text-xl tracking-[0.2em] font-medium text-slate-800 py-3.5 px-6 rounded-full border-2 transition-all outline-none ${error ? 'border-red-400 bg-red-50' : 'border-indigo-500 focus:ring-4 focus:ring-indigo-500/20'}`}
+                onChange={(e) => handleInputChange(e, "dob")}
+                className={`w-full text-center text-xl tracking-[0.2em] font-medium text-slate-800 py-3.5 px-6 rounded-full border-2 transition-all outline-none ${error && dobStr.length !== 10 ? 'border-red-400 bg-red-50' : 'border-indigo-500 focus:ring-4 focus:ring-indigo-500/20'}`}
               />
-              {error && <p className="text-red-500 text-xs font-bold mt-2 text-center">{error}</p>}
             </div>
 
-            {/* FIXED BUTTON LAYOUT: Simple vertical stack */}
+            {/* FIELD 2: Optional Target Current Date */}
+            <div className="mb-6">
+              <label className="block text-slate-700 font-bold mb-2 ml-1 text-[14px]">
+                Current Date <span className="font-normal text-slate-400">(Optional - DD/MM/YYYY)</span>
+              </label>
+              <input 
+                type="text" 
+                placeholder="Leave empty for today's date"
+                value={currentDateStr}
+                onChange={(e) => handleInputChange(e, "current")}
+                className="w-full text-center text-base tracking-[0.15em] font-medium text-slate-700 py-3 px-6 rounded-full border-2 border-slate-200 bg-slate-50/50 focus:border-purple-400 focus:bg-white transition-all outline-none"
+              />
+              {error && <p className="text-red-500 text-xs font-bold mt-3 text-center bg-red-50 py-2 rounded-xl border border-red-100">{error}</p>}
+            </div>
+
+            {/* BUTTON LAYOUT */}
             <div className="space-y-3 mb-2">
               <button 
                 onClick={handleCalculate}
-                className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-lg py-3.5 rounded-full flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-indigo-500/30 transition-all active:scale-95"
+                className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-lg py-3.5 rounded-full flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-indigo-500/30 transition-all active:scale-95 shadow-md"
               >
                 <Sparkles size={20} className="text-yellow-300 fill-yellow-300" /> Calculate My Age
               </button>
@@ -391,9 +451,7 @@ export default function AgeCalc() {
 
                 </div>
 
-                {/* =========================================
-                    SHARE & COPY ACTION BUTTONS
-                ========================================= */}
+                {/* SHARE & COPY ACTION BUTTONS */}
                 <div className="mt-8 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-center gap-4">
                   <button 
                     onClick={handleWhatsAppShare}
@@ -416,12 +474,11 @@ export default function AgeCalc() {
           </div>
 
           {/* =========================================
-              CARD 2: CLIENT'S NEXT BIRTHDAY WIDGET (Shows side-by-side on desktop)
+              CARD 2: CLIENT'S NEXT BIRTHDAY WIDGET
           ========================================= */}
           {age && (
             <div className="bg-[#fcfaff] rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.05)] overflow-hidden border border-fuchsia-50 w-full animate-in fade-in slide-in-from-bottom-8 duration-700 h-fit lg:sticky lg:top-32">
               
-              {/* FIXED CAKE HEADER: Used flex layout instead of absolute position so it never overlaps */}
               <div className="bg-gradient-to-r from-[#fc238c] to-[#5951f8] p-6 flex items-center justify-center gap-4">
                 <span className="text-3xl md:text-4xl drop-shadow-md">🎂</span>
                 <h2 className="text-white font-black text-2xl md:text-3xl text-left leading-tight drop-shadow-sm">
@@ -450,7 +507,6 @@ export default function AgeCalc() {
                       <Clock size={18} className="text-[#ff509e]" /> Live Countdown
                     </div>
 
-                    {/* FIXED COUNTDOWN BOXES: Flex layout to ensure numbers stay inside */}
                     <div className="grid grid-cols-3 gap-3 w-full mb-4">
                       <div className="bg-gradient-to-b from-[#fc238c] to-[#f80860] rounded-2xl p-4 flex flex-col items-center justify-center text-white shadow-lg shadow-pink-500/20">
                         <span className="text-4xl font-black tabular-nums tracking-tighter drop-shadow-sm">{bdayData.months}</span>
@@ -489,60 +545,61 @@ export default function AgeCalc() {
 
         </div>
 
+        {/* SEO CONTENT SECTION */}
         <div className="mt-16 bg-white p-6 md:p-10 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 max-w-4xl mx-auto mb-12">
-  <div className="prose prose-slate max-w-none">
-    <h2 className="text-2xl font-black text-slate-800 mb-4">Exact Age Calculator</h2>
-    <p className="text-slate-600 font-medium leading-relaxed mb-8">
-      Want to know your exact age in years, months, days, hours, and even seconds? Our Exact Age Calculator helps you calculate age online instantly with accurate results. Just enter your date of birth and get your real age along with total days lived, next birthday countdown, and life progress details. This free online age calculator is simple, fast, mobile-friendly, and perfect for students, job forms, school admission, government documents, retirement planning, and personal use.
-    </p>
+          <div className="prose prose-slate max-w-none">
+            <h2 className="text-2xl font-black text-slate-800 mb-4">Exact Age Calculator</h2>
+            <p className="text-slate-600 font-medium leading-relaxed mb-8">
+              Want to know your exact age in years, months, days, hours, and even seconds? Our Exact Age Calculator helps you calculate age online instantly with accurate results. Just enter your date of birth and get your real age along with total days lived, next birthday countdown, and life progress details. This free online age calculator is simple, fast, mobile-friendly, and perfect for students, job forms, school admission, government documents, retirement planning, and personal use.
+            </p>
 
-    <h3 className="text-xl font-bold text-slate-800 mb-3">How to Use the Age Calculator</h3>
-    <p className="text-slate-600 font-medium mb-3">Using this online age calculator is very easy. Follow these simple steps:</p>
-    <ul className="list-decimal pl-5 text-slate-600 font-medium mb-6 space-y-2">
-      <li>Open the age calculator tool.</li>
-      <li>Enter your Date of Birth in DD/MM/YYYY format.</li>
-      <li>Click on the <strong>Calculate My Age</strong> button.</li>
-    </ul>
-    
-    <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 mb-8">
-      <h4 className="font-bold text-slate-800 mb-2">Instantly see your exact age result. You will get:</h4>
-      <ul className="list-disc pl-5 text-slate-600 font-medium space-y-1">
-        <li>Age in years, months, days, hours, minutes, and even seconds</li>
-        <li>Total Days Lived, Weeks, and Hours</li>
-        <li>Live Seconds Counter</li>
-        <li>Next Birthday Countdown & Life Journey Progress</li>
-        <li>Road to 18 and 50 Years Tracker</li>
-        <li>Copy or share your result on WhatsApp easily</li>
-      </ul>
-      <p className="text-sm text-[#00a63e] font-bold mt-3">The tool works instantly without signup or download.</p>
-    </div>
+            <h3 className="text-xl font-bold text-slate-800 mb-3">How to Use the Age Calculator</h3>
+            <p className="text-slate-600 font-medium mb-3">Using this online age calculator is very easy. Follow these simple steps:</p>
+            <ul className="list-decimal pl-5 text-slate-600 font-medium mb-6 space-y-2">
+              <li>Open the age calculator tool.</li>
+              <li>Enter your Date of Birth in DD/MM/YYYY format.</li>
+              <li>Click on the <strong>Calculate My Age</strong> button.</li>
+            </ul>
+            
+            <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 mb-8">
+              <h4 className="font-bold text-slate-800 mb-2">Instantly see your exact age result. You will get:</h4>
+              <ul className="list-disc pl-5 text-slate-600 font-medium space-y-1">
+                <li>Age in years, months, days, hours, minutes, and even seconds</li>
+                <li>Total Days Lived, Weeks, and Hours</li>
+                <li>Live Seconds Counter</li>
+                <li>Next Birthday Countdown & Life Journey Progress</li>
+                <li>Road to 18 and 50 Years Tracker</li>
+                <li>Copy or share your result on WhatsApp easily</li>
+              </ul>
+              <p className="text-sm text-[#00a63e] font-bold mt-3">The tool works instantly without signup or download.</p>
+            </div>
 
-    <h3 className="text-xl font-bold text-slate-800 mb-3">How Age is Calculated</h3>
-    <p className="text-slate-600 font-medium mb-4">
-      The age calculator checks the difference between your birth date and today’s current date. The formula is simple: <strong>Current Date − Date of Birth = Exact Age</strong>.
-    </p>
-    <p className="text-slate-600 font-medium mb-8">
-      For better accuracy, the calculator also considers leap years, month differences, total days in each month, and current time/timezone. This helps provide a precise age result without manual calculation mistakes.
-    </p>
+            <h3 className="text-xl font-bold text-slate-800 mb-3">How Age is Calculated</h3>
+            <p className="text-slate-600 font-medium mb-4">
+              The age calculator checks the difference between your birth date and today’s current date. The formula is simple: <strong>Current Date − Date of Birth = Exact Age</strong>.
+            </p>
+            <p className="text-slate-600 font-medium mb-8">
+              For better accuracy, the calculator also considers leap years, month differences, total days in each month, and current time/timezone. This helps provide a precise age result without manual calculation mistakes.
+            </p>
 
-    <h3 className="text-xl font-bold text-slate-800 mb-3">Common Mistakes While Calculating Age</h3>
-    <p className="text-slate-600 font-medium mb-4">Many people calculate age incorrectly because of small mistakes. Here are common errors:</p>
-    <div className="space-y-4">
-      <div className="bg-red-50/50 p-4 rounded-xl border border-red-100">
-        <h4 className="font-bold text-red-800">1. Wrong Date Format</h4>
-        <p className="text-slate-600 text-sm mt-1">Entering MM/DD/YYYY instead of DD/MM/YYYY can give incorrect results.</p>
-      </div>
-      <div className="bg-red-50/50 p-4 rounded-xl border border-red-100">
-        <h4 className="font-bold text-red-800">2. Not Adding 0 Before Single Digit Date/Month</h4>
-        <p className="text-slate-600 text-sm mt-1">One common mistake is entering single-digit dates or months without adding 0 in front.</p>
-        <p className="text-sm mt-2"><span className="font-bold text-red-500">Wrong:</span> 1/6/2000 | <span className="font-bold text-[#00a63e]">Correct:</span> 01/06/2000</p>
-      </div>
-    </div>
-    <p className="text-slate-600 font-medium mt-4 text-sm">
-      Always use proper DD/MM/YYYY format while entering your date of birth. Adding 0 before single-digit dates and months helps avoid confusion and ensures accurate age calculation.
-    </p>
-  </div>
-</div>
+            <h3 className="text-xl font-bold text-slate-800 mb-3">Common Mistakes While Calculating Age</h3>
+            <p className="text-slate-600 font-medium mb-4">Many people calculate age incorrectly because of small mistakes. Here are common errors:</p>
+            <div className="space-y-4">
+              <div className="bg-red-50/50 p-4 rounded-xl border border-red-100">
+                <h4 className="font-bold text-red-800">1. Wrong Date Format</h4>
+                <p className="text-slate-600 text-sm mt-1">Entering MM/DD/YYYY instead of DD/MM/YYYY can give incorrect results.</p>
+              </div>
+              <div className="bg-red-50/50 p-4 rounded-xl border border-red-100">
+                <h4 className="font-bold text-red-800">2. Not Adding 0 Before Single Digit Date/Month</h4>
+                <p className="text-slate-600 text-sm mt-1">One common mistake is entering single-digit dates or months without adding 0 in front.</p>
+                <p className="text-sm mt-2"><span className="font-bold text-red-500">Wrong:</span> 1/6/2000 | <span className="font-bold text-[#00a63e]">Correct:</span> 01/06/2000</p>
+              </div>
+            </div>
+            <p className="text-slate-600 font-medium mt-4 text-sm">
+              Always use proper DD/MM/YYYY format while entering your date of birth. Adding 0 before single-digit dates and months helps avoid confusion and ensures accurate age calculation.
+            </p>
+          </div>
+        </div>
 
       </div>
     </CalcShell>
