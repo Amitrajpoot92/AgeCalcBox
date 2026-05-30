@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Client ka exact non-www domain 🚀
+  // Client ka exact live domain rasta set kar diya hai 🚀
   const baseUrl = 'https://agecalculatorbox.com';
 
   return [
@@ -12,20 +12,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      // 🚀 Folder rename ke mutabik sahi naya URL:
-      url: `${baseUrl}/age-calculator-online`, 
+      url: `${baseUrl}/age-calculator-online`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/future-age`,
+      url: `${baseUrl}/future-age-online`, // 🔥 Updated to same format
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/age-difference`,
+      url: `${baseUrl}/age-difference-online`, // 🔥 Updated to same format
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
