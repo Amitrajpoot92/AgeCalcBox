@@ -18,13 +18,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/future-age-online`, // 🔥 Updated to same format
+      url: `${baseUrl}/future-age-calculator`, // 🔥 Updated to same format
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/age-difference-online`, // 🔥 Updated to same format
+      url: `${baseUrl}/age-difference-calculator`, // 🔥 Updated to same format
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,

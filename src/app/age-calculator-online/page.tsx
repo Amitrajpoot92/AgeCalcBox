@@ -54,6 +54,15 @@ export default function AgeCalc() {
     isReached: false
   });
 
+  // NAYA EFFECT: Initial render par reference image ke mutabik real current date auto-fill karne ke liye 🚀
+  useEffect(() => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    setCurrentDateStr(`${dd}/${mm}/${yyyy}`);
+  }, []);
+
   // Auto-format input to DD/MM/YYYY
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, type: "dob" | "current") => {
     let val = e.target.value.replace(/\D/g, ''); 
@@ -241,7 +250,11 @@ export default function AgeCalc() {
 
   const handleReset = () => {
     setDobStr("");
-    setCurrentDateStr("");
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    setCurrentDateStr(`${dd}/${mm}/${yyyy}`);
     setLockedDate(null);
     setCustomNowDate(null);
     setAge(null);
@@ -332,17 +345,17 @@ export default function AgeCalc() {
               />
             </div>
 
-            {/* FIELD 2: Optional Target Current Date */}
+            {/* FIELD 2: Optional Target Current Date - MATCHING CLIENT EXPECTATION 🚀 */}
             <div className="mb-6">
               <label className="block text-slate-700 font-bold mb-2 ml-1 text-[14px]">
-                Current Date <span className="font-normal text-slate-400">(Optional - DD/MM/YYYY)</span>
+                Age at the Date of <span className="font-normal text-slate-400">(DD/MM/YYYY)</span>
               </label>
               <input 
                 type="text" 
-                placeholder="Leave empty for today's date"
+                placeholder="DD/MM/YYYY"
                 value={currentDateStr}
                 onChange={(e) => handleInputChange(e, "current")}
-                className="w-full text-center text-base tracking-[0.15em] font-medium text-slate-700 py-3 px-6 rounded-full border-2 border-slate-200 bg-slate-50/50 focus:border-purple-400 focus:bg-white transition-all outline-none"
+                className="w-full text-center text-xl tracking-[0.2em] font-medium text-slate-800 py-3.5 px-6 rounded-full border-2 border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all outline-none"
               />
               {error && <p className="text-red-500 text-xs font-bold mt-3 text-center bg-red-50 py-2 rounded-xl border border-red-100">{error}</p>}
             </div>
