@@ -50,7 +50,7 @@ export default function ShopPage() {
           <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-gray-100 mb-2">
             <Sparkles size={16} className="text-[#00a63e]" />
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-[#00a63e] to-teal-500">
-              Curated Marketplace
+              RECOMMENDED PRODUCTS
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl font-black text-slate-800 tracking-tighter leading-tight drop-shadow-sm">
