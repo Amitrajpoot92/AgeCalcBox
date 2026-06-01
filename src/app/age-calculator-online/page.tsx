@@ -381,14 +381,13 @@ export default function AgeCalc() {
             {age && (
               <div className="space-y-5 mt-6 animate-in fade-in slide-in-from-top-4 duration-500 pt-5 border-t border-slate-100">
                 
-                <div className="grid grid-cols-3 gap-2.5 md:gap-4">
+                {/* 🚀 MODIFIED GRID: Layout updated to 2-columns since Minutes and Seconds are removed */}
+                <div className="grid grid-cols-2 gap-2.5 md:gap-4">
                   {[
                     { value: age.years, label: "YEARS" },
                     { value: age.months, label: "MONTHS" },
                     { value: age.days, label: "DAYS" },
                     { value: liveData.hours.toString().padStart(2, '0'), label: "HOURS" },
-                    { value: liveData.minutes.toString().padStart(2, '0'), label: "MINUTES" },
-                    { value: liveData.seconds.toString().padStart(2, '0'), label: "SECONDS" },
                   ].map((item, index) => (
                     <div key={index} className="bg-[#f3f6ff] rounded-xl p-3 md:p-5 flex flex-col items-center justify-center border border-indigo-50/40">
                       <span className="text-xl md:text-3xl font-black text-indigo-900 mb-0.5 tabular-nums">{item.value}</span>
@@ -520,7 +519,7 @@ export default function AgeCalc() {
                       <Clock size={16} className="text-[#ff509e]" /> Live Countdown
                     </div>
 
-                    <div className="grid grid-cols-3 gap-2.5 w-full mb-3">
+                    <div className="grid grid-cols-3 gap-2.5 w-full mb-5">
                       <div className="bg-gradient-to-b from-[#fc238c] to-[#f80860] rounded-xl p-3 flex flex-col items-center justify-center text-white shadow-md">
                         <span className="text-2xl font-black tabular-nums tracking-tighter">{bdayData.months}</span>
                         <span className="text-[9px] font-bold uppercase mt-0.5 tracking-wider opacity-90">Months</span>
@@ -532,17 +531,6 @@ export default function AgeCalc() {
                       <div className="bg-gradient-to-b from-[#5966ff] to-[#424ff5] rounded-xl p-3 flex flex-col items-center justify-center text-white shadow-md">
                         <span className="text-2xl font-black tabular-nums tracking-tighter">{bdayData.hours}</span>
                         <span className="text-[9px] font-bold uppercase mt-0.5 tracking-wider opacity-90">Hours</span>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-2.5 w-full mb-5">
-                      <div className="bg-white rounded-xl p-3 flex flex-col items-center justify-center text-[#2d3748] shadow-sm border border-slate-100">
-                        <span className="text-2xl font-black tabular-nums tracking-tighter">{bdayData.minutes}</span>
-                        <span className="text-[10px] font-bold uppercase mt-0.5 tracking-wider text-slate-400">Minutes</span>
-                      </div>
-                      <div className="bg-white rounded-xl p-3 flex flex-col items-center justify-center text-[#2d3748] shadow-sm border border-slate-100">
-                        <span className="text-2xl font-black tabular-nums tracking-tighter">{bdayData.seconds}</span>
-                        <span className="text-[10px] font-bold uppercase mt-0.5 tracking-wider text-slate-400">Seconds</span>
                       </div>
                     </div>
 
