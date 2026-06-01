@@ -342,7 +342,7 @@ export default function AgeCalc() {
             {/* FIELD 1: Date of Birth */}
             <div className="mb-3">
               <label className="block text-slate-700 font-bold mb-1 ml-0.5 text-xs">
-                Date of Birth <span className="font-normal text-slate-400">(DD/MM/YYYY)</span>
+                DATE OF BIRTH <span className="font-normal text-slate-400">(DD/MM/YYYY)</span>
               </label>
               <input 
                 type="text" 
@@ -356,7 +356,7 @@ export default function AgeCalc() {
             {/* FIELD 2: Optional Target Current Date */}
             <div className="mb-4">
               <label className="block text-slate-700 font-bold mb-1 ml-0.5 text-xs">
-                Age at the Date of <span className="font-normal text-slate-400">(DD/MM/YYYY)</span>
+                AGE AT THE DATE OF<span className="font-normal text-slate-400">(DD/MM/YYYY)</span>
               </label>
               <input 
                 type="text" 

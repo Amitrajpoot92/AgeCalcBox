@@ -190,7 +190,7 @@ export default function FutureAge() {
               
               <div className="flex items-center gap-2 mb-3 relative z-10">
                 <div className="p-2 bg-white text-emerald-500 rounded-lg shadow-sm border border-emerald-100"><CalendarDays size={14} /></div>
-                <span className="font-black uppercase tracking-widest text-[10px] text-emerald-600">Origin Point</span>
+                <span className="font-black uppercase tracking-widest text-[10px] text-emerald-600">DATE OF BIRTH</span>
               </div>
               
               <div className="space-y-1.5 relative z-10">
@@ -208,7 +208,7 @@ export default function FutureAge() {
               
               <div className="flex items-center gap-2 mb-3 relative z-10">
                 <div className="p-2 bg-white text-blue-500 rounded-lg shadow-sm border border-blue-100"><Rocket size={14} /></div>
-                <span className="font-black uppercase tracking-widest text-[10px] text-blue-600">Target Point</span>
+                <span className="font-black uppercase tracking-widest text-[10px] text-blue-600">FUTURE DATE</span>
               </div>
               
               <div className="space-y-1.5 relative z-10">
