@@ -221,7 +221,7 @@ export default function FutureAge() {
               onClick={handleCalculate}
               className="w-full sm:w-2/3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold text-sm py-3 rounded-full flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-blue-500/20 transition-all active:scale-[0.98]"
             >
-              <Sparkles size={16} className="text-yellow-300 fill-yellow-300" /> Initialize Time Travel
+              <Sparkles size={16} className="text-yellow-300 fill-yellow-300" /> Calculate Future Age
             </button>
             <button 
               onClick={handleReset}
