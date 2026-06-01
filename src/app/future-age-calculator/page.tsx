@@ -14,7 +14,8 @@ import {
   FastForward,
   MessageCircle,
   Copy,
-  Check
+  Check,
+  Clock
 } from 'lucide-react';
 import CalcShell from "@/components/calculators/CalcShell";
 
@@ -30,6 +31,9 @@ export default function FutureAge() {
     days: number;
     daysToWait: number;
     isPast: boolean;
+    hours: number;
+    minutes: number;
+    seconds: number;
   } | null>(null);
 
   // Auto-format input to DD/MM/YYYY
@@ -98,9 +102,14 @@ export default function FutureAge() {
     const daysToWait = Math.ceil(diffMsFromToday / (1000 * 60 * 60 * 24));
 
     setResult({
-      years: y, months: m, days: d,
+      years: y, 
+      months: m, 
+      days: d,
       daysToWait: daysToWait,
-      isPast: daysToWait < 0
+      isPast: daysToWait < 0,
+      hours: now.getHours(),
+      minutes: now.getMinutes(),
+      seconds: now.getSeconds()
     });
   };
 
@@ -166,7 +175,7 @@ export default function FutureAge() {
         {/* =========================================
             COMPACT DUAL INPUT WIDGET
         ========================================= */}
-        <div className="bg-white p-4 md:p-6 rounded-[1.75rem] shadow-[0_8px_30px_rgba(0,0,0,0.03)] relative z-20 border border-slate-50">
+        <div className="bg-white p-4 md:p-6 rounded-[1.75rem] shadow-[0_8px_30px_rgba(0,0,0,0.03)] relative z-20 border border-slate-100">
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 relative z-10 mb-5">
             
@@ -266,6 +275,18 @@ export default function FutureAge() {
               ))}
             </div>
 
+            {/* Sub-grid block for Minutes and Seconds */}
+            <div className="grid grid-cols-2 gap-2.5 w-full mb-5">
+              <div className="bg-white rounded-xl p-2.5 flex flex-col items-center justify-center text-[#2d3748] shadow-sm border border-slate-100">
+                <span className="text-2xl font-black tabular-nums tracking-tighter">{result.minutes.toString().padStart(2, '0')}</span>
+                <span className="text-[10px] font-bold uppercase mt-0.5 tracking-wider text-slate-400">Minutes</span>
+              </div>
+              <div className="bg-white rounded-xl p-2.5 flex flex-col items-center justify-center text-[#2d3748] shadow-sm border border-slate-100">
+                <span className="text-2xl font-black tabular-nums tracking-tighter">{result.seconds.toString().padStart(2, '0')}</span>
+                <span className="text-[10px] font-bold uppercase mt-0.5 tracking-wider text-slate-400">Seconds</span>
+              </div>
+            </div>
+
             {/* Wait Time / Distance Tracker Box */}
             <div className={`rounded-xl p-4 border shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 relative overflow-hidden group ${result.isPast ? 'bg-slate-50 border-slate-200' : 'bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-100'}`}>
               
@@ -286,8 +307,9 @@ export default function FutureAge() {
               </div>
               
               <div className="text-center sm:text-right w-full sm:w-auto relative z-10 bg-white sm:bg-transparent p-3 sm:p-0 rounded-xl border sm:border-none border-slate-100/80">
+                {/* Fixed syntax evaluate block string interpolation 🚀 */}
                 <span className={`text-3xl md:text-4xl font-black tracking-tighter tabular-nums ${result.isPast ? 'text-slate-500' : 'text-blue-600'}`}>
-                  {Math.family = Math.abs(result.daysToWait).toLocaleString()}
+                  {Math.abs(result.daysToWait).toLocaleString()}
                 </span>
                 <span className="block text-[8px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">
                   {result.isPast ? "Days Ago" : "Days to Go"}
@@ -358,7 +380,7 @@ export default function FutureAge() {
                 <p className="text-slate-600 text-xs mt-0.5">Entering MM/DD/YYYY instead of DD/MM/YYYY can give incorrect results.</p>
               </div>
               <div className="bg-red-50/50 p-3 rounded-xl border border-red-100">
-                <h4 className="font-bold text-red-800 text-sm">2. Not Adding 0 Before Single Digit Date/Month</h4>
+                <h4 className="font-bold text-red-800 text-xs">2. Not Adding 0 Before Single Digit Date/Month</h4>
                 <p className="text-slate-600 text-xs mt-0.5">One common mistake is entering single-digit dates or months without adding 0 in front.</p>
                 <p className="text-xs mt-1.5"><span className="font-bold text-red-500">Wrong:</span> 1/6/2000 | <span className="font-bold text-[#00a63e]">Correct:</span> 01/06/2000</p>
               </div>
