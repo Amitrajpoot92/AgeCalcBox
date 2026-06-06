@@ -320,9 +320,6 @@ export default function AgeCalc() {
         
         {/* PREMIUM GRADIENT HEADLINE SECTION */}
         <div className="text-center mb-4 md:mb-6 mt-0.5">
-          <div className="inline-flex items-center gap-1.5 bg-white border border-slate-100 shadow-sm px-2.5 py-0.5 rounded-full text-[10px] font-bold text-[#00a63e] tracking-wide mb-2">
-            <Sparkles size={11} className="fill-[#00a63e]" /> CURATED MARKETPLACE
-          </div>
           <h1 className="text-2xl md:text-5xl font-black tracking-tight text-slate-800 leading-tight">
             Age Calculator<span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00a63e] to-[#007a2d] drop-shadow-sm"> online.</span>
           </h1>

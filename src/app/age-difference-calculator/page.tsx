@@ -212,9 +212,7 @@ export default function AgeDifference() {
         
         {/* PREMIUM GRADIENT HEADLINE SECTION (MATCHING MAIN PAGE) 🚀 */}
         <div className="text-center mb-6 mt-1">
-          <div className="inline-flex items-center gap-1.5 bg-white border border-slate-100 shadow-sm px-3 py-1 rounded-full text-[11px] font-bold text-[#00a63e] tracking-wide mb-2.5">
-            <Sparkles size={12} className="fill-[#00a63e]" /> CURATED MARKETPLACE
-          </div>
+           
           <h1 className="text-3xl md:text-5xl font-black tracking-tight text-slate-800 leading-tight">
             Age Difference <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00a63e] to-[#007a2d] drop-shadow-sm">Calculator.</span>
           </h1>
