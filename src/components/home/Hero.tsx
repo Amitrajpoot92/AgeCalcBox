@@ -15,13 +15,12 @@ const Hero = () => {
       <div className="max-w-4xl mx-auto w-full relative z-10 flex flex-col items-center justify-center text-center space-y-4 md:space-y-6">
         
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 tracking-tighter leading-tight">
-          <span className="text-[#00a63e]">All Age Calculators</span> <br />
-          in One Place.
+          <span className="text-[#00a63e]">Free Online Age Calculator, Age Difference & Future Age Calculator</span> <br />
+          Future Age Calculator
         </h1>
 
         <p className="max-w-xl text-gray-500 font-medium text-base md:text-lg">
-          High-performance tools with <span className="text-gray-900 font-bold tracking-tight">ZERO-DATA STORAGE</span> policy. 
-          Instant calculations. Absolute privacy ever.
+          Calculate your exact age, compare age differences, and predict future age with accurate online tools<span className="text-gray-900 font-bold tracking-tight"> instant results</span>.....
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-5 pt-2">

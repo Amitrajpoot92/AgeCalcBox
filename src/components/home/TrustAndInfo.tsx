@@ -63,7 +63,7 @@ export default function TrustAndInfo() {
           
           <div className="text-center mb-10 space-y-4">
             <h2 className="text-4xl md:text-5xl font-black text-slate-800 tracking-tighter leading-tight">
-              Everything You Need to <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600">Know.</span>
+              Learn More About <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600">Age Calculator Box.</span>
             </h2>
           </div>
 
@@ -81,9 +81,9 @@ export default function TrustAndInfo() {
                 </div>
                 <h3 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tight drop-shadow-md">What is Age Calculator Box?</h3>
                 <p className="text-blue-100 font-medium leading-relaxed max-w-xl text-sm md:text-base">
-                  Age Calculator Box is a free online platform that helps you calculate exact age instantly. You can check age in years, months, days, hours, minutes, and live seconds using simple and accurate tools.
+                  Age Calculator Box is a free online platform created for anyone who needs quick and accurate age-related calculations. Whether you want to calculate your exact age, find the age difference between two people, or check your future age on a specific date, our tools make the process simple and hassle-free. Instead of manually counting years, months, and days, you can get instant results within seconds. The platform is designed for students, parents, professionals, job seekers, and anyone who needs reliable age information for personal, educational, or official purposes.
 
-Our platform also includes Age Difference Calculator and Future Age Calculator to make age-related calculations fast, easy, and mobile-friendly for everyone.
+Many people search for terms like age calculator online, exact age calculator, date of birth age calculator, calculate age from DOB, age difference calculator, and future age calculator because accurate age information is often required in daily life. From school admissions and competitive exams to government applications and retirement planning, age plays an important role in many decisions. Age Calculator Box brings all these calculations together in one place, making it easier to find the information you need without complicated formulas or manual calculations.udes Age Difference Calculator and Future Age Calculator to make age-related calculations fast, easy, and mobile-friendly for everyone.
                 </p>
               </div>
             </div>
@@ -96,11 +96,11 @@ Our platform also includes Age Difference Calculator and Future Age Calculator t
                 <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl border border-white/20 flex items-center justify-center text-white mb-8 shadow-inner group-hover:rotate-12 transition-transform">
                   <Lightbulb size={28} />
                 </div>
-                <h3 className="text-2xl font-black text-white mb-4 tracking-tight drop-shadow-md">Why is this useful?</h3>
+                <h3 className="text-2xl font-black text-white mb-4 tracking-tight drop-shadow-md">Why Is Age Calculation Important?</h3>
                 <p className="text-rose-100 font-medium leading-relaxed text-sm">
-                  Age Calculator Box makes it easy to calculate exact age and age differences instantly without any manual calculations. It helps users quickly check age in years, months, days, hours, and live seconds with accurate results.
+                  Knowing your exact age is more useful than many people realize. Educational institutions often have age eligibility requirements, employers may specify age limits in job notifications, and various government forms require accurate age details. Even a small mistake in age calculation can create confusion during applications or verification processes. That is why using a reliable online age calculator can save time and help avoid unnecessary errors.
 
-Whether you want to know your current age, compare ages between two people, or predict your future age, our tools provide fast, free, and mobile-friendly calculations anytime.
+Age calculation is also useful for personal planning. Parents often check their child's age before school admissions, professionals may calculate their future age for retirement planning, and families sometimes compare age differences between siblings or relatives. Searches such as how old am I today, age in years months and days, age calculator by birth date, and exact age finder continue to grow because people want fast and accurate answers. Our tools are built to provide those answers in a clear and easy-to-understand format.
                 </p>
               </div>
             </div>
@@ -116,11 +116,11 @@ Whether you want to know your current age, compare ages between two people, or p
               </div>
               
               <div className="relative z-10 text-center md:text-left">
-                <h3 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight drop-shadow-md">What do we offer?</h3>
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight drop-shadow-md">What Do We Offer?</h3>
                 <p className="text-emerald-50 font-medium leading-relaxed text-sm md:text-base max-w-3xl">
-                  Age Calculator Box helps people quickly calculate exact age without manual counting or confusing date calculations. It provides fast and accurate results in years, months, days, hours, and live seconds.
+                  At Age Calculator Box, we provide a collection of free and easy-to-use tools designed around real user needs. Our Age Calculator helps you find your exact age from your date of birth. The Age Difference Calculator allows you to compare two birth dates and determine the precise age gap between individuals. The Future Age Calculator helps you estimate how old you will be on any future date, making it useful for long-term planning and milestone tracking.
 
-People use our tools for school forms, job applications, official documents, birthday planning, future age predictions, and comparing age differences between two people — all in one simple and mobile-friendly platform.
+Beyond calculations, our goal is to provide useful information that helps users better understand age-related concepts and date calculations. Every tool is mobile-friendly, fast, accurate, and accessible without registration. Whether you are searching for an online age calculator, birthday age calculator, future age prediction tool, or age comparison calculator, Age Calculator Box is designed to deliver accurate results and a smooth user experience whenever you need it.
                 </p>
               </div>
             </div>

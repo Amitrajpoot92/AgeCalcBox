@@ -29,7 +29,7 @@ const Footer = () => {
             </Link>
             
             <p className="text-sm md:text-base leading-relaxed max-w-sm text-gray-400 font-medium">
-              A simple and accurate platform to calculate age, compare age differences, and predict future age instantly with a fast and mobile-friendly experience.
+              Age Calculator Box is a free online platform that helps you calculate exact age from your date of birth, compare age differences, and predict future age with accuracy. Whether you need age information for school admissions, job applications, official documents, retirement planning, or personal records, our easy-to-use calculators deliver instant and reliable results on any device.
             </p>
 
             {/* Graphical Trust Tokens */}
