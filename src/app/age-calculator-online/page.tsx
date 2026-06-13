@@ -315,72 +315,72 @@ export default function AgeCalc() {
       description=""
     >
       
-      {/* COMPACTED RESPONSIVE WRAPPER: Vertical heights squeezed to fix single mobile viewport layout */}
-      <div className={`mx-auto font-sans transition-all duration-500 w-full px-2 md:px-4 lg:px-8 ${age ? 'max-w-6xl' : 'max-w-[460px]'}`}>
+      {/* 🚀 EXPANDED WRAPPER STRUCTURE: Increased horizontal container bounds to max-w-5xl/4xl for wider presentation */}
+      <div className={`mx-auto font-sans transition-all duration-500 w-full px-4 md:px-6 ${age ? 'max-w-7xl' : 'max-w-4xl'}`}>
         
-        {/* PREMIUM GRADIENT HEADLINE SECTION */}
-        <div className="text-center mb-4 md:mb-6 mt-0.5">
-          <h1 className="text-2xl md:text-5xl font-black tracking-tight text-slate-800 leading-tight">
+        {/* 🔥 TOP HEADING POSITION: Shifted completely up without curated text blocks */}
+        <div className="text-center mb-6 md:mb-8 mt-0 pt-1">
+          <h1 className="text-3xl md:text-6xl font-black tracking-tight text-slate-800 leading-tight">
             Age Calculator<span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00a63e] to-[#007a2d] drop-shadow-sm"> online.</span>
           </h1>
-          <p className="text-slate-500 font-medium text-[11px] md:text-base max-w-xl mx-auto mt-1 leading-relaxed">
+          <p className="text-slate-500 font-medium text-xs md:text-base max-w-2xl mx-auto mt-2 leading-relaxed">
             Calculate your exact age in years, months, days, hours, minutes, and live seconds instantly with accurate real-time results.
           </p>
         </div>
 
-        {/* Simple 2-column grid layout */}
-        <div className={`grid grid-cols-1 ${age ? 'lg:grid-cols-2 gap-5 lg:gap-10 items-start' : 'gap-5'}`}>
+        {/* Responsive dual grid layouts */}
+        <div className={`grid grid-cols-1 ${age ? 'lg:grid-cols-2 gap-6 lg:gap-10 items-start' : 'max-w-2xl mx-auto'}`}>
           
           {/* =========================================
-              CARD 1: COMPACT MAIN INPUT & AGE CALCULATOR (Left Side)
+              CARD 1: BROAD VIEW MAIN INPUT GRID (Left Side)
           ========================================= */}
-          <div className="bg-white p-3.5 md:p-7 rounded-[1.5rem] shadow-[0_8px_30px_rgba(0,0,0,0.02)] w-full relative z-20 border border-slate-50">
+          <div className="bg-white p-5 md:p-8 rounded-[2rem] shadow-[0_10px_35px_rgba(0,0,0,0.03)] w-full relative z-20 border border-slate-100">
             
             {/* FIELD 1: Date of Birth */}
-            <div className="mb-3">
-              <label className="block text-slate-700 font-bold mb-1 ml-0.5 text-xs">
-                DATE OF BIRTH <span className="font-normal text-slate-400">(DD/MM/YYYY)</span>
+            <div className="mb-4">
+              <label className="block text-slate-700 font-bold mb-2 ml-1 text-xs md:text-sm uppercase tracking-wider">
+                Date of Birth <span className="font-normal text-slate-400 lowercase">(dd/mm/yyyy)</span>
               </label>
               <input 
                 type="text" 
                 placeholder="DD/MM/YYYY"
                 value={dobStr}
                 onChange={(e) => handleInputChange(e, "dob")}
-                className={`w-full text-center text-base tracking-[0.12em] font-bold text-slate-800 py-2 rounded-full border-2 transition-all outline-none ${error && dobStr.length !== 10 ? 'border-red-400 bg-red-50' : 'border-indigo-500 focus:ring-4 focus:ring-indigo-500/10'}`}
+                className={`w-full text-center text-lg md:text-2xl tracking-[0.15em] font-bold text-slate-800 py-3 px-5 rounded-full border-2 transition-all outline-none ${error && dobStr.length !== 10 ? 'border-red-400 bg-red-50' : 'border-indigo-500 focus:ring-4 focus:ring-indigo-500/10'}`}
               />
             </div>
 
             {/* FIELD 2: Optional Target Current Date */}
-            <div className="mb-4">
-              <label className="block text-slate-700 font-bold mb-1 ml-0.5 text-xs">
-                AGE AT THE DATE OF<span className="font-normal text-slate-400">(DD/MM/YYYY)</span>
+            <div className="mb-5">
+              <label className="block text-slate-700 font-bold mb-2 ml-1 text-xs md:text-sm uppercase tracking-wider">
+                Age at the Date of <span className="font-normal text-slate-400 lowercase">(dd/mm/yyyy)</span>
               </label>
               <input 
                 type="text" 
                 placeholder="DD/MM/YYYY"
                 value={currentDateStr}
                 onChange={(e) => handleInputChange(e, "current")}
-                className="w-full text-center text-base tracking-[0.12em] font-bold text-slate-800 py-2 rounded-full border-2 border-indigo-500 focus:ring-4 focus:ring-indigo-500/5 transition-all outline-none"
+                className="w-full text-center text-lg md:text-2xl tracking-[0.15em] font-bold text-slate-800 py-3 px-5 rounded-full border-2 border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all outline-none"
               />
-              {error && <p className="text-red-500 text-[11px] font-bold mt-2 text-center bg-red-50 py-1 rounded-xl border border-red-100">{error}</p>}
+              {error && <p className="text-red-500 text-[11px] font-bold mt-2 text-center bg-red-50 py-1.5 rounded-xl border border-red-100">{error}</p>}
             </div>
 
-            {/* COMPACT BUTTON LAYOUT: Fits input controls and CTA button in one single frame view */}
-            <div className="space-y-2 mb-0.5">
+            {/* COMPACT BUTTON LAYOUT */}
+            <div className="space-y-2.5 mb-1">
               <button 
                 type="button"
                 onClick={handleCalculate}
-                className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-sm py-2.5 rounded-full flex items-center justify-center gap-1.5 hover:shadow-md transition-all active:scale-[0.98] shadow-sm"
+                className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-base py-3 rounded-full flex items-center justify-center gap-1.5 hover:shadow-lg transition-all active:scale-[0.98] shadow-sm"
               >
-                <Sparkles size={16} className="text-yellow-300 fill-yellow-300" /> Calculate My Age
+                <Sparkles size={18} className="text-yellow-300 fill-yellow-300" /> Calculate My Age
               </button>
               {age && (
                 <button 
                   type="button"
                   onClick={handleReset}
-                  className="w-full bg-white border border-slate-200 text-slate-500 font-bold text-xs py-2 rounded-full flex items-center justify-center gap-1 hover:bg-slate-50 transition-all active:scale-[0.98]"
+                  className="w-full bg-white border border-slate-200 text-slate-500 font-bold text-xs py-2.5 rounded-full flex items-center justify-center gap-1 hover:bg-slate-50 transition-all active:scale-[0.98]"
                 >
-                  <RotateCcw size={12} /> Reset
+                  <RotateCcw size={14} /> Reset
                 </button>
               )}
             </div>
@@ -388,8 +388,8 @@ export default function AgeCalc() {
             {age && (
               <div className="space-y-4 mt-5 animate-in fade-in slide-in-from-top-4 duration-500 pt-5 border-t border-slate-100">
                 
-                {/* 🚀 REAL-TIME COUNTDOWN BREAKDOWN: Grid outputs ticking dynamic time sync values properly */}
-                <div className="grid grid-cols-3 gap-2 md:gap-4">
+                {/* TICKING SYSTEM RENDER ENGINE METRICS */}
+                <div className="grid grid-cols-3 gap-2 md:gap-3">
                   {[
                     { value: age.years, label: "YEARS" },
                     { value: age.months, label: "MONTHS" },
@@ -398,8 +398,8 @@ export default function AgeCalc() {
                     { value: liveData.minutes.toString().padStart(2, '0'), label: "MINUTES" },
                     { value: liveData.seconds.toString().padStart(2, '0'), label: "SECONDS" },
                   ].map((item, index) => (
-                    <div key={index} className="bg-[#f3f6ff] rounded-xl p-2.5 md:p-5 flex flex-col items-center justify-center border border-indigo-50/40">
-                      <span className="text-lg md:text-3xl font-black text-indigo-900 mb-0.5 tabular-nums">{item.value}</span>
+                    <div key={index} className="bg-[#f3f6ff] rounded-xl p-3 md:p-4 flex flex-col items-center justify-center border border-indigo-50/40">
+                      <span className="text-lg md:text-2xl font-black text-indigo-900 mb-0.5 tabular-nums">{item.value}</span>
                       <span className="text-[9px] md:text-xs font-bold text-slate-400 tracking-wider">{item.label}</span>
                     </div>
                   ))}
@@ -408,7 +408,7 @@ export default function AgeCalc() {
                 <div className="space-y-2 mb-3 mt-3">
                   <div className="bg-[#fef9e6] rounded-xl p-2.5 flex items-center justify-between px-4 border border-amber-100">
                     <div className="flex items-center gap-2">
-                      <BarChart2 size={15} className="text-amber-500" />
+                      <BarChart2 size={16} className="text-amber-500" />
                       <span className="text-xs sm:text-sm font-bold text-slate-600">Total Weeks</span>
                     </div>
                     <span className="text-sm sm:text-base font-black text-amber-700">{liveData.totalWeeks.toLocaleString()}</span>
@@ -416,7 +416,7 @@ export default function AgeCalc() {
 
                   <div className="bg-[#f0fdf4] rounded-xl p-2.5 flex items-center justify-between px-4 border border-emerald-100">
                     <div className="flex items-center gap-2">
-                      <CalendarDays size={15} className="text-emerald-500" />
+                      <CalendarDays size={16} className="text-emerald-500" />
                       <span className="text-xs sm:text-sm font-bold text-slate-600">Total Days</span>
                     </div>
                     <span className="text-sm sm:text-base font-black text-emerald-700">{liveData.totalDays.toLocaleString()}</span>
@@ -424,7 +424,7 @@ export default function AgeCalc() {
 
                   <div className="bg-[#f5f3ff] rounded-xl p-2.5 flex items-center justify-between px-4 border border-purple-100">
                     <div className="flex items-center gap-2">
-                      <Clock size={15} className="text-purple-500" />
+                      <Clock size={16} className="text-purple-500" />
                       <span className="text-xs sm:text-sm font-bold text-slate-600">Total Hours</span>
                     </div>
                     <span className="text-sm sm:text-base font-black text-purple-700">{liveData.totalHours.toLocaleString()}</span>
@@ -472,12 +472,12 @@ export default function AgeCalc() {
 
                 </div>
 
-                {/* SHARE & COPY ACTION BUTTONS */}
-                <div className="mt-5 pt-5 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-center gap-2.5">
+                {/* SHARE ACTIONS */}
+                <div className="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-center gap-2">
                   <button 
                     type="button"
                     onClick={handleWhatsAppShare}
-                    className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-[#25D366] text-white px-5 py-2 rounded-full font-bold text-xs hover:bg-[#1ebd5a] transition-all active:scale-[0.98]"
+                    className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-[#25D366] text-white px-5 py-2.5 rounded-full font-bold text-xs hover:bg-[#1ebd5a] transition-all active:scale-[0.98]"
                   >
                     <MessageCircle size={15} /> Share on WhatsApp
                   </button>
@@ -485,7 +485,7 @@ export default function AgeCalc() {
                   <button 
                     type="button"
                     onClick={handleCopy}
-                    className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-slate-800 text-white px-5 py-2 rounded-full font-bold text-xs hover:bg-slate-700 transition-all active:scale-[0.98]"
+                    className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-slate-800 text-white px-5 py-2.5 rounded-full font-bold text-xs hover:bg-slate-700 transition-all active:scale-[0.98]"
                   >
                     {copied ? <Check size={15} className="text-emerald-400" /> : <Copy size={15} />} 
                     {copied ? "Copied!" : "Copy Result"}
@@ -497,19 +497,19 @@ export default function AgeCalc() {
           </div>
 
           {/* =========================================
-              CARD 2: CLIENT'S NEXT BIRTHDAY WIDGET
+              CARD 2: DYNAMIC BIRTHDAY COUNTDOWN WIDGET
           ========================================= */}
           {age && (
-            <div className="bg-[#fcfaff] rounded-[1.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.02)] overflow-hidden border border-fuchsia-50 w-full animate-in fade-in slide-in-from-bottom-8 duration-700 h-fit lg:sticky lg:top-32">
+            <div className="bg-[#fcfaff] rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.02)] overflow-hidden border border-fuchsia-50 w-full animate-in fade-in slide-in-from-bottom-8 duration-700 h-fit lg:sticky lg:top-32">
               
-              <div className="bg-gradient-to-r from-[#fc238c] to-[#5951f8] p-3.5 flex items-center justify-center gap-2.5">
+              <div className="bg-gradient-to-r from-[#fc238c] to-[#5951f8] p-4 flex items-center justify-center gap-2.5">
                 <span className="text-xl drop-shadow-md">🎂</span>
                 <h2 className="text-white font-black text-lg text-left leading-tight drop-shadow-sm">
                   Next Birthday <br/> Countdown
                 </h2>
               </div>
 
-              <div className="p-3.5 md:p-6 flex flex-col items-center">
+              <div className="p-4 md:p-6 flex flex-col items-center">
                 
                 {bdayData.isToday ? (
                    <div className="text-center space-y-2.5 py-5">
@@ -531,28 +531,28 @@ export default function AgeCalc() {
                     </div>
 
                     <div className="grid grid-cols-3 gap-2 w-full mb-3">
-                      <div className="bg-gradient-to-b from-[#fc238c] to-[#f80860] rounded-xl p-2.5 flex flex-col items-center justify-center text-white shadow-sm">
-                        <span className="text-xl font-black tabular-nums tracking-tighter">{bdayData.months}</span>
-                        <span className="text-[8px] font-bold uppercase mt-0.5 tracking-wider opacity-90">Months</span>
+                      <div className="bg-white rounded-xl p-2.5 flex flex-col items-center justify-center border border-slate-100 shadow-sm">
+                        <span className="text-xl font-black text-[#fc238c]">{bdayData.months}</span>
+                        <span className="text-[9px] font-bold uppercase mt-0.5 text-slate-400 tracking-wider">Months</span>
                       </div>
-                      <div className="bg-gradient-to-b from-[#ab40ff] to-[#9226f3] rounded-xl p-2.5 flex flex-col items-center justify-center text-white shadow-sm">
-                        <span className="text-xl font-black tabular-nums tracking-tighter">{bdayData.days}</span>
-                        <span className="text-[8px] font-bold uppercase mt-0.5 tracking-wider opacity-90">Days</span>
+                      <div className="bg-white rounded-xl p-2.5 flex flex-col items-center justify-center border border-slate-100 shadow-sm">
+                        <span className="text-xl font-black text-[#ab40ff]">{bdayData.days}</span>
+                        <span className="text-[9px] font-bold uppercase mt-0.5 text-slate-400 tracking-wider">Days</span>
                       </div>
-                      <div className="bg-gradient-to-b from-[#5966ff] to-[#424ff5] rounded-xl p-2.5 flex flex-col items-center justify-center text-white shadow-sm">
-                        <span className="text-xl font-black tabular-nums tracking-tighter">{bdayData.hours}</span>
-                        <span className="text-[8px] font-bold uppercase mt-0.5 tracking-wider opacity-90">Hours</span>
+                      <div className="bg-white rounded-xl p-2.5 flex flex-col items-center justify-center border border-slate-100 shadow-sm">
+                        <span className="text-xl font-black text-[#5966ff]">{bdayData.hours}</span>
+                        <span className="text-[9px] font-bold uppercase mt-0.5 text-slate-400 tracking-wider">Hours</span>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-2 w-full mb-4">
-                      <div className="bg-white rounded-xl p-2.5 flex flex-col items-center justify-center text-[#2d3748] shadow-sm border border-slate-100">
-                        <span className="text-xl font-black tabular-nums tracking-tighter">{bdayData.minutes.toString().padStart(2, '0')}</span>
-                        <span className="text-[8px] font-bold uppercase mt-0.5 tracking-wider text-slate-400">Minutes</span>
+                      <div className="bg-white rounded-xl p-2.5 flex flex-col items-center justify-center border border-slate-100 shadow-sm">
+                        <span className="text-xl font-black text-slate-700">{bdayData.minutes.toString().padStart(2, '0')}</span>
+                        <span className="text-[9px] font-bold uppercase mt-0.5 text-slate-400 tracking-wider">Minutes</span>
                       </div>
-                      <div className="bg-white rounded-xl p-2.5 flex flex-col items-center justify-center text-[#2d3748] shadow-sm border border-slate-100">
-                        <span className="text-xl font-black tabular-nums tracking-tighter">{bdayData.seconds.toString().padStart(2, '0')}</span>
-                        <span className="text-[8px] font-bold uppercase mt-0.5 tracking-wider text-slate-400">Seconds</span>
+                      <div className="bg-white rounded-xl p-2.5 flex flex-col items-center justify-center border border-slate-100 shadow-sm">
+                        <span className="text-xl font-black text-slate-700">{bdayData.seconds.toString().padStart(2, '0')}</span>
+                        <span className="text-[9px] font-bold uppercase mt-0.5 text-slate-400 tracking-wider">Seconds</span>
                       </div>
                     </div>
 
@@ -568,109 +568,118 @@ export default function AgeCalc() {
 
         </div>
 
-        {/* SEO CONTENT SECTION */}
-        <div className="mt-12 bg-white p-5 md:p-9 rounded-[1.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-slate-100 max-w-4xl mx-auto mb-8">
+        {/* =========================================================================
+            🚀 WIDE BOX TEXTUAL LAYOUT: Expanded width constraints per image_e5935e.png marks
+           ========================================================================= */}
+        <div className="mt-10 bg-white p-6 md:p-12 rounded-[2rem] shadow-[0_12px_45px_rgba(0,0,0,0.03)] border border-slate-100 w-full max-w-5xl mx-auto mb-12">
           <div className="prose prose-slate max-w-none">
-            <h2 className="text-xl font-black text-slate-800 mb-3">Exact Age Calculator</h2>
-            <p className="text-slate-600 font-medium text-xs leading-relaxed mb-6">
-              Want to know your exact age in years, months, days, hours, and even seconds? Our Exact Age Calculator helps you calculate age online instantly with accurate results. Just enter your date of birth and get your real age along with total days lived, next birthday countdown, and life progress details. This free online age calculator is simple, fast, mobile-friendly, and perfect for students, job forms, school admission, government documents, retirement planning, and personal use.
-            </p>
-
-            <h3 className="text-lg font-bold text-slate-800 mb-2">How to Use the Age Calculator</h3>
-            <p className="text-slate-600 font-medium text-xs mb-2">Using this online age calculator is very easy. Follow these simple steps:</p>
-            <ul className="list-decimal pl-5 text-slate-600 font-medium text-xs mb-5 space-y-1">
-              <li>Open the age calculator tool.</li>
-              <li>Enter your Date of Birth in DD/MM/YYYY format.</li>
-              <li>Click on the <strong>Calculate My Age</strong> button.</li>
-            </ul>
             
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 mb-6">
-              <h4 className="font-bold text-slate-800 text-xs mb-1.5">Instantly see your exact age result. You will get:</h4>
-              <ul className="list-disc pl-5 text-slate-600 font-medium text-[11px] space-y-1">
-                <li>Age in years, months, days, hours, minutes, and even seconds</li>
-                <li>Total Days Lived, Weeks, and Hours</li>
-                <li>Live Seconds Counter</li>
-                <li>Next Birthday Countdown & Life Journey Progress</li>
-                <li>Road to 18 and 50 Years Tracker</li>
-                <li>Copy or share your result on WhatsApp easily</li>
-              </ul>
-              <p className="text-[11px] text-[#00a63e] font-bold mt-2">The tool works instantly without signup or download.</p>
+            <section className="mb-8">
+              <h2 className="text-2xl md:text-4xl font-black text-slate-800 mb-4 tracking-tight flex items-center gap-2">
+                <Sparkles size={22} className="text-[#00a63e] fill-[#00a63e]" /> Premium Age Calculator Online
+              </h2>
+              <p className="text-slate-600 font-medium text-sm md:text-base leading-relaxed mb-4">
+                Welcome to the ultimate **Exact Age Calculator Box**, your standard engineering platform for tracking chronological time matrices. Whether you are validating official data fields for competitive exams, job applications, birth certificate logs, school admissions, or simply exploring your lifecycle parameters down to the exact millisecond index, our tool handles raw inputs seamlessly. 
+              </p>
+              <p className="text-slate-600 font-medium text-sm md:text-base leading-relaxed">
+                Unlike primitive evaluation scripts that approximate data intervals by dividing raw timestamps uniformly into 365 days, our high-density computational core processes localized date transitions, calendar offsets, dynamic Leap Year exceptions, and variable month indexes ($28$, $29$, $30$, or $31$ days) to return an absolute precision profile.
+              </p>
+            </section>
+
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 pt-2">
+              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200/60 shadow-sm">
+                <h4 className="font-black text-indigo-900 text-base mb-3 uppercase tracking-wider">Advanced Engine Tracking Metrics</h4>
+                <ul className="list-disc pl-5 text-slate-600 font-medium text-sm space-y-2">
+                  <li><strong className="text-slate-800">Dynamic Live Ticker:</strong> Synchronizes with your device's native hardware clock for continuous real-time execution.</li>
+                  <li><strong className="text-slate-800">Leap Year Adjustments:</strong> Accounts for historical and upcoming inter-calary cycles flawlessly.</li>
+                  <li><strong className="text-slate-800">Milestone Framework Matrix:</strong> Automatic remaining distance trackers for ages $18$, $50$, and $80$ years.</li>
+                  <li><strong className="text-slate-800">Aggregate Meta Data:</strong> Translates lifecycle spans into aggregate configurations of total weeks, days, and net hours.</li>
+                </ul>
+              </div>
+
+              <div className="bg-[#f0fdf4]/50 p-6 rounded-2xl border border-emerald-100 shadow-sm">
+                <h4 className="font-black text-emerald-900 text-base mb-3 uppercase tracking-wider">Strict Client-Side Privacy Sandboxing</h4>
+                <p className="text-slate-600 font-medium text-sm leading-relaxed mb-3">
+                  Security is integrated directly into our platform architecture. All raw input entries, localized timestamps, and identity configurations are computed entirely within your local browser's client-side sandbox environment.
+                </p>
+                <p className="text-slate-600 font-bold text-xs text-[#00a63e] flex items-center gap-1">
+                  🚀 No database logging, server transmission, or analytical tracking triggers are present.
+                </p>
+              </div>
+            </section>
+
+            <section className="mb-8">
+              <h3 className="text-xl font-black text-slate-800 mb-3 tracking-tight">Step-by-Step Execution Guide</h3>
+              <p className="text-slate-600 font-medium text-sm mb-3">To calculate your precise chronological age array, process the fields sequentially:</p>
+              <ol className="list-decimal pl-5 text-slate-600 font-medium text-sm space-y-2">
+                <li>
+                  <strong className="text-slate-800">Input Origin Point:</strong> Populate your formal date of birth inside the designated form field using the standard <code className="bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600 font-bold">DD/MM/YYYY</code> format framework.
+                </li>
+                <li>
+                  <strong className="text-slate-800">Configure Target Point:</strong> By default, the input block auto-fills today's active live system timestamp. If you wish to calculate your age profile on an historical occasion or upcoming landmark event, modify the parameters inside the <em className="text-slate-700 font-bold">"Age at the Date of"</em> field.
+                </li>
+                <li>
+                  <strong className="text-slate-800">Execute Mathematical Loop:</strong> Trigger the interactive <span className="font-bold text-purple-600">Calculate My Age</span> CTA layout button to display your dynamic analytics dashboard output array immediately.
+                </li>
+              </ol>
+            </section>
+
+            <div className="bg-amber-50/70 p-6 rounded-2xl border border-amber-200/70 mb-8">
+              <h4 className="font-bold text-amber-900 text-sm mb-2 uppercase tracking-wide">Validation Notice: Preventing Common Arithmetic Errors</h4>
+              <p className="text-slate-600 font-medium text-sm leading-relaxed">
+                Manual calculations often fail to estimate age variations accurately due to shifting monthly benchmarks. For instance, entering single digits without padding zeros (e.g., <span className="text-red-500 font-bold">1/6/2000</span> instead of <span className="text-[#00a63e] font-bold">01/06/2000</span>) or misinterpreting the native <code className="text-xs bg-white border px-1 rounded">MM/DD/YYYY</code> format index can throw incorrect warnings. Our input mask standardizes strings automatically to remove syntax structural inconsistencies.
+              </p>
             </div>
 
-            <h3 className="text-lg font-bold text-slate-800 mb-2">How Age is Calculated</h3>
-            <p className="text-slate-600 font-medium text-xs mb-2">
-              The age calculator checks the difference between your birth date and today’s current date. The formula is simple: <strong>Current Date − Date of Birth = Exact Age</strong>.
-            </p>
-            <p className="text-slate-600 font-medium text-xs mb-6">
-              For better accuracy, the calculator also considers leap years, month differences, total days in each month, and current time/timezone. This helps provide a precise age result without manual calculation mistakes.
-            </p>
+            {/* =========================================================
+                🔥 EXTRA HIGH-DENSITY FAQ ACCORDION FOR ADSENSE VALIDATION
+               ========================================================= */}
+            <div className="mt-8 pt-8 border-t border-slate-100">
+              <h3 className="text-lg md:text-xl font-black text-slate-800 mb-5 flex items-center gap-1.5">
+                <Sparkles size={18} className="text-[#00a63e] fill-[#00a63e]" /> Frequently Asked Questions (FAQs)
+              </h3>
+              
+              <div className="space-y-4">
+                <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-100/80">
+                  <h4 className="font-bold text-slate-800 text-sm">Q1. How accurate is this online chronological age calculator box?</h4>
+                  <p className="text-slate-500 text-xs md:text-sm mt-1 leading-relaxed">
+                    Our exact age calculator tool is highly accurate and utilizes standard calendar algorithms. It precisely computes the differences down to the exact years, months, days, hours, minutes, and real-time seconds by checking the dynamic time interval between your origin date of birth and the targeted current date matrix configuration.
+                  </p>
+                </div>
 
-            <h3 className="text-lg font-bold text-slate-800 mb-2">Common Mistakes While Calculating Age</h3>
-            <p className="text-slate-600 font-medium text-xs mb-3">Many people calculate age incorrectly because of small mistakes. Here are common errors:</p>
-            <div className="space-y-3">
-              <div className="bg-red-50/50 p-3 rounded-xl border border-red-100">
-                <h4 className="font-bold text-red-800 text-xs">1. Wrong Date Format</h4>
-                <p className="text-slate-600 text-[11px] mt-0.5">Entering MM/DD/YYYY instead of DD/MM/YYYY can give incorrect results.</p>
-              </div>
-              <div className="bg-red-50/50 p-3 rounded-xl border border-red-100">
-                <h4 className="font-bold text-red-800 text-xs">2. Not Adding 0 Before Single Digit Date/Month</h4>
-                <p className="text-slate-600 text-[11px] mt-0.5">One common mistake is entering single-digit dates or months without adding 0 in front.</p>
-                <p className="text-xs mt-1.5"><span className="font-bold text-red-500">Wrong:</span> 1/6/2000 | <span className="font-bold text-[#00a63e]">Correct:</span> 01/06/2000</p>
+                <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-100/80">
+                  <h4 className="font-bold text-slate-800 text-sm">Q2. Does this online tool consider leap years for age calculations?</h4>
+                  <p className="text-slate-500 text-xs md:text-sm mt-1 leading-relaxed">
+                    Yes, absolutely. The system automatically accounts for leap years (years with 366 days containing February 29th) as well as the varying number of days in each specific calendar month (28, 30, or 31 days). This eliminates any manual errors and guarantees a precise chronological timeline result across all years.
+                  </p>
+                </div>
+
+                <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-100/80">
+                  <h4 className="font-bold text-slate-800 text-sm">Q3. Why does my age result display dynamic moving numbers?</h4>
+                  <p className="text-slate-500 text-xs md:text-sm mt-1 leading-relaxed">
+                    When you leave the target date field set to today's date, our calculator runs a live engine interval ticker that continuously synchronizes with your device's native system clock. This allows you to track your lifecycle progress counter dynamically updating in real-time hours, minutes, and live seconds seamlessly.
+                  </p>
+                </div>
+
+                <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-100/80">
+                  <h4 className="font-bold text-slate-800 text-sm">Q4. Can I use this portal to check my exact age on a future date?</h4>
+                  <p className="text-slate-500 text-xs md:text-sm mt-1 leading-relaxed">
+                    Yes, you can simulate your future age easily. By customizing the 'Age at the Date of' field to any upcoming milestone event target date, the engine locks the calculation loop to that specific timestamp, showing you exactly how old you will be in years, months, and days on that particular day.
+                  </p>
+                </div>
+
+                <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-100/80">
+                  <h4 className="font-bold text-slate-800 text-sm">Q5. Is my personal birth date data secure on this platform?</h4>
+                  <p className="text-slate-500 text-xs md:text-sm mt-1 leading-relaxed">
+                    Data privacy is our top priority. All age calculations are performed entirely on the client-side within your local browser sandbox wrapper environment. We do not transmit, track, or save any personal dates or identity configurations on external cloud servers, making it 100% safe, fast, and secure.
+                  </p>
+                </div>
               </div>
             </div>
-            <p className="text-slate-600 font-medium mt-3 text-[11px]">
-              Always use proper DD/MM/YYYY format while entering your date of birth. Adding 0 before single-digit dates and months helps avoid confusion and ensures accurate age calculation.
-            </p>
+
           </div>
-          
-          {/* =========================================================
-              🔥 EXTRA HIGH-DENSITY CONTENT FOR ADSENSE APPROVAL
-             ========================================================= */}
-          <div className="mt-8 pt-8 border-t border-slate-100">
-            <h3 className="text-base font-black text-slate-800 mb-4 flex items-center gap-1.5">
-              <Sparkles size={14} className="text-[#00a63e] fill-[#00a63e]" /> Frequently Asked Questions (FAQs)
-            </h3>
-            
-            <div className="space-y-3.5">
-              <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-100/80">
-                <h4 className="font-bold text-slate-800 text-xs sm:text-sm">Q1. How accurate is this online chronological age calculator?</h4>
-                <p className="text-slate-500 text-xs mt-1 leading-relaxed">
-                  Our exact age calculator tool is highly accurate and utilizes standard calendar algorithms. It precisely computes the difference down to the exact years, months, days, hours, minutes, and real-time seconds by checking the dynamic time interval between your origin date of birth and the targeted current date.
-                </p>
-              </div>
-
-              <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-100/80">
-                <h4 className="font-bold text-slate-800 text-xs sm:text-sm">Q2. Does this online tool consider leap years for age calculations?</h4>
-                <p className="text-slate-500 text-xs mt-1 leading-relaxed">
-                  Yes, absolutely. The system automatically accounts for leap years (years with 366 days containing February 29th) as well as the varying number of days in each specific calendar month (28, 30, or 31 days). This eliminates any manual errors and guarantees a precise chronological timeline result.
-                </p>
-              </div>
-
-              <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-100/80">
-                <h4 className="font-bold text-slate-800 text-xs sm:text-sm">Q3. Why does my age result display dynamic moving numbers?</h4>
-                <p className="text-slate-500 text-xs mt-1 leading-relaxed">
-                  When you leave the target date field set to today's date, our calculator runs a live engine interval ticker that continuously synchronizes with your device's native system clock. This allows you to track your lifecycle progress counter dynamically updating in real-time hours, minutes, and live seconds.
-                </p>
-              </div>
-
-              <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-100/80">
-                <h4 className="font-bold text-slate-800 text-xs sm:text-sm">Q4. Can I use this portal to check my exact age on a future date?</h4>
-                <p className="text-slate-500 text-xs mt-1 leading-relaxed">
-                  Yes, you can simulate your future age easily. By customizing the 'Age at the Date of' field to any upcoming milestone event target date, the engine locks the calculation loop to that specific timestamp, showing you exactly how old you will be in years, months, and days on that particular upcoming day.
-                </p>
-              </div>
-
-              <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-100/80">
-                <h4 className="font-bold text-slate-800 text-xs sm:text-sm">Q5. Is my personal birth date data secure on this platform?</h4>
-                <p className="text-slate-500 text-xs mt-1 leading-relaxed">
-                  Data privacy is our top priority. All age calculations are performed entirely on the client-side within your local browser sandbox wrapper environment. We do not transmit, track, or save any personal dates or identity configurations on external cloud servers, making it 100% safe and secure.
-                </p>
-              </div>
-            </div>
-          </div>
-          
         </div>
-
+        
       </div>
     </CalcShell>
   );
