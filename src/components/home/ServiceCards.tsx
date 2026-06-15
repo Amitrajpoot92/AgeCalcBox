@@ -82,9 +82,7 @@ const ServiceCards = () => {
               ALL-IN-ONE CALCULATION AGE TOOLS
             </span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-black text-slate-800 tracking-tighter leading-tight drop-shadow-sm">
-            Calculate Age, Compare Ages & Plan Future Milestones,<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00a63e] to-[#007a2d]">In One Place</span>
-          </h2>
+          
         </div>
 
         {/* 3-Column Perfect Grid */}

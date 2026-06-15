@@ -321,7 +321,7 @@ export default function AgeCalc() {
         {/* 🔥 TOP HEADING POSITION: Shifted completely up without curated text blocks */}
         <div className="text-center mb-6 md:mb-8 mt-0 pt-1">
           <h1 className="text-3xl md:text-6xl font-black tracking-tight text-slate-800 leading-tight">
-            Age Calculator<span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00a63e] to-[#007a2d] drop-shadow-sm"> online.</span>
+            Age Calculator Online,<span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00a63e] to-[#007a2d] drop-shadow-sm"> Calculate Exact Age by Date of Birth</span>
           </h1>
           <p className="text-slate-500 font-medium text-xs md:text-base max-w-2xl mx-auto mt-2 leading-relaxed">
             Calculate your exact age in years, months, days, hours, minutes, and live seconds instantly with accurate real-time results.
