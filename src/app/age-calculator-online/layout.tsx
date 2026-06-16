@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Age Calculator – Calculate Your Exact Age in Years, Months, Days',
-  description: 'Calculate your exact age instantly with our free Age Calculator. Get years, months, days, hours, minutes and live seconds with birthday countdown.',
+  title: 'Future Age Calculator – Check Your Age on Any Future Date',
+  description: 'Calculate your exact future age in years, months, and days. Instantly find how old you'll be on any future date with our free future age calculator..',
   alternates: {
     canonical: '/age-calculator',
   },
