@@ -163,7 +163,7 @@ export default function FutureAge() {
         <div className="text-center mb-6 mt-1">
            
           <h1 className="text-3xl md:text-5xl font-black tracking-tight text-slate-800 leading-tight">
-            Future Age Calculator,<span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00a63e] to-[#007a2d] drop-shadow-sm"> Check Your Age on Any Future Date</span>
+            Future Age <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00a63e] to-[#007a2d] drop-shadow-sm"> Calculator</span>
           </h1>
           <p className="text-slate-500 font-medium text-xs md:text-base max-w-2xl mx-auto mt-1.5 leading-relaxed">
             Calculate your exact future age in years, months, and days. Instantly find how old you'll be on any future date with our free future age calculator.
