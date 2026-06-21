@@ -12,8 +12,8 @@ const inter = Inter({ subsets: ["latin"] });
 // 1. Homepage ka Meta Data aur Canonical yahan update kiya hai
 export const metadata: Metadata = {
   metadataBase: new URL('https://agecalculatorbox.com'),
-  title: "Age Calculator Box – All Age Calculators in One PlaceAge Calculator Box – Calculate Exact Age, Age Difference and Future Age",
-  description: "All age calculators in one place. Calculate exact age, age difference, future age, and next birthday countdown with accurate results..",
+  title: "Age Calculator Box – Calculate Exact Age, Age Difference and Future Age",
+  description: "All age calculators in one place. Calculate exact age, age difference, future age, and next birthday countdown with accurate results....",
   alternates: {
     canonical: '/',
   },
